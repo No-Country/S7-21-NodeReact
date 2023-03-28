@@ -7,13 +7,15 @@
     "typecheck": "tsc"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.3",
     "@remix-run/node": "^1.14.3",
     "@remix-run/react": "^1.14.3",
     "@remix-run/vercel": "^1.14.3",
     "@vercel/node": "^2.6.2",
     "isbot": "latest",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.0.5"
   },
   "devDependencies": {
     "@remix-run/dev": "^1.14.3",
