@@ -3,6 +3,8 @@ const morgan = require("morgan");
 const cors = require("cors");
 require("dotenv").config();
 
+const { notFoundMiddleware, errorMiddleware } = require("./middlewares");
+
 const db = require("./database/models");
 
 const app = express();
@@ -14,6 +16,9 @@ app.use(morgan("dev", { skip: (req, res) => process.env.NODE_ENV === "test" }));
 app.get("/", (req, res) => {
   res.send("Backend Barberia");
 });
+
+app.use(notFoundMiddleware);
+app.use(errorMiddleware);
 
 const startApi = async () => {
   console.log("Testing the database connection...");
