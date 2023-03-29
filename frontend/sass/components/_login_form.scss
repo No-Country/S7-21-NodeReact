@@ -1,0 +1,70 @@
+@use "../base/variables" as *;
+@use "../base/mixins" as *;
+
+form {
+    @include flex()
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-left {
+  flex-basis: 50%;
+  padding: 2rem;
+  text-align: center;
+}
+
+.login-left img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.login-right {
+  flex-basis: 50%;
+  padding: 2rem;
+  background-color: #f5f5f5;
+  text-align: center;
+}
+
+.login-right h2 {
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.login-right form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-right label {
+  margin-bottom: 0.5rem;
+  color: #333;
+  font-weight: bold;
+}
+
+.login-right input {
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  border: none;
+  margin-bottom: 1rem;
+}
+
+.login-right button {
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.login-right button:hover {
+  background-color: #0062cc;
+}

@@ -1,0 +1,19 @@
+@use "../base/mixins" as *;
+$backround-image: require("../../assets/images/bg-login.jpeg");
+
+.login-container {
+  @include flex();
+  height: 100vh;
+  background-color: red;
+  align-items: stretch;
+  .login-left {
+    @include bg-image("../assets/images/pattern.jpeg", left, repeat, 20%);
+    filter: opacity(0.5);
+    @include flex-column();
+  }
+  .login-right {
+    @include flex-column();
+    background-color: #f5f5f5;
+    text-align: center;
+  }
+}
