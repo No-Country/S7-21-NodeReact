@@ -7,4 +7,4 @@ module.exports = {
   notFoundMiddleware,
   authenticateUser,
   authorizeByRole,
-};
+}; 
