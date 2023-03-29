@@ -4,7 +4,10 @@
   "scripts": {
     "build": "remix build",
     "dev": "remix dev",
-    "typecheck": "tsc"
+    "start": "remix run",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.json,.md,.mdx",
+    "build:css": "sass --no-source-map --style=compressed sass:app/styles",
+    "dev:css": "yarn build:css && sass --watch --no-source-map --style=compressed sass:app/styles"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.3",
@@ -24,6 +27,7 @@
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.8",
     "eslint": "^8.27.0",
+    "sass": "^1.59.3",
     "typescript": "^4.8.4"
   },
   "engines": {
