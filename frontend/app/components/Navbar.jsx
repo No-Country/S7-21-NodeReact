@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "@remix-run/react";
 export default function Navbar() {
   return (
     <div>
@@ -8,32 +8,28 @@ export default function Navbar() {
 
         <ul className="nav-links">
           <li className="nav-item">
-            <a href="#">INICIO</a>
+            <Link to="/">INICIO</Link>
           </li>
           <li className="nav-item">
-            <a href="#">ESTILISTA/BARBERO</a>
+            <Link to="/">ESTILISTA/BARBERO</Link>
           </li>
           <li className="nav-item">
-            <a href="#">SERVICIOS</a>
+            <Link to="/">SERVICIOS</Link>
           </li>
           <li className="nav-item">
-            <a href="#">SHOP</a>
+            <Link to="/">SHOP</Link>
           </li>
           <li>
-            <a href="#">SOBRE NOSOTROS</a>
+            <Link to="/">SOBRE NOSOTROS</Link>
           </li>
           <li className="nav-item">
-            <a href="#">CONTACTO</a>
+            <Link to="/">CONTACTO</Link>
           </li>
           <li className="nav-item">
-            <a class="button" href="#">
-              INGRESAR
-            </a>
+            <Link className="button" to="/">INGRESAR</Link>
           </li>
           <li className="nav-item">
-            <a class="button" href="#">
-              TURNOS
-            </a>
+            <Link  className="button" to="/">TURNOS</Link>
           </li>
         </ul>
       </nav>
