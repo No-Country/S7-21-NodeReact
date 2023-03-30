@@ -35,6 +35,11 @@
     align-items: center;
 }
 
+@mixin flex-star {
+    display: flex;
+    align-items: start;       
+}
+
 
 // --------------------------------------------------
 // Media Queries
