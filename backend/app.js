@@ -2,6 +2,7 @@ const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
 require("dotenv").config();
+const routes = require("./routes");
 
 const { notFoundMiddleware, errorMiddleware } = require("./middlewares");
 
@@ -16,6 +17,7 @@ app.use(morgan("dev", { skip: (req, res) => process.env.NODE_ENV === "test" }));
 app.get("/", (req, res) => {
   res.send("Backend Barberia");
 });
+app.use("/api/v1", routes);
 
 app.use(notFoundMiddleware);
 app.use(errorMiddleware);
