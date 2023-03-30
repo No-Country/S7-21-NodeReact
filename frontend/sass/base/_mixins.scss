@@ -1,75 +1,83 @@
-@use "_variables.scss" as *;
+@use "variables.scss" as *;
+
 // --------------------------------------------------
 // Mixins
 // --------------------------------------------------
 @mixin flex($justify: center, $align: center) {
-    display: flex;
-    justify-content: $justify;
-    align-items: $align;
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
 }
 
 @mixin flex-column($justify: center, $align: center) {
-    display: flex;
-    flex-direction: column;
-    justify-content: $justify;
-    align-items: $align;
+  display: flex;
+  flex-direction: column;
+  justify-content: $justify;
+  align-items: $align;
 }
 
 @mixin flex-row($justify: center, $align: center) {
-    display: flex;
-    flex-direction: row;
-    justify-content: $justify;
-    align-items: $align;
+  display: flex;
+  flex-direction: row;
+  justify-content: $justify;
+  align-items: $align;
 }
 
 @mixin flex-wrap($justify: center, $align: center) {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: $justify;
-    align-items: $align;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: $justify;
+  align-items: $align;
 }
 
 @mixin flex-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-
 
 // --------------------------------------------------
 // Media Queries
 // --------------------------------------------------
 @mixin mobile {
-    @media (max-width: $breakpoint-mobile) {
-        @content;
-    }
+  @media (max-width: $breakpoint-mobile) {
+    @content;
+  }
 }
 
 @mixin tablet {
-    @media (max-width: $breakpoint-tablet) {
-        @content;
-    }
+  @media (min-width: $breakpoint-tablet) {
+    @content;
+  }
 }
 
 @mixin desktop {
-    @media (max-width: $breakpoint-desktop) {
-        @content;
-    }
+  @media (min-width: $breakpoint-desktop) {
+    @content;
+  }
 }
 
 @mixin large {
-    @media (max-width: $breakpoint-large) {
-        @content;
-    }
+  @media (min-width: $breakpoint-large) {
+    @content;
+  }
 }
-
 
 // --------------------------------------------------
 // Background Image
 // --------------------------------------------------
 @mixin bg-image($image, $position: center, $repeat: no-repeat, $size: cover) {
-    background-image: url($image);
-    background-position: $position;
-    background-repeat: $repeat;
-    background-size: $size;
+  background-image: url($image);
+  background-position: $position;
+  background-repeat: $repeat;
+  background-size: $size;
+}
+
+// --------------------------------------------------
+// Box Shadow
+// --------------------------------------------------
+@mixin box-shadow($shadow) {
+  -webkit-box-shadow: $shadow;
+  -moz-box-shadow: $shadow;
+  box-shadow: $shadow;
 }

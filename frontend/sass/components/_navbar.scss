@@ -5,6 +5,7 @@
     space-between,
     center
   ); // Aplicar el mixin 'flex' para centrar los elementos horizontalmente
+  width: 100%;
   background-color: #bcb2b2;
   color: #fff;
   padding: 10px;
@@ -56,4 +57,3 @@
     }
   }
 }
-

@@ -35,5 +35,6 @@ export default function App() {
 }
 
 export function links() {
-  return [{ rel: "stylesheet", href: styles }];
+  return [{ rel: "stylesheet", href: styles },
+  { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" },];
 }
