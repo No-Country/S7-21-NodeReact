@@ -10,6 +10,8 @@ $navbar-hidden: "navbar-hidden";
   padding-bottom: 1rem;
   padding-left: 2rem;
   padding-right: 2rem;
+  flex-wrap: wrap;
+  align-items: center;
 
 }
 .left {
@@ -36,24 +38,26 @@ $navbar-hidden: "navbar-hidden";
   @include flex(
     space-between,
     center
-  ); // Aplicar el mixin 'flex' para centrar los elementos horizontalmente
+  ); 
   background-color: #bcb2b2;
   color: #fff;
   padding-left: 2rem;
   padding-right: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   @include mobile {
-    // En pantallas móviles, cambiar la dirección de flexión a 'columna' y centrar los elementos verticalmente
     @include flex-column($align: center);
+    padding: 1rem;
   }
   @include tablet {
     @include flex-column($align: center);
+    padding: 1.5rem;
   }
   .logo {
     display: inline-block;
     font-size: 1.6rem;
     color: black;
   }
-  //mobile
   .hamburger {
     display: none;
     cursor: pointer;
@@ -75,53 +79,42 @@ $navbar-hidden: "navbar-hidden";
   ul {
     list-style: none;
     display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    margin: 0;
     @include mobile {
-      // En pantallas móviles, cambiar la dirección de flexión a 'columna' y centrar los elementos verticalmente
       @include flex-column();
       &.navbar-hidden {
         display: none;
       }
     }
     @include tablet {
-      // En pantallas móviles, cambiar la dirección de flexión a 'columna' y centrar los elementos verticalmente
-      @include flex-column();
+      @include flex-row();
       &.navbar-hidden {
         display: none;
       }
     }
-
-/*     @include desktop {
-      .navbar ul {
-        &.#{$navbar-hidden} {
-          display: flex;
-          background-color: $color-secondary;
-        }
-      }
-    } */
-/*     .righ {
-      display: flex;
-      justify-content: flex-end;
-    } */
     li {
-      margin: 0 10px;
+      margin: 0 5px;
       @include mobile {
-        margin: 10px 0;
+        margin: 5px 0;
+        font-size: 1.2rem;
       }
 
       a {
         display: inline-block;
-        padding: 10px 15px;
+        padding: 5px;
         color: black;
         text-decoration: none;
-        font-size: 1.6rem;
+        font-size: 1.4rem;
         &:hover {
           text-decoration: underline;
         }
         &.button {
-          // Agregar la clase .button al selector
           color: white;
           background-color: black;
           border-radius: 30px;
+          padding: 5px 10px;
           &:hover {
             background-color: darken(white, 10%);
             color: black;
@@ -131,4 +124,3 @@ $navbar-hidden: "navbar-hidden";
     }
   }
 }
-
