@@ -1,5 +1,5 @@
 const { User } = require("../database/models");
-const { CustomError, encryptPassword } = require("../helpers");
+const { CustomError, encryptPassword, createJwt, comparePassword } = require("../helpers");
 
 const createUser = async (
   firstName,
@@ -37,4 +37,42 @@ const createUser = async (
   }
 };
 
-module.exports = { createUser };
+const login = async (email, password) => {
+  try {
+    // Busca en la base de datos si existe un registro con este email
+    const user = await User.findOne({ where: { email } });
+    if (!user) {
+      throw new CustomError("Credenciales inválidas", 401);
+    }
+
+    // Compara la contraseña proporcionada con la contraseña almacenada en la base de datos
+    const isMatch = await comparePassword(password, user.password);
+    if (!isMatch) {
+      throw new CustomError("Credenciales inválidas", 401);
+    }
+
+    // Genera un token de acceso para el usuario autenticado
+    const pld = {
+      payload: user.id
+    }
+    const token = await createJwt(pld);
+
+    // Devuelve los detalles del usuario autenticado y el token de acceso
+    return {
+      user: {
+        id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        phone: user.phone,
+        profileImage: user.profileImage,
+      },
+      token,
+    };
+  } catch (error) {
+    // Si ocurre un error lo devuelve al usuario a través de la clase CustomError
+    throw new CustomError(error.message, error.statusCode, error.errors);
+  }
+};
+
+module.exports = { createUser, login };
