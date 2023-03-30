@@ -18,7 +18,7 @@
  */
 
 const endPointResponse = ({ res, code = 200, message, body }) => {
-  res.statusCode(code).json({ code, message, body });
+  res.status(code).json({ code, message, body });
 };
 
 module.exports = endPointResponse;
