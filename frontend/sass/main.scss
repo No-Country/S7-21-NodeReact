@@ -4,6 +4,8 @@
 
 // Components
 @forward "components/login_form";
+@forward "components/navbar";
+
 
 // Layout
 
@@ -11,6 +13,8 @@
 @forward "pages/login";
 @forward "pages/home";
 @forward 'pages/contact';
+@forward "pages/services";
+@forward "pages/stylists";
 
 html {
   font-size: 62.5%;

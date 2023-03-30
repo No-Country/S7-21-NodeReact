@@ -1,4 +1,4 @@
-
+@use "_variables.scss" as *;
 // --------------------------------------------------
 // Mixins
 // --------------------------------------------------
@@ -33,6 +33,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+@mixin flex-star {
+    display: flex;
+    align-items: start;       
 }
 
 
