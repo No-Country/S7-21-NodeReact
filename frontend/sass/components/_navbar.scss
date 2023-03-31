@@ -2,9 +2,7 @@ $navbar-hidden: "navbar-hidden";
 @use "../base/variables" as *;
 @use "../base/mixins" as *;
 .header {
-  @include flex(
-    space-between, center
-  );
+  @include flex(space-between, center);
   background-color: black;
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -12,7 +10,6 @@ $navbar-hidden: "navbar-hidden";
   padding-right: 2rem;
   flex-wrap: wrap;
   align-items: center;
-
 }
 .left {
   font-size: 1.6rem;
@@ -23,22 +20,18 @@ $navbar-hidden: "navbar-hidden";
   flex-grow: 1;
 }
 .right {
+  display: flex;
+  font-size: 1.6rem;
+  gap: 2rem;
+  color: $color-white;
+  div {
     display: flex;
-    font-size: 1.6rem;
-    gap: 2rem;
-    color: $color-white;
-    div {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    
+    align-items: center;
+    gap: 0.5rem;
+  }
 }
 .navbar {
-  @include flex(
-    space-between,
-    center
-  ); 
+  @include flex(space-between, center);
   background-color: #bcb2b2;
   color: #fff;
   padding-left: 2rem;

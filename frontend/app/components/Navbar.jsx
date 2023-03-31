@@ -15,10 +15,10 @@ export default function Navbar() {
     <div>
       <header>
         <div className="header">
-          <div className="left"><TbClockHour9/>Abierto: Lunes - Sabado, 09 am - 7:30 pm</div>
+          <div className="left"><TbClockHour9 />Abierto: Lunes - Sabado, 09 am - 7:30 pm</div>
           <div className="right">
-            <div><FaWhatsapp/>Whatsapp</div>
-            <div><HiOutlineMail/>thebossbarbershopco@gmail.com</div>
+            <div><FaWhatsapp />Whatsapp</div>
+            <div><HiOutlineMail />thebossbarbershopco@gmail.com</div>
           </div>
         </div>
         <nav className="navbar">
