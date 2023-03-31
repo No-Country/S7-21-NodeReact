@@ -34,7 +34,11 @@ header {
     }
   }
   .navbar {
-    @include flex-column($align: center);
+    @include flex-row(space-between, center);
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
     background-color: #bcb2b2;
     color: #fff;
     padding: 1rem;
@@ -43,13 +47,13 @@ header {
     @include tablet {
       padding: 1.5rem;
     }
-    @include desktop {
+   @include desktop {
       @include flex-row(space-between, center);
       padding-left: 2rem;
       padding-right: 2rem;
       padding-top: 1rem;
       padding-bottom: 1rem;
-    }
+    } 
     .logo {
       display: inline-block;
       font-size: 1.6rem;
@@ -60,9 +64,6 @@ header {
       cursor: pointer;
 
       @include mobile {
-        display: block;
-      }
-      @include tablet {
         display: block;
       }
 
@@ -81,12 +82,6 @@ header {
       margin: 0;
       @include mobile {
         @include flex-column();
-        &.navbar-hidden {
-          display: none;
-        }
-      }
-      @include tablet {
-        @include flex-row();
         &.navbar-hidden {
           display: none;
         }
