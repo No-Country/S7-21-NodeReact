@@ -3,6 +3,7 @@ const morgan = require("morgan");
 const cors = require("cors");
 require("dotenv").config();
 const routes = require("./routes");
+const expressListEndpoints = require('express-list-endpoints');
 
 const { notFoundMiddleware, errorMiddleware } = require("./middlewares");
 
@@ -36,5 +37,7 @@ const startApi = async () => {
     console.log("Unable to connect to the database \n", error);
   }
 };
+
+console.log(expressListEndpoints(app));
 
 startApi();

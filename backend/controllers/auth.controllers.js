@@ -21,4 +21,16 @@ const registerUser = tryCatchWrapper(async (req, res, next) => {
   });
 });
 
-module.exports = { registerUser };
+const loginUser = tryCatchWrapper( async (req, res, next) => {
+  const { email, password } = req.body;
+  const response = await authServices.login(email, password);
+
+  endPointResponse({
+    res,
+    code: 200,
+    message: "Login exitoso",
+    body: response,
+  });
+});
+
+module.exports = { registerUser, loginUser };

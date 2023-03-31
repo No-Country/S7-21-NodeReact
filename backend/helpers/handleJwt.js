@@ -9,10 +9,8 @@ const jwt = require("jsonwebtoken");
  * createJwt({payload: {usuario:"test", id:1, phone:"123"}})
  * @returns eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
  */
-const createJwt = ({ payload }) => {
-  const accessToken = jwt.sign(payload, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_DURATION,
-  });
+const createJwt = (payload) => {
+  const accessToken = jwt.sign({payload}, process.env.JWT_SECRET, {expiresIn: process.env.JWT_DURATION});
   return accessToken;
 };
 
