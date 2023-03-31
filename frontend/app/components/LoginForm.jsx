@@ -1,4 +1,5 @@
 import { Link } from '@remix-run/react'
+import { FaGoogle, FaFacebook } from 'react-icons/fa'
 // import React, { useEffect } from 'react'
 import hairstyle from '~/assets/images/hairstyle.png'
 
@@ -37,8 +38,8 @@ export default function LoginForm() {
                 <div className="login-social">
                     <p>O inicia sesión con</p>
                     <div className="login-social-icons">
-                        <Link href="/login/facebook"><i className="fab fa-facebook-f"></i></Link>
-                        <Link href="/login/google"><i className="fab fa-google"></i></Link>
+                        <Link href="/login/facebook"><FaFacebook /></Link>
+                        <Link href="/login/google"><FaGoogle /></Link>
                     </div>
                 </div>
             </div>
