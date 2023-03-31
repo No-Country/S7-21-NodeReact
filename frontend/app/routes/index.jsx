@@ -9,7 +9,6 @@ export default function Index() {
   return (
     <Provider store={store}>
       <Home />
-      <Contact />
     </Provider>
   );
 }
