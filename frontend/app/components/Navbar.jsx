@@ -34,10 +34,10 @@ export default function Navbar() {
             <Link to="/">INICIO</Link>
           </li>
           <li className="nav-item">
-            <Link to="/">ESTILISTA/BARBERO</Link>
+            <Link to="/stylists">ESTILISTA/BARBERO</Link>
           </li>
           <li className="nav-item">
-            <Link to="/">SERVICIOS</Link>
+            <Link to="/services">SERVICIOS</Link>
           </li>
           <li className="nav-item">
             <Link to="/">SHOP</Link>
@@ -49,7 +49,7 @@ export default function Navbar() {
             <Link to="/">CONTACTO</Link>
           </li>
           <li className="nav-item">
-            <Link className="button" to="/">
+            <Link className="button" to="/login">
               INGRESAR
             </Link>
           </li>
