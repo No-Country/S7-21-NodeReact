@@ -1,0 +1,34 @@
+// Globals
+@use "base/variables" as *;
+@use "base/mixins" as *;
+@forward "base/normalize";
+
+// Components
+@forward "components/login_form";
+@forward "components/navbar";
+
+// Layout
+
+// Pages
+@forward "pages/login";
+@forward "pages/home";
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+body {
+  @include flex-column(start);
+  font-family: $font-primary;
+  height: 100vh;
+  margin: 0;
+  font-size: 1.6rem;
+  line-height: 1.6;
+  color: $color-primary;
+  background-color: $color-white;
+}
