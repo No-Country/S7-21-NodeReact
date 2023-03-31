@@ -1,36 +1,67 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "@remix-run/react";
+import { HiOutlineMail, } from "react-icons/hi";
+import { FaWhatsapp } from "react-icons/fa";
+import { TbClockHour9 } from "react-icons/tb"
 export default function Navbar() {
-  return (
-    <nav className="navbar">
-      <div className="logo">LOGO</div>
+  const [isOpen, setIsOpen] = useState(false);
 
-      <ul className="nav-links">
-        <li className="nav-item">
-          <Link to="/">INICIO</Link>
-        </li>
-        <li className="nav-item">
-          <Link to="/">ESTILISTA/BARBERO</Link>
-        </li>
-        <li className="nav-item">
-          <Link to="/">SERVICIOS</Link>
-        </li>
-        <li className="nav-item">
-          <Link to="/">SHOP</Link>
-        </li>
-        <li>
-          <Link to="/">SOBRE NOSOTROS</Link>
-        </li>
-        <li className="nav-item">
-          <Link to="/">CONTACTO</Link>
-        </li>
-        <li className="nav-item">
-          <Link className="button" to="/login">INGRESAR</Link>
-        </li>
-        <li className="nav-item">
-          <Link className="button" to="/">TURNOS</Link>
-        </li>
-      </ul>
-    </nav>
+  const toggle = () => {
+    console.log("click en togle", isOpen);
+    setIsOpen(!isOpen);
+  };
+
+  return (
+    <div>
+      <header>
+        <div className="header">
+          <div className="left"><TbClockHour9 />Abierto: Lunes - Sabado, 09 am - 7:30 pm</div>
+          <div className="right">
+            <div><FaWhatsapp />Whatsapp</div>
+            <div><HiOutlineMail />thebossbarbershopco@gmail.com</div>
+          </div>
+        </div>
+        <nav className="navbar">
+          <div className="logo">LOGO</div>
+
+          <div className="hamburger" onClick={toggle}>
+            <div />
+            <div />
+            <div />
+          </div>
+
+          <ul className={`nav-links ${isOpen ? "show-nav" : "navbar-hidden"}`}>
+            <li className="nav-item">
+              <Link to="/">INICIO</Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/">ESTILISTA/BARBERO</Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/">SERVICIOS</Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/">SHOP</Link>
+            </li>
+            <li>
+              <Link to="/">SOBRE NOSOTROS</Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/">CONTACTO</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="button" to="/">
+                INGRESAR
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="button" to="/">
+                TURNOS
+              </Link>
+            </li>
+          </ul>
+        </nav>
+      </header>
+    </div>
   );
 }
