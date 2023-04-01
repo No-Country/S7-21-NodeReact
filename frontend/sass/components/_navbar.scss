@@ -44,8 +44,10 @@ header {
     padding: 1rem;
     width: 100%;
 
-    @include tablet {
+    @include navbarmobile {
+      @include flex-column(center, center);
       padding: 1.5rem;
+
     }
    @include desktop {
       @include flex-row(space-between, center);
@@ -58,12 +60,18 @@ header {
       display: inline-block;
       font-size: 1.6rem;
       color: black;
+      @include navbarmobile {
+        display: flex; /* Utilizar flexbox */
+        justify-content: center; /* Centrar horizontalmente */
+        align-items: center; /* Centrar verticalmente */
+        color: black;
+      }
     }
     .hamburger {
       display: none;
       cursor: pointer;
 
-      @include mobile {
+      @include navbarmobile {
         display: block;
       }
 
@@ -80,7 +88,7 @@ header {
       flex-wrap: wrap;
       justify-content: flex-end;
       margin: 0;
-      @include mobile {
+      @include navbarmobile {
         @include flex-column();
         &.navbar-hidden {
           display: none;
@@ -88,7 +96,7 @@ header {
       }
       li {
         margin: 0 5px;
-        @include mobile {
+        @include navbarmobile {
           margin: 5px 0;
           font-size: 1.2rem;
         }
