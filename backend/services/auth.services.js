@@ -52,10 +52,10 @@ const login = async (email, password) => {
     }
 
     // Genera un token de acceso para el usuario autenticado
-    const pld = {
-      payload: user.id
+    const payload = {
+      id: user.id, role:user.role
     }
-    const token = await createJwt(pld);
+    const token = await createJwt({payload});
 
     // Devuelve los detalles del usuario autenticado y el token de acceso
     return {
