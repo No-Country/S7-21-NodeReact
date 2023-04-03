@@ -21,7 +21,7 @@ const registerUser = tryCatchWrapper(async (req, res, next) => {
   });
 });
 
-const loginUser = tryCatchWrapper( async (req, res, next) => {
+const loginUser = tryCatchWrapper(async (req, res, next) => {
   const { email, password } = req.body;
   const response = await authServices.login(email, password);
 
@@ -33,4 +33,21 @@ const loginUser = tryCatchWrapper( async (req, res, next) => {
   });
 });
 
-module.exports = { registerUser, loginUser };
+const changePassword = tryCatchWrapper(async (req, res, next) => {
+  const { email, oldPassword, newPassword, confirmNewPassword } = req.body;
+  const response = await authServices.reset(
+    email,
+    oldPassword,
+    newPassword,
+    confirmNewPassword
+  );
+
+  endPointResponse({
+    res,
+    code: 200,
+    message: "Contraseña actualizada.",
+    body: response,
+  });
+});
+
+module.exports = { registerUser, loginUser, changePassword };

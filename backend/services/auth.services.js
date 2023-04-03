@@ -1,5 +1,10 @@
 const { User } = require("../database/models");
-const { CustomError, encryptPassword, createJwt, comparePassword } = require("../helpers");
+const {
+  CustomError,
+  encryptPassword,
+  createJwt,
+  comparePassword,
+} = require("../helpers");
 
 const createUser = async (
   firstName,
@@ -53,9 +58,10 @@ const login = async (email, password) => {
 
     // Genera un token de acceso para el usuario autenticado
     const payload = {
-      id: user.id, role:user.role
-    }
-    const token = await createJwt({payload});
+      id: user.id,
+      role: user.role,
+    };
+    const token = await createJwt({ payload });
 
     // Devuelve los detalles del usuario autenticado y el token de acceso
     return {
@@ -75,4 +81,29 @@ const login = async (email, password) => {
   }
 };
 
-module.exports = { createUser, login };
+const reset = async (email, oldPassword, newPassword, confirmNewPassword) => {
+  try {
+    // Verificar que las contraseñas nuevas sean iguales
+    if (newPassword !== confirmNewPassword) {
+      throw new CustomError("Las contraseñas no coinciden", 400);
+    }
+
+    // Verificar que la contraseña anterior sea correcta
+    const user = await User.findOne({ where: { email } });
+    if (!user || !(await comparePassword(oldPassword, user.password))) {
+      throw new CustomError("Error. Verificar Email y Contraseña", 400);
+    }
+
+    //Encriptar la nueva contraseña
+    const hashPassword = await encryptPassword(newPassword);
+
+    // Actualizar la contraseña
+    await user.update({ password: hashPassword });
+
+    return "La contraseña ha sido actualizada.";
+  } catch (error) {
+    throw new CustomError(error.message, error.statusCode, error.errors);
+  }
+};
+
+module.exports = { createUser, login, reset };
