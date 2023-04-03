@@ -1,6 +1,7 @@
 const { tryCatchWrapper, endPointResponse } = require("../helpers");
 const userServices = require("../services/users.services");
 
+
 const getAllUsers = tryCatchWrapper(async (req, res, next) => {
   const { roleUser } = req.params;
   const allUsers = await userServices.findAllUsers(roleUser);
