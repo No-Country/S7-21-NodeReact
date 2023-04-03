@@ -91,7 +91,7 @@ const reset = async (email, oldPassword, newPassword, confirmNewPassword) => {
     // Verificar que la contraseña anterior sea correcta
     const user = await User.findOne({ where: { email } });
     if (!user || !(await comparePassword(oldPassword, user.password))) {
-      throw new CustomError("Las contraseñas anterior no es correcta", 400);
+      throw new CustomError("Error. Verificar Email y Contraseña", 400);
     }
 
     //Encriptar la nueva contraseña
