@@ -18,6 +18,6 @@ router.patch("/:id", authenticateUser, updateUserById);
 // Ruta de actualizar usuario por id
 router.delete("/:id", authenticateUser, deleteUser);
 
-router.get("/:roleUser", authenticateUser, getAllUsers);
+router.get("/all/:roleUser", authenticateUser, getAllUsers);
 
 module.exports = router;
