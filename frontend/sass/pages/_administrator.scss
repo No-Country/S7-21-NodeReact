@@ -1,0 +1,115 @@
+@use "../base/variables" as *;
+@use "../base/mixins" as *;
+.title {
+  @include flex();
+  @include navbarmobile {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+  }
+  font-style: normal;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 48px;
+  text-align: center;
+  margin-top: 12rem;
+  margin-bottom: 9rem;
+}
+.container {
+  @include flex();
+  max-width: 90vw;
+  margin: 2rem;
+
+  .container_administration {
+    @include flex-row();
+    gap: 3rem;
+    @include navbarmobile {
+      @include flex-column();
+    }
+    .buton_administration {
+      @include flex-column();
+      min-width: 10vw;
+      margin-left: 50px;
+      gap: 1rem;
+      button {
+        border-radius: 25px; /* Añadir esta propiedad */
+        padding: 0.6rem;
+        font-size: 12px;
+        background-color: $color-white;
+        border-width: 1px;
+        border: 1px solid #000000;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px;
+        width: 180px;
+        height: 30px;
+
+        /* Estilos para hover */
+        &:hover {
+          background-color: $color-yellow;
+          border: none;
+        }
+
+        /* Estilos para active */
+        &:active {
+          background-color: blue;
+          color: white;
+        }
+      }
+    }
+
+
+    
+    table th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      background-color: #331763;
+      color: white;
+    }
+    
+    th:first-child {
+      border-radius: 10px 0 0 10px;
+    }
+    th:last-child {
+      border-radius: 0 10px 10px 0;
+    }
+    .table {
+      @include flex-column();
+      margin-right: 80px;
+      table {
+        border-collapse: collapse;
+        min-width: 80vw;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        margin-right: 60px;
+        tr td {
+          border: none;
+          padding: 8px;
+          text-align: center;
+          border-bottom: 1px solid #ccc;
+          font-size: 16px;
+          font-weight: 500;
+          line-height: 19px;
+        }
+        tr td .img-table {
+          width: 60px;
+          height: 60px;
+          vertical-align: middle;
+          margin-right: 10px;
+          color: #d9d9d9;
+        }
+      }
+    }
+    .tile_table {
+      th {
+        border: none;
+        padding-top: 18px;
+        padding-bottom: 18px;
+        text-align: center;
+        background-color: $color-primary;
+        color: $color-white;
+      }
+    }
+  }
+}
