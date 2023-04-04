@@ -1,4 +1,8 @@
-const { tryCatchWrapper, endPointResponse } = require("../helpers");
+const {
+  tryCatchWrapper,
+  endPointResponse,
+  CustomError,
+} = require("../helpers");
 const userServices = require("../services/users.services");
 const { User } = require("../database/models");
 
@@ -31,4 +35,65 @@ const showMe = tryCatchWrapper(async (req, res, next) => {
   });
 });
 
-module.exports = { getAllUsers, showMe };
+const getUserById = tryCatchWrapper(async (req, res, next) => {
+  const userId = req.params.id;
+
+  const user = await User.findByPk(userId);
+
+  if (!user) {
+    throw new CustomError("Usuario no encontrado", 404);
+  }
+
+  endPointResponse({
+    res,
+    code: 200,
+    message: "Usuario encontrado",
+    body: user,
+  });
+});
+
+// no actualiza el usuario debemos arreglarla
+const updateUserById = tryCatchWrapper(async (req, res, next) => {
+  const userId = req.params.id;
+
+  const [rowsUpdated] = await User.update({
+    where: { id: userId },
+    returning: true,
+  });
+
+  if (rowsUpdated === 0) {
+    throw new CustomError("Usuario no encontrado", 404);
+  }
+
+  endPointResponse({
+    res,
+    code: 200,
+    message: "Usuario encontrado",
+    body: updateDate,
+  });
+});
+
+const deleteUser = tryCatchWrapper(async (req, res, next) => {
+  const userId = req.params.id;
+
+  const rowsDeleted = await User.destroy({
+    where: { id: userId },
+  });
+
+  if (rowsDeleted === 0) {
+    throw new CustomError("Usuario no encontrado", 404);
+  }
+
+  endPointResponse({
+    res,
+    message: `Usuario ${userId} eliminado`,
+  });
+});
+
+module.exports = {
+  getAllUsers,
+  showMe,
+  getUserById,
+  updateUserById,
+  deleteUser,
+};
