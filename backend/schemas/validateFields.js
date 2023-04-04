@@ -1,4 +1,4 @@
-const validationResult = require('express-validator')
+const { validationResult } = require('express-validator')
 
 /**
  * Middleware que valida los schemas creados en express-validator
@@ -10,20 +10,13 @@ const validationResult = require('express-validator')
  */
 
 const validateFields = (req, res, next) => {
-    const errors = validationResult(req)
-    const body = req.body
-    console.log(body)
-
-    if(!errors.isEmpty()) {
-        const error = errors
-            .array()
-            .map((item) => item.msg)
-            .join(', ')
-        
-        return res.status(400).json({ error });
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ 
+            error: errors.array().map(error => error.msg).join(', ')
+        });
     }
-
-    next()
+    next();
 }
 
 module.exports = validateFields

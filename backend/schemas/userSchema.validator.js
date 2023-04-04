@@ -1,4 +1,4 @@
-const check = require('express-validator')
+const { check } = require('express-validator')
 
 /**
  * Middleware que valida los datos para crear el schema de User creados en express-validator
@@ -7,11 +7,11 @@ const check = require('express-validator')
  */
 
 const userSchemaValidator = [
-    check('firstName', 'El nombre es obligatorio').exists().not().isEmpty().trim(),
-    check('lastName', 'El apellido es obligatorio').exists().not().isEmpty().trim(),
-    check('email', 'El mail es obligatorio').exists().isemail().trim(),
-    check('phone', 'Número no válido').exists().isNumeric().isLength({min: 6}),
-    check('password', 'El password debe ser de más de 6 caracteres').exists().isLength({min: 6}).trim()
+    check('firstName').exists().not().trim().withMessage('El nombre es obligatorio'),
+    check('lastName').exists().not().trim().withMessage('El apellido es obligatorio'),
+    check('email').isEmail().trim().withMessage('Email incorrecto'),
+    check('phone').isNumeric().isLength({min: 6}).withMessage('Número no válido'),
+    check('password').isLength({min: 6}).trim().withMessage('El password debe ser de más de 6 caracteres')
 ]
 
 module.exports = userSchemaValidator
