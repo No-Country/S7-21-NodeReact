@@ -1,5 +1,6 @@
 const { tryCatchWrapper, endPointResponse } = require("../helpers");
 const authServices = require("../services/auth.services");
+const sendNewUser = require("../middlewares/email.middleware");
 
 const registerUser = tryCatchWrapper(async (req, res, next) => {
   const { firstName, lastName, email, phone, profileImage, password } =
@@ -12,6 +13,10 @@ const registerUser = tryCatchWrapper(async (req, res, next) => {
     profileImage,
     password
   );
+
+  //envía correo de bienvenida
+  await sendNewUser(email, firstName, lastName)
+
   // Se devuelve la respuesta de la peticion http usando la funcion "endPointResponse"
   endPointResponse({
     res,
