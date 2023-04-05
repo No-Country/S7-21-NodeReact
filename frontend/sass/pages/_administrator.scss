@@ -15,24 +15,21 @@
   margin-bottom: 9rem;
 }
 .container {
-  @include flex();
+  @include flex-row();
+  
   max-width: 90vw;
-  margin: 2rem;
-
   .container_administration {
+margin-right: 20px;
     @include flex-row();
-    gap: 3rem;
     @include navbarmobile {
       @include flex-column();
     }
     .buton_administration {
       @include flex-column();
       min-width: 10vw;
-      margin-left: 50px;
-      gap: 1rem;
+      margin-left: 25px;
       button {
         border-radius: 25px; /* Añadir esta propiedad */
-        padding: 0.6rem;
         font-size: 12px;
         background-color: $color-white;
         border-width: 1px;
@@ -75,14 +72,14 @@
       border-radius: 0 10px 10px 0;
     }
     .table {
+      margin-left: 5px;
       @include flex-column();
-      margin-right: 80px;
       table {
+        
         border-collapse: collapse;
         min-width: 80vw;
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
-        margin-right: 60px;
         tr td {
           border: none;
           padding: 8px;
