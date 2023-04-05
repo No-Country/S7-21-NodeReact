@@ -1,5 +1,3 @@
-const transporter = require('./config.js')
-
 const gmailOptions = (userEmail, subjectEmail, htmlTemplate) => { 
     return {
         from: process.env.GMAIL_ACCOUNT,
