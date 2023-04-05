@@ -12,7 +12,7 @@ export const Administrator = () => {
             <button>TURNOS</button>
             <button>CLIENTES</button>
           </div>
-          <div className="table">
+          <div className="table table-responsive">
             <table>
               <tr className="tile_table">
                 <th>Nombre y apellido</th>

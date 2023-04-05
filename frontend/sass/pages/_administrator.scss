@@ -28,6 +28,7 @@ margin-right: 20px;
       @include flex-column();
       min-width: 10vw;
       margin-left: 25px;
+      margin-right: 10px;
       button {
         border-radius: 25px; /* Añadir esta propiedad */
         font-size: 12px;
@@ -73,12 +74,13 @@ margin-right: 20px;
       border-radius: 0 10px 10px 0;
     }
     .table {
-      margin-left: 5px;
+      margin-left: 10px;
+      overflow-x: auto;
       @include flex-column();
       table {
-        
+        max-width: 100%;
         border-collapse: collapse;
-        min-width: 80vw;
+        min-width: 75vw;
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
         tr td {
