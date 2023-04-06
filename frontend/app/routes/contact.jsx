@@ -1,10 +1,10 @@
-import React from 'react'
-import { Contact } from '../pages/Contact'
+import React from "react";
+import { Contact } from "../pages/Contact";
 
-export default function contact() {
-    return (
-        <main>
-            <Contact />
-        </main>
-    )
+export default function services() {
+  return (
+    <main>
+      <Contact />
+    </main>
+  );
 }

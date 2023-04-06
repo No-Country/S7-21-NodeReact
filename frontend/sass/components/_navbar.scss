@@ -34,35 +34,44 @@ header {
     }
   }
   .navbar {
-    @include flex-column($align: center);
+    @include flex-row(space-between, center);
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
     background-color: #bcb2b2;
     color: #fff;
     padding: 1rem;
     width: 100%;
 
-    @include tablet {
+    @include navbarmobile {
+      @include flex-column(center, center);
       padding: 1.5rem;
+
     }
-    @include desktop {
+   @include desktop {
       @include flex-row(space-between, center);
       padding-left: 2rem;
       padding-right: 2rem;
       padding-top: 1rem;
       padding-bottom: 1rem;
-    }
+    } 
     .logo {
       display: inline-block;
       font-size: 1.6rem;
       color: black;
+      @include navbarmobile {
+        display: flex; /* Utilizar flexbox */
+        justify-content: center; /* Centrar horizontalmente */
+        align-items: center; /* Centrar verticalmente */
+        color: black;
+      }
     }
     .hamburger {
       display: none;
       cursor: pointer;
 
-      @include mobile {
-        display: block;
-      }
-      @include tablet {
+      @include navbarmobile {
         display: block;
       }
 
@@ -79,21 +88,15 @@ header {
       flex-wrap: wrap;
       justify-content: flex-end;
       margin: 0;
-      @include mobile {
+      @include navbarmobile {
         @include flex-column();
-        &.navbar-hidden {
-          display: none;
-        }
-      }
-      @include tablet {
-        @include flex-row();
         &.navbar-hidden {
           display: none;
         }
       }
       li {
         margin: 0 5px;
-        @include mobile {
+        @include navbarmobile {
           margin: 5px 0;
           font-size: 1.2rem;
         }

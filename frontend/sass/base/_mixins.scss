@@ -50,7 +50,11 @@
     @content;
   }
 }
-
+@mixin navbarmobile {
+  @media (max-width: $breakpoint-navbar) {
+    @content;
+  }
+}
 @mixin tablet {
   @media (min-width: $breakpoint-tablet) {
     @content;
