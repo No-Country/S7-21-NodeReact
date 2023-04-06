@@ -14,7 +14,6 @@ export const Stylists = () => {
                         <div
                             className="cardStylist"
                             key={index}
-                            onClick={() => console.log(stylist.id)}
                         >
                             <div className="textContainer"><h4>{stylist.name}</h4></div>
                             <img
