@@ -17,6 +17,9 @@
 @forward "pages/stylists";
 @forward "pages/administrator";
 
+//routes 
+@forward 'routes/Barber/$barberId';
+
 * {
   box-sizing: border-box;
 }
