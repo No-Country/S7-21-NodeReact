@@ -19,6 +19,7 @@ export const authSlice = createSlice({
       state.errorMessage = undefined;
     },
     onLoginError: (state, { error }) => {
+      console.log(error, "error")
       state.status = "not-authenticated";
       state.user = {};
       state.errorMessage = error;
@@ -45,7 +46,7 @@ export const loginuser = (payload) => {
         return data;
       }
     } catch (error) {
-      dispatch({ type: onLoginError, payload: error });
+      dispatch({ type: onLoginError, error: error.response.data.error });
     }
   };
 };
