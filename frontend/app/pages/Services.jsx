@@ -10,6 +10,7 @@ export const Services = () => {
                     <img
                         src={corte}
                         className='imgServices'
+                        alt=''
                     />
                     <h1>CORTE DE PELO</h1>
                     <span>Descripción del servicio</span>
@@ -19,6 +20,8 @@ export const Services = () => {
                     <img
                         src={corte}
                         className='imgServices'
+                        alt=''
+
                     />
                     <h1>CORTE DE BARBA</h1>
                     <span>Descripción del servicio</span>
@@ -28,6 +31,7 @@ export const Services = () => {
                     <img
                         src={corte}
                         className='imgServices'
+                        alt=''
                     />
                     <h1>LAVADO Y PERFILADO </h1>
                     <span>Descripción del servicio</span>
@@ -37,6 +41,7 @@ export const Services = () => {
                     <img
                         src={corte}
                         className='imgServices'
+                        alt=''
                     />
                     <h1>LAVADO Y CORTE</h1>
                     <span>Descripción del servicio</span>
