@@ -79,7 +79,7 @@ router.get("/showMe", authenticateUser, showMe);
 
 /**
  * @openapi
- * /api/v1/all/{rol}:
+ * /api/v1/users/all/{rol}:
  *   get:
  *     tags:
  *       - All
