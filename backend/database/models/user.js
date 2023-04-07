@@ -52,6 +52,13 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: "client",
         allowNull: false,
       },
+      verificationToken:{
+        type: DataTypes.STRING
+      },
+      verified:{
+        type: DataTypes.BOOLEAN,
+        defaultValue:false
+      }
     },
     {
       sequelize,
