@@ -2,15 +2,19 @@ const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
 require("dotenv").config();
+const db = require("./database/models");
 const routes = require("./routes");
-const expressListEndpoints = require('express-list-endpoints');
+
+//Documentacion con swagger
+const { swaggerDocs: V1SwaggerDocs } = require("./swagger.js");
+
+const expressListEndpoints = require("express-list-endpoints");
 
 const { notFoundMiddleware, errorMiddleware } = require("./middlewares");
 
-const db = require("./database/models");
-
 const app = express();
 const port = process.env.PORT || 8080;
+
 app.use(cors());
 app.use(express.json());
 app.use(morgan("dev", { skip: (req, res) => process.env.NODE_ENV === "test" }));
@@ -19,6 +23,9 @@ app.get("/", (req, res) => {
   res.send("Backend Barberia");
 });
 app.use("/api/v1", routes);
+
+//Documentacion con swagger
+V1SwaggerDocs(app, port);
 
 app.use(notFoundMiddleware);
 app.use(errorMiddleware);

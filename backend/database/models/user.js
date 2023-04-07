@@ -1,5 +1,43 @@
 "use strict";
 const { Model } = require("sequelize");
+
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     User:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: string
+ *           format: uuid
+ *           description: The unique identifier for a user.
+ *         firstName:
+ *           type: string
+ *           description: The first name of the user.
+ *         lastName:
+ *           type: string
+ *           description: The last name of the user.
+ *         email:
+ *           type: string
+ *           format: email
+ *           description: The email address of the user.
+ *         profileImage:
+ *           type: string
+ *           format: uri
+ *           description: The URL of the user's profile image.
+ *         phone:
+ *           type: string
+ *           description: The phone number of the user.
+ *         password:
+ *           type: string
+ *           description: The password of the user.
+ *         role:
+ *           type: string
+ *           enum: [admin, barber, client]
+ *           description: The role of the user. Possible values are "admin", "barber", or "client".
+ */
+
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**

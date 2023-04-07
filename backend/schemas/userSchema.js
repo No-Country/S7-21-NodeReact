@@ -1,7 +1,5 @@
-const { check } = require('express-validator');
+const { check } = require("express-validator");
 
-const userSchema = {
-  // define validation rules for user fields
-};
+const userSchema = {};
 
 module.exports = userSchema;
