@@ -12,7 +12,8 @@ const createUser = async (
   email,
   phone,
   profileImage,
-  password
+  password,
+  verificationToken
 ) => {
   try {
     // Se encripta la contraseña ingresada por el usuario
@@ -29,6 +30,7 @@ const createUser = async (
         phone,
         profileImage,
         password: hashPassword,
+        verificationToken,
       },
     });
     if (!created) {
@@ -81,6 +83,25 @@ const login = async (email, password) => {
   }
 };
 
+const verifyUserByEmail = async (verificationToken, email) => {
+  try {
+    const user = await User.findOne({ where: { email } });
+    if (!user) {
+      throw new CustomError("Usuario no encontrado", 404);
+    }
+
+    if (user.verificationToken !== verificationToken) {
+      throw new CustomError("Fallo la verificacion", 401);
+    }
+
+    await user.update({ ...user, verified: true, verificationToken: "" });
+
+    return `Usuario verificado de manera exitosa`;
+  } catch (error) {
+    throw new CustomError(error.message, error.statusCode, error.errors);
+  }
+};
+
 const reset = async (email, oldPassword, newPassword, confirmNewPassword) => {
   try {
     // Verificar que las contraseñas nuevas sean iguales
@@ -106,4 +127,4 @@ const reset = async (email, oldPassword, newPassword, confirmNewPassword) => {
   }
 };
 
-module.exports = { createUser, login, reset };
+module.exports = { createUser, login, verifyUserByEmail, reset };
