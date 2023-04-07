@@ -1,5 +1,13 @@
-function newUserEmail(userName, userLastName) {
-    return `<!DOCTYPE html>
+function newUserEmail(
+  userName,
+  userLastName,
+  email,
+  verificationToken,
+  origin
+) {
+  const verifyUrl = `${origin}/user/verify-email?token=${verificationToken}&email=${email}`;
+
+  return `<!DOCTYPE html>
     <html lang="es">
       <head>
         <meta charset="UTF-8" />
@@ -89,12 +97,12 @@ function newUserEmail(userName, userLastName) {
             <p></p>
             <span>Apellido: ${userLastName}</span>
             <br/>
-            <a href="https://www.google.com.ar">Ir a la web</a>
+            <a href="${verifyUrl}">Confirma tu cuenta</a>
           </div>
             
         </div>
       </body>
-    </html>`
+    </html>`;
 }
 
-module.exports = newUserEmail
+module.exports = newUserEmail;
