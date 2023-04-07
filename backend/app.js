@@ -2,37 +2,18 @@ const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
 require("dotenv").config();
+const db = require("./database/models");
 const routes = require("./routes");
+
+//Documentacion con swagger
+const { swaggerDocs: V1SwaggerDocs } = require("./swagger.js");
+
 const expressListEndpoints = require("express-list-endpoints");
-const swaggerUi = require("swagger-ui-express");
-const swaggerJSDoc = require("swagger-jsdoc");
 
 const { notFoundMiddleware, errorMiddleware } = require("./middlewares");
 
-const db = require("./database/models");
-
 const app = express();
 const port = process.env.PORT || 8080;
-
-const swaggerOptions = {
-  swaggerDefinition: {
-    info: {
-      title: "API de ejemplo",
-      description: "Esta es una API de ejemplo para documentar con Swagger",
-      contact: {
-        name: "Tu nombre",
-        email: "tu.email@example.com",
-        url: "https://tu-sitio-web.com",
-      },
-      version: "1.0.0",
-    },
-  },
-  apis: ["./routes/*.js"],
-};
-
-const swaggerDocs = swaggerJSDoc(swaggerOptions);
-
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 app.use(cors());
 app.use(express.json());
@@ -42,6 +23,9 @@ app.get("/", (req, res) => {
   res.send("Backend Barberia");
 });
 app.use("/api/v1", routes);
+
+//Documentacion con swagger
+V1SwaggerDocs(app, port);
 
 app.use(notFoundMiddleware);
 app.use(errorMiddleware);

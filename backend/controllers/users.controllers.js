@@ -52,24 +52,14 @@ const getUserById = tryCatchWrapper(async (req, res, next) => {
   });
 });
 
-// no actualiza el usuario debemos arreglarla
 const updateUserById = tryCatchWrapper(async (req, res, next) => {
-  const userId = req.params.id;
-
-  const [rowsUpdated] = await User.update({
-    where: { id: userId },
-    returning: true,
-  });
-
-  if (rowsUpdated === 0) {
-    throw new CustomError("Usuario no encontrado", 404);
-  }
+  const { id } = req.params;
+  const updatedUser = await userServices.updateUser(id, req.body, req.user);
 
   endPointResponse({
     res,
-    code: 200,
-    message: "Usuario encontrado",
-    body: updateDate,
+    message: "Usuario actualizado de manera exitosa",
+    body: updatedUser,
   });
 });
 
