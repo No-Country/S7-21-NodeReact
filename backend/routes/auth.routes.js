@@ -196,9 +196,11 @@ router.post("/login", authCtrls.loginUser);
  *                 error:
  *                   type: string
  *                   example: Error. Verificar Email y Contraseña
-
  */
 
 router.post("/resetPass", authCtrls.changePassword);
+
+// Ruta para verificar usuario por email
+router.post("/verifyEmail", authCtrls.verifyEmail);
 
 module.exports = router;

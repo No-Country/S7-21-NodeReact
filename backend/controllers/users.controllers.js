@@ -38,7 +38,9 @@ const showMe = tryCatchWrapper(async (req, res, next) => {
 const getUserById = tryCatchWrapper(async (req, res, next) => {
   const userId = req.params.id;
 
-  const user = await User.findByPk(userId);
+  const user = await User.findByPk(userId, {
+    attributes: { exclude: ["password"] },
+  });
 
   if (!user) {
     throw new CustomError("Usuario no encontrado", 404);

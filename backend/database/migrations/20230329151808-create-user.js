@@ -30,6 +30,13 @@ module.exports = {
       profileImage: {
         type: Sequelize.STRING,
       },
+      verificationToken:{
+        type: Sequelize.STRING
+      },
+      verified:{
+        type: Sequelize.BOOLEAN,
+        defaultValue:false
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

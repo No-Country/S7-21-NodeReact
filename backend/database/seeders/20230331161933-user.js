@@ -15,10 +15,13 @@ module.exports = {
       firstName: "Admin",
       lastName: "NoCountry",
       email: "admin@mail.com",
-      profileImage: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
+      profileImage:
+        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
       phone: faker.phone.number("##########"),
       password: userPassword,
       role: "admin",
+      verificationToken: "",
+      verified: true,
       createdAt: faker.date.recent(),
       updatedAt: faker.date.recent(),
     };
@@ -34,6 +37,8 @@ module.exports = {
         phone: faker.helpers.unique(() => faker.phone.number("##########")),
         password: userPassword,
         role: i < 10 ? "barber" : "client",
+        verificationToken: "",
+        verified: true,
         createdAt,
         updatedAt: createdAt,
       };
