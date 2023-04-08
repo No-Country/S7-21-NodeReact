@@ -1,6 +1,17 @@
-import React from "react";
+import { useNavigate } from "@remix-run/react";
+import React, { useEffect } from "react";
 import { FaCircle} from "react-icons/fa"
+import { useSelector } from "react-redux";
 export const Administrator = () => {
+  const navigate = useNavigate()
+  const isAuthenticated = useSelector((state)=> state.auth.status === "authenticated");
+  console.log("isAuthenticated", isAuthenticated);
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate('/login');
+    }
+  }, [isAuthenticated, navigate]);
+
   return (
     <div>
       <div className="title">Administrador</div>
