@@ -40,7 +40,7 @@ export default function Navbar() {
             <Link to="/services">SERVICIOS</Link>
           </li>
           <li className="nav-item">
-            <Link to="/">SHOP</Link>
+            <Link to="/administrator">SHOP</Link>
           </li>
           <li>
             <Link to="/">SOBRE NOSOTROS</Link>
