@@ -4,7 +4,7 @@ import { FaCircle} from "react-icons/fa"
 import { useSelector } from "react-redux";
 export const Administrator = () => {
   const navigate = useNavigate()
-  const isAuthenticated = useSelector((state)=> state.auth.status === "authenticated");
+  const isAuthenticated = useSelector((state)=> state.user.status === "authenticated");
   console.log("isAuthenticated", isAuthenticated);
   useEffect(() => {
     if (!isAuthenticated) {
