@@ -1,23 +1,41 @@
 import React, { useState } from "react";
 import { Link } from "@remix-run/react";
-import { HiOutlineMail, } from "react-icons/hi";
+import { HiOutlineMail } from "react-icons/hi";
 import { FaWhatsapp } from "react-icons/fa";
-import { TbClockHour9 } from "react-icons/tb"
+import { TbClockHour9 } from "react-icons/tb";
+import Modal from "react-modal";
+import Turno from "./Turno";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-
+  const [isOpenModal, setIsOpenModal] = useState(false);
   const toggle = () => {
     console.log("click en togle", isOpen);
     setIsOpen(!isOpen);
   };
+  const togglemodal = () => {
+    setIsOpenModal(!isOpenModal)
+  }
 
+  const closeModal = () => {
+    setIsOpenModal(false);
+  };
   return (
-    <header>
+    <div className="content-nav-and-head">
+ <header>
       <div className="header">
-        <div className="left"><TbClockHour9 />Abierto: Lunes - Sabado, 09 am - 7:30 pm</div>
+        <div className="left">
+          <TbClockHour9 />
+          Abierto: Lunes - Sabado, 09 am - 7:30 pm
+        </div>
         <div className="right">
-          <div><FaWhatsapp />Whatsapp</div>
-          <div><HiOutlineMail />thebossbarbershopco@gmail.com</div>
+          <div>
+            <FaWhatsapp />
+            Whatsapp
+          </div>
+          <div>
+            <HiOutlineMail />
+            thebossbarbershopco@gmail.com
+          </div>
         </div>
       </div>
       <nav className="navbar">
@@ -53,13 +71,25 @@ export default function Navbar() {
               INGRESAR
             </Link>
           </li>
-          <li className="nav-item">
-            <Link className="button" to="/">
-              TURNOS
-            </Link>
+          <li className="nav-item custom-style" onClick={togglemodal}>
+            <div className="buton">TURNO</div>
           </li>
         </ul>
       </nav>
     </header>
+    <Modal
+        isOpen={isOpenModal}
+        onRequestClose={closeModal}
+        contentLabel="Turno"
+        className="modal"
+        
+      >
+        <div className="modal-content">
+        <Turno closeModal={closeModal}/>
+        </div>
+       
+      </Modal>
+    </div>
+   
   );
 }

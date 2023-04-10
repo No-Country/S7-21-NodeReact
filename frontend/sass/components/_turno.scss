@@ -1,0 +1,233 @@
+@use "../base/variables" as *;
+@use "../base/mixins" as *;
+@import "../../node_modules/react-datepicker/dist/react-datepicker.css";
+.content-turno {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* para ocupar toda la altura de la pantalla */
+  background-color: transparent;
+  .content-form {
+    background-color: $color-primary;
+    border-radius: 20px;
+    padding: 46px;
+    .content-input {
+      @include flex-wrap();
+      width: 100%;
+      .input-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 45%;
+        margin: 15px;
+        .iconofinput {
+          position: absolute;
+          left: 2rem; /* ajuste según sea necesario */
+          top: 50%;
+          transform: translateY(-50%);
+          margin-right: 0.5rem; /* ajuste según sea necesario */
+          font-size: 30px;
+        }
+        input[type="text"] {
+          text-align: center;
+          width: 100%;
+          padding-left: 5rem; /* ajuste según sea necesario */
+          padding-right: 1rem; /* 8px */
+          padding-top: 1rem; /* 8px */
+          padding-bottom: 1rem; /* 8px */
+          font-style: normal;
+          font-weight: 400;
+          font-size: 20px;
+          line-height: 24px;
+          border-radius: 10px;
+          margin-left: 0.5rem; /* ajuste según sea necesario */
+          margin-right: 0.5rem; /* ajuste según sea necesario */
+        }
+      }
+    }
+    .content-message {
+      margin-top: 4rem;
+      @include flex();
+      textarea {
+        width: 92%;
+        height: 150px;
+        padding-left: 10px;
+        padding-top: 15px;
+        padding-bottom: 10px;
+        padding-right: 10px;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 24px;
+        border-radius: 10px;
+      }
+    }
+    .content-select {
+      @include flex-wrap();
+      width: 100%;
+      .select-cont {
+        flex-basis: 45%;
+        display: flex;
+        align-items: center;
+        position: relative;
+        margin: 15px;
+  
+        select {
+          text-align: center;
+          width: 100%;
+          padding-left: 2rem; /* ajuste según sea necesario */
+          padding-right: 1rem; /* 8px */
+          padding-top: 1rem; /* 8px */
+          padding-bottom: 1rem; /* 8px */
+          font-style: normal;
+          font-weight: 400;
+          font-size: 20px;
+          line-height: 24px;
+          border-radius: 10px;
+          margin-left: 0.5rem; /* ajuste según sea necesario */
+          margin-right: 0.5rem; /* ajuste según sea necesario */
+  
+          option {
+            padding: 1rem;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 24px;
+          }
+        }
+  
+        .select-icon-left {
+          position: absolute;
+          left: 2rem;
+          top: 50%;
+          transform: translateY(-50%);
+          font-size: 30px;
+        }
+      }
+    }
+    .content-date {
+      @include flex-wrap();
+      width: 100%;
+      margin-top: 15px;
+  
+      .react-datepicker-wrapper {
+        width: 45%;
+      }
+  
+      .react-datepicker__input-container {
+        font-size: 1.5rem;
+        padding: 1rem;
+        width: 100%;
+        input {
+          width: 100%;
+          padding-left: 10px;
+          padding-top: 15px;
+          padding-bottom: 10px;
+          padding-right: 10px;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 20px;
+          line-height: 24px;
+          border-radius: 10px;
+        }
+      }
+  
+      .custom-input {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: row-reverse; /* Agregar esta propiedad */
+        width: 100%; /* Añadir esto para que ocupe todo el ancho disponible */
+      }
+  
+      .icon-container {
+        display: flex;
+        align-items: center;
+        .icon {
+          font-size: 35px;
+        }
+      }
+      .select-cont {
+        margin-left: 20px;
+        flex-basis: 45%;
+        display: flex;
+        align-items: center;
+        position: relative;
+  
+        select {
+          text-align: center;
+          width: 100%;
+          padding-left: 2rem; /* ajuste según sea necesario */
+          padding-right: 1rem; /* 8px */
+          padding-top: 1rem; /* 8px */
+          padding-bottom: 1rem; /* 8px */
+          font-style: normal;
+          font-weight: 400;
+          font-size: 20px;
+          line-height: 24px;
+          border-radius: 10px;
+          margin-left: 0.5rem; /* ajuste según sea necesario */
+          margin-right: 0.5rem; /* ajuste según sea necesario */
+  
+          option {
+            padding: 1rem;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 24px;
+          }
+        }
+  
+        .select-icon-left {
+          position: absolute;
+          left: 2rem;
+          top: 50%;
+          transform: translateY(-50%);
+          font-size: 30px;
+        }
+      }
+    }
+    .input-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 45%;
+      margin: 15px;
+      .input-icon {
+        font-size: 1.2rem; /* ajuste según sea necesario */
+        margin-right: 0.5rem; /* ajuste según sea necesario */
+      }
+      input[type="text"] {
+        text-align: center;
+        width: 100%;
+        padding-left: 2.5rem; /* ajuste según sea necesario */
+        padding-right: 2.5rem; /* ajuste según sea necesario */
+        padding-top: 1rem; /* 8px */
+        padding-bottom: 1rem; /* 8px */
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 24px;
+        border-radius: 10px;
+        margin-left: 0.5rem; /* ajuste según sea necesario */
+        margin-right: 0.5rem; /* ajuste según sea necesario */
+      }
+    }
+  
+    .content-button {
+      @include flex();
+      margin-top: 40px;
+      margin-bottom: 10px;
+      button {
+        background-color: $color-yellow;
+        border-radius: 20px;
+        width: 182px;
+        height: 45px;
+        &:hover {
+          background-color: $color-secondary;
+        }
+      }
+    }
+  }
+}
+
