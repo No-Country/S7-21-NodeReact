@@ -13,11 +13,26 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  messages.init({
-    id: DataTypes.UUID,
-    message: DataTypes.STRING,
-    clientId: DataTypes.UUID,
-    barberId: DataTypes.UUID
+  messages.init(
+    {
+      id: {
+        primaryKey: true,
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        allowNull: false,
+      },
+      message: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      clientId: {
+        type: DataTypes.UUID,
+        allowNull: false,
+      },
+      barberId: {
+        type: DataTypes.UUID,
+        allowNull: false,
+      }
   }, {
     sequelize,
     modelName: 'messages',
