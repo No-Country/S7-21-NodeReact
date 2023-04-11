@@ -61,7 +61,7 @@ export default function Navbar() {
             <Link to="/administrator">SHOP</Link>
           </li>
           <li>
-            <Link to="/">SOBRE NOSOTROS</Link>
+            <Link to="/about">SOBRE NOSOTROS</Link>
           </li>
           <li className="nav-item">
             <Link to="/contact">CONTACTO</Link>
