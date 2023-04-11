@@ -7,6 +7,7 @@
 @forward "components/login_form";
 @forward "components/navbar";
 @forward "components/turno";
+@forward "components/footer";
 
 // Layout
 
@@ -17,6 +18,7 @@
 @forward "pages/services";
 @forward "pages/stylists";
 @forward "pages/administrator";
+@forward "pages/aboutMe";
 
 //routes 
 @forward 'routes/Barber/$barberId';

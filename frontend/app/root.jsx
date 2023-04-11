@@ -12,6 +12,7 @@ import Navbar from "~/components/Navbar";
 
 import styles from "~/styles/main.css";
 import { PersistGate } from 'redux-persist/integration/react'
+import Footer from "./components/Footer";
 
 
 export const meta = () => ({
@@ -33,6 +34,7 @@ function Document({ title, children }) {
           <PersistGate persistor={persistor}>
             <Navbar />
             {children}
+            <Footer />
           </PersistGate>
           <ScrollRestoration />
             <Scripts />
