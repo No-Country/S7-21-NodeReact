@@ -1,12 +1,13 @@
 import { Link, useNavigate } from "@remix-run/react";
 import { FaGoogle, FaFacebook } from "react-icons/fa";
-// import React, { useEffect } from 'react'
 import hairstyle from "~/assets/images/hairstyle.png";
 import { useDispatch } from "react-redux";
 import { loginuser } from "../store/auth/authSlice";
 import { useState } from "react";
 export default function LoginForm() {
   const [user, setUser] = useState({
+    nombre: "",
+    apellido: "",
     email: "",
     password: "",
   });
@@ -14,12 +15,13 @@ export default function LoginForm() {
   const navigate = useNavigate();
   const handlechange = (e) => {
     e.preventDefault();
-    setUser({ ...user, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setUser({ ...user, [name]: value });
   };
-  const handlelogin = async (e) => {
+  const handlelogin = (e) => {
     e.preventDefault();
     try {
-      let response = await dispacth(loginuser(user))
+      let response = dispacth(loginuser(user))
       if (!response) return
       navigate("/")
       console.log(user, "datos de user");
@@ -35,11 +37,30 @@ export default function LoginForm() {
                 <p>Únete a la experiencia de un corte de cabello excepcional y siéntete como en casa en nuestro ambiente acogedor. Inicia sesión para reservar tu cita y descubrir lo que podemos hacer por ti.</p> */}
         </div>
         <div className="login-right">
-          <h2>Inicia sesión</h2>
+          <h2>Registro nuevo usuario</h2>
           <form onClick={(e) => handlelogin(e)}>
             <div className="login-image">
               <img src={hairstyle} alt="Login" />
             </div>
+            <label htmlFor="nombre">Nombre</label>
+            <input
+              type="text"
+              id="nombre"
+              name="nombre"
+              onChange={handlechange}
+              value={user.nombre}
+              required
+            />
+            <label htmlFor="nombre">Apellido</label>
+            <input
+              type="text"
+              id="apellido"
+              name="apellido"
+              onChange={handlechange}
+              value={user.apellido}
+              required
+            />
+
             <label htmlFor="email">Correo electrónico</label>
             <input
               type="email"
@@ -61,17 +82,14 @@ export default function LoginForm() {
             />
 
             <div className="login-forgot-password">
-              <div className="login-remember">
-                <input type="checkbox" id="remember" name="remember" />
-                <label htmlFor="remember">Recuérdame</label>
-              </div>
-              <Link to="/forgot-password">¿Olvidaste tu contraseña?</Link>
+              <input type="checkbox" id="remember" name="remember" />
+              <label htmlFor="remember">&nbsp;Acepto los&nbsp;</label> <a href="#">terminos y condiciones</a>
             </div>
 
-            <button type="submit">Iniciar sesión</button>
+            <button type="submit">Registrar</button>
           </form>
           <p>
-            ¿No tienes una cuenta? <Link to="/register">Regístrate</Link>
+            ¿Ya tienes cuenta? <Link to="/login">Inicia Sesión</Link>
           </p>
 
           <div className="login-social">
