@@ -9,8 +9,9 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
-      // define association here
+    static associate({User}) {
+      this.belongsTo(User, { foreignKey: "clientId" });
+      this.belongsTo(User, { foreignKey: "barberId" });
     }
   }
   appointments.init(
@@ -22,27 +23,27 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       appointmentDate: {
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         allowNull: false,
       },
       appointmentHour: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      satus: {
+      status: {
           type: DataTypes.ENUM,
           values: ['allow', 'notAllow'],
           defaultValue: 'allow',
           allowNull: false,
       },
-      clientId: {
-        type: DataTypes.UUID,
-        allowNull: false,
-      },
-      barberId: {
-        type: DataTypes.UUID,
-        allowNull: false,
-      },
+      // clientId: {
+      //   type: DataTypes.UUID,
+      //   allowNull: false,
+      // },
+      // barberId: {
+      //   type: DataTypes.UUID,
+      //   allowNull: false,
+      // },
     }, 
     {
       sequelize,
