@@ -1,4 +1,4 @@
-const { CustomError } = require("../helpers");
+const { CustomError, checkPermissions } = require("../helpers");
 const { User, appointments } = require("../database/models");
 const { Op } = require("sequelize");
 
@@ -13,6 +13,20 @@ const findBarber = async (barberId) => {
       throw new CustomError("No se encontro ningun barbero con ese Id", 404);
     }
     return barber;
+  } catch (error) {
+    throw new CustomError(error.message, error.statusCode, error.errors);
+  }
+};
+
+const findAppointment = async (appointmentId) => {
+  try {
+    const appointment = await appointments.findOne({
+      where: { id: appointmentId },
+    });
+    if (!appointment) {
+      throw new CustomError("No se encontro ningun turno con este Id", 404);
+    }
+    return appointment;
   } catch (error) {
     throw new CustomError(error.message, error.statusCode, error.errors);
   }
@@ -48,7 +62,13 @@ const findAppointments = async (barberId) => {
   try {
     const barber = await findBarber(barberId);
     const appointments = await barber.getAppointments({
-      attributes: ["clientId", "status", "appointmentDate", "appointmentHour"],
+      attributes: [
+        "id",
+        "clientId",
+        "status",
+        "appointmentDate",
+        "appointmentHour",
+      ],
     });
     return appointments;
   } catch (error) {
@@ -56,4 +76,30 @@ const findAppointments = async (barberId) => {
   }
 };
 
-module.exports = { createAppointment, findAppointments };
+const updateAppointment = async (appointmentId, newDate, newHour) => {
+  try {
+    const appointment = await findAppointment(appointmentId);
+        
+  } catch (error) {
+    throw new CustomError(error.message, error.statusCode, error.errors);
+  }
+};
+
+const deleteAppointmentById = async (appointmentId, reqUser) => {
+  try {
+    const appointment = await findAppointment(appointmentId);
+    checkPermissions(reqUser, appointment.clientId);
+    await appointment.destroy();
+
+    return `Turno ${appointmentId} eliminado`;
+  } catch (error) {
+    throw new CustomError(error.message, error.statusCode, error.errors);
+  }
+};
+
+module.exports = {
+  createAppointment,
+  findAppointments,
+  updateAppointment,
+  deleteAppointmentById,
+};

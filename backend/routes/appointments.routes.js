@@ -7,4 +7,9 @@ router
   .post(authenticateUser, apptCtrls.postAppointment)
   .get(authenticateUser, apptCtrls.getAppointments);
 
+router
+  .route("/:appointmentId")
+  .patch(authenticateUser, apptCtrls.patchAppointment)
+  .delete(authenticateUser, apptCtrls.deleteAppointment)
+
 module.exports = router;

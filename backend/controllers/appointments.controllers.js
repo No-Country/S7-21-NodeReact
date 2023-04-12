@@ -22,4 +22,29 @@ const getAppointments = tryCatchWrapper(async (req, res, next) => {
   endPointResponse({ res, message: "turnos asignados", body: response });
 });
 
-module.exports = { postAppointment, getAppointments };
+const patchAppointment = tryCatchWrapper(async (req, res, next) => {
+  const { appointmentId } = req.params;
+  const { newDate, newHour } = req.body;
+  const response = await apptServices.updateAppointment(
+    appointmentId,
+    newDate,
+    newHour
+  );
+});
+
+const deleteAppointment = tryCatchWrapper(async (req, res, next) => {
+  const { appointmentId } = req.params;
+  const response = await apptServices.deleteAppointmentById(
+    appointmentId,
+    req.user
+  );
+
+  endPointResponse({ res, message: response });
+});
+
+module.exports = {
+  postAppointment,
+  getAppointments,
+  patchAppointment,
+  deleteAppointment,
+};
