@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "@remix-run/react";
 import { HiOutlineMail } from "react-icons/hi";
 import { FaWhatsapp } from "react-icons/fa";
 import { TbClockHour9 } from "react-icons/tb";
 import Modal from "react-modal";
 import Turno from "./Turno";
+import { useSelector } from "react-redux";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const isAuthenticated = useSelector((state)=> state.user.status === "authenticated");
+  const Authuser = useSelector((state)=> state.user.user)
+  console.log("authuser", Authuser)
+  console.log("isAuthenticated", isAuthenticated);
   const toggle = () => {
     console.log("click en togle", isOpen);
     setIsOpen(!isOpen);
@@ -67,9 +72,12 @@ export default function Navbar() {
             <Link to="/contact">CONTACTO</Link>
           </li>
           <li className="nav-item">
-            <Link className="button" to="/login">
+            {isAuthenticated ? (<Link className="button" to="/">
+              LOGOUT
+            </Link>): (<Link className="button" to="/login">
               INGRESAR
-            </Link>
+            </Link>)}
+            
           </li>
           <li className="nav-item custom-style" onClick={togglemodal}>
             <div className="buton">TURNO</div>
