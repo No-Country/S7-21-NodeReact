@@ -1,5 +1,6 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import {authSlice} from './auth/authSlice';
+import { turnerSlice } from './turner/turnerSlice';
 import {
   persistStore,
   persistReducer,
@@ -28,6 +29,8 @@ const storage = typeof window !== 'undefined' ? createWebStorage('local') : crea
 
 export const rootReducer = combineReducers({
   user: authSlice.reducer,
+  turner: turnerSlice.reducer
+
 }); 
 
 const persistConfig = {
