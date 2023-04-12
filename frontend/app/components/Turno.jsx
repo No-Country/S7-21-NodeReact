@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import {
   FaUserAlt,
@@ -8,6 +8,8 @@ import {
   FaClock,
 } from "react-icons/fa";
 import { ImScissors } from "react-icons/im";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllBarber } from "../store/barber/barberSlice";
 const CustomDatePickerInput = ({ value, onClick }) => (
   <div className="custom-input" onClick={onClick}>
     <div className="icon-container">
@@ -17,7 +19,28 @@ const CustomDatePickerInput = ({ value, onClick }) => (
   </div>
 );
 export default function Turno({closeModal}) {
+  const dispatch = useDispatch();
+  const loading = useSelector((state)=> state.barber.loading);
+  const barbers = useSelector((state)=> state.barber.barbers);
+  console.log(barbers, "barbder")
+  const [barber, setBarber] = useState();
+  const [form, setForm] = useState({
+    name: "",
+    lastname: "",
+    email: "",
+    phone: "",
+    message: "",
+    servicio: "",
+    hour: ""
+  });
+  const handleChangeForm = (e) => {
+    e.preventDefault();
+    setForm({...form, [e.target.name]: e.target.value})
+  }
   const [startDate, setStartDate] = useState(new Date());
+  useEffect(()=> {
+    dispatch(getAllBarber())
+  }, [dispatch])
   const handleClickOutside = (event) => {
     if (event.target.classList.contains("content-turno")) {
       closeModal();
@@ -30,25 +53,25 @@ export default function Turno({closeModal}) {
         <div class="content-input">
           <div class="input-container">
             <FaUserAlt className="iconofinput" />
-            <input type="text" placeholder="Nombre" />
+            <input type="text" placeholder="Nombre" name="name" value={form.name} onChange={handleChangeForm}/>
           </div>
           <div class="input-container">
             <FaUserAlt className="iconofinput" />
-            <input type="text" placeholder="Apellido" />
+            <input type="text" placeholder="Apellido" name="lastname" value={form.lastname} onChange={handleChangeForm} />
           </div>
           <div class="input-container">
             <FaEnvelope className="iconofinput" />
-            <input type="text" placeholder="Email" />
+            <input type="text" placeholder="Email" name="email" value={form.email} onChange={handleChangeForm} />
           </div>
           <div class="input-container">
             <FaPhoneAlt className="iconofinput" />
-            <input type="text" placeholder="Telefono" />
+            <input type="text" placeholder="Telefono" name="phone" value={form.phone} onChange={handleChangeForm} />
           </div>
         </div>
         <div className="content-select">
           <div className="select-cont">
             <ImScissors className="select-icon select-icon-left" />
-            <select className="style_select" id="servicio" name="servicio">
+            <select className="style_select" id="servicio" name="servicio"value={form.servicio}  onChange={handleChangeForm}>
               <option value="Corte_pelo">CORTE PELO</option>
               <option value="Corte_pelo">CORTE BARBA</option>
               <option value="Corte_pelo">CORTE PELO Y BARBA</option>
@@ -59,13 +82,23 @@ export default function Turno({closeModal}) {
 
           <div className="select-cont">
             <ImScissors className="select-icon select-icon-left" />
-            <select className="style_select" id="servicio" name="servicio">
-              <option value="Corte_pelo">CORTE PELO</option>
-              <option value="Corte_pelo">CORTE BARBA</option>
-              <option value="Corte_pelo">CORTE PELO Y BARBA</option>
-              <option value="Corte_pelo">LAVADO Y CORTE</option>
-              <option value="Corte_pelo">LAVADO Y PERFILADO</option>
-            </select>
+            {loading ? (
+              <div style={{Color: "red", fontSize:"2rem"}}>Loading...</div>
+            ) : (
+              <select
+                className="style_select"
+                id="barbero"
+                name="barbero"
+                value={barber}
+                onChange={(e) => setBarber(e.target.value)}
+              >
+                {barbers.map((barber) => (
+                  <option key={barber.id} value={barber.id}>
+                    {barber.firstName}
+                  </option>
+                ))}
+              </select>
+            )}
           </div>
         </div>
         <div className="content-date">
@@ -76,7 +109,7 @@ export default function Turno({closeModal}) {
           />
           <div className="select-cont">
             <FaClock className="select-icon select-icon-left" />
-            <select className="style_select" id="hora" name="hora">
+            <select className="style_select" id="hora" name="hora" value={form.hour} onChange={handleChangeForm}>
               <option value="9:00">9:00</option>
               <option value="9:30">9:00</option>
               <option value="10:00">10:00</option>
@@ -91,7 +124,7 @@ export default function Turno({closeModal}) {
           </div>
         </div>
         <div className="content-message">
-          <textarea placeholder="Mensage" />
+          <textarea placeholder="Mensage" name="message" value={form.message} onChange={handleChangeForm} />
         </div>
         <div className="content-button">
           <button>Turno</button>
