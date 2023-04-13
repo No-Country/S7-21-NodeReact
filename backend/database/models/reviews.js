@@ -1,7 +1,44 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
+
+/**
+ * @openapi
+ * components:
+ *  schemas:
+ *    reviews:
+ *      type: object
+ *      properties:
+ *        id:
+ *          type: string
+ *          format: uuid
+ *          description: The unique identifier for a review.
+ *        title:
+ *          type: string
+ *          description: The title of the review.
+ *        rating:
+ *          type: integer
+ *          minimum: 1
+ *          maximum: 5
+ *          description: The rating score of the review, with 1 being the lowest and 5 being the highest.
+ *        comment:
+ *          type: string
+ *          description: The comment of the review.
+ *        clientId:
+ *          type: string
+ *          format: uuid
+ *          description: The unique identifier for the client who created the review.
+ *        barberId:
+ *          type: string
+ *          format: uuid
+ *          description: The unique identifier for the barber who is being reviewed.
+ *      required:
+ *        - title
+ *        - rating
+ *        - comment
+ *        - clientId
+ *        - barberId
+ */
+
 module.exports = (sequelize, DataTypes) => {
   class reviews extends Model {
     /**
@@ -41,10 +78,11 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.UUID,
         allowNull: false,
       },
-  },
-  {
-    sequelize,
-    modelName: 'reviews',
-  });
+    },
+    {
+      sequelize,
+      modelName: "reviews",
+    }
+  );
   return reviews;
 };

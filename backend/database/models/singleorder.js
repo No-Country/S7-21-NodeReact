@@ -1,7 +1,29 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
+
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     singleOrder:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: string
+ *           format: uuid
+ *           description: The unique identifier for a single order.
+ *         productId:
+ *           type: string
+ *           format: uuid
+ *           description: The unique identifier for the product in the order.
+ *         quantity:
+ *           type: integer
+ *           description: The quantity of the product in the order.
+ *         price:
+ *           type: integer
+ *           description: The price of the product in the order.
+ */
+
 module.exports = (sequelize, DataTypes) => {
   class singleorder extends Model {
     /**
@@ -19,7 +41,7 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
-        allowNull:false,
+        allowNull: false,
       },
       productid: {
         type: DataTypes.UUID,
@@ -33,10 +55,11 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-  },
-  {
-    sequelize,
-    modelName: 'singleorder',
-  });
+    },
+    {
+      sequelize,
+      modelName: "singleorder",
+    }
+  );
   return singleorder;
 };

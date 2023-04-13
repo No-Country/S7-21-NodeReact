@@ -148,7 +148,7 @@ router.post("/login", authCtrls.loginUser);
 
 /**
  * @openapi
- * /api/v1/auth/resetPassword:
+ * /api/v1/auth/resetPass:
  *   post:
  *     summary: Resetear la contraseña del usuario
  *     tags:
@@ -199,6 +199,71 @@ router.post("/login", authCtrls.loginUser);
  */
 
 router.post("/resetPass", authCtrls.changePassword);
+
+/**
+ * @openapi
+ * /api/v1/auth/verifyEmail:
+ *   post:
+ *     summary: Verifica la cuenta de usuario por correo electrónico
+ *     tags:
+ *        - Authentication
+ *     requestBody:
+ *       description: Verifica la cuenta de usuario a través de correo electrónico.
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               verificationToken:
+ *                 type: string
+ *                 description: Token de verificación del usuario.
+ *               email:
+ *                 type: string
+ *                 format: email
+ *                 description: Correo electrónico del usuario.
+ *             required:
+ *               - verificationToken
+ *               - email
+ *     responses:
+ *       '200':
+ *         description: Éxito. El usuario se ha verificado de manera exitosa.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 code:
+ *                   type: integer
+ *                   example: 200
+ *                   description: Código de estado de la respuesta.
+ *                 message:
+ *                   type: string
+ *                   example: Usuario verificado de manera exitosa.
+ *                   description: Mensaje de éxito.
+ *       '401':
+ *         description: Error. El token de verificación no es válido o el usuario ya ha sido verificado previamente.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Fallo la verificación.
+ *                   description: Descripción del error.
+ *       '404':
+ *         description: Error. El correo electrónico proporcionado no se encuentra en la base de datos.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Usuario no encontrado.
+ *                   description: Descripción del error.
+ */
 
 // Ruta para verificar usuario por email
 router.post("/verifyEmail", authCtrls.verifyEmail);

@@ -1,8 +1,41 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
+  /**
+   * @swagger
+   *  components:
+   *    schemas:
+   *      products:
+   *        type: object
+   *        properties:
+   *          id:
+   *            type: string
+   *            format: uuid
+   *            description: The unique identifier for the product
+   *          title:
+   *            type: string
+   *            description: The title of the product
+   *          description:
+   *            type: string
+   *            description: The description of the product
+   *          price:
+   *            type: integer
+   *            description: The price of the product
+   *          stock:
+   *            type: integer
+   *            description: The amount of available stock for the product
+   *          images:
+   *            type: string
+   *            description: The URL of the image for the product
+   *        required:
+   *          - id
+   *          - title
+   *          - description
+   *          - price
+   *          - stock
+   *          - images
+   */
+
   class products extends Model {
     /**
      * Helper method for defining associations.
@@ -44,7 +77,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: 'products',
-    });
+      modelName: "products",
+    }
+  );
   return products;
 };

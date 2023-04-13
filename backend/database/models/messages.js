@@ -1,7 +1,34 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     messages:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: string
+ *           format: uuid
+ *           description: The unique identifier for the message.
+ *         message:
+ *           type: string
+ *           description: The content of the message.
+ *         clientId:
+ *           type: string
+ *           format: uuid
+ *           description: The unique identifier for the client who sent the message.
+ *         barberId:
+ *           type: string
+ *           format: uuid
+ *           description: The unique identifier for the barber who received the message.
+ *       required:
+ *         - id
+ *         - message
+ *         - clientId
+ *         - barberId
+ */
+
 module.exports = (sequelize, DataTypes) => {
   class messages extends Model {
     /**
@@ -32,10 +59,12 @@ module.exports = (sequelize, DataTypes) => {
       barberId: {
         type: DataTypes.UUID,
         allowNull: false,
-      }
-  }, {
-    sequelize,
-    modelName: 'messages',
-  });
+      },
+    },
+    {
+      sequelize,
+      modelName: "messages",
+    }
+  );
   return messages;
 };

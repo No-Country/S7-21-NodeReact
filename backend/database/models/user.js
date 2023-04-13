@@ -36,6 +36,12 @@ const { Model } = require("sequelize");
  *           type: string
  *           enum: [admin, barber, client]
  *           description: The role of the user. Possible values are "admin", "barber", or "client".
+ *         verificationToken:
+ *           type: string
+ *           description: The token used for verifying the user's email address.
+ *         verified:
+ *           type: boolean
+ *           description: Whether the user's email address has been verified.
  */
 
 module.exports = (sequelize, DataTypes) => {

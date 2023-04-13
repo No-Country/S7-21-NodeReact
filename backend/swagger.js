@@ -7,10 +7,10 @@ const swaggerOptions = {
     info: {
       title: "The Boss Barbershop API",
       description: "API para manejar todo lo referido al usuario.",
-      version: "1.0.0",
+      version: "1.1.0",
     },
   },
-  apis: ["./database/models/user.js", "./routes/*.js"],
+  apis: ["./database/models/*.js", "./routes/*.js"],
 };
 
 const swaggerSpec = swaggerJSDoc(swaggerOptions);
