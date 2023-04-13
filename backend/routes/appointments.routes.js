@@ -5,7 +5,7 @@ const { authenticateUser } = require("../middlewares/auth.middleware");
 router
   .route("/:barberId")
   .post(authenticateUser, apptCtrls.postAppointment)
-  .get(authenticateUser, apptCtrls.getAppointments);
+  .get(authenticateUser, apptCtrls.getAppointmentsById);
 
 router
   .route("/:appointmentId")

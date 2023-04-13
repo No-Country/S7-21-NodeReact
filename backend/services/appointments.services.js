@@ -32,7 +32,14 @@ const findAppointment = async (appointmentId) => {
   }
 };
 
-const createAppointment = async (barberId, date, hour, clientId) => {
+const createAppointment = async (
+  barberId,
+  date,
+  hour,
+  service,
+  message,
+  clientId
+) => {
   try {
     const barber = await findBarber(barberId);
 
@@ -43,6 +50,8 @@ const createAppointment = async (barberId, date, hour, clientId) => {
       defaults: {
         appointmentDate: date,
         appointmentHour: hour,
+        service,
+        message,
         clientId,
         barberId: barber.id,
         status: "notAllow",
@@ -79,7 +88,6 @@ const findAppointments = async (barberId) => {
 const updateAppointment = async (appointmentId, newDate, newHour) => {
   try {
     const appointment = await findAppointment(appointmentId);
-        
   } catch (error) {
     throw new CustomError(error.message, error.statusCode, error.errors);
   }
