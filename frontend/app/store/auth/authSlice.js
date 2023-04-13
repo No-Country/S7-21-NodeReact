@@ -39,7 +39,7 @@ export const loginuser = (payload) => {
     console.log(payload, "datos")
     try {
       dispatch({ type: onChecking });
-      const {data}= await axios.post("http://localhost:8080/api/v1/auth/login", payload);
+      const { data } = await axios.post("http://localhost:8080/api/v1/auth/login", payload);
       console.log(data, "json")
       if (data) {
         dispatch({ type: onLogin, payload: data.body.user });

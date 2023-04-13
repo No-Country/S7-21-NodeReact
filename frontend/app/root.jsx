@@ -25,7 +25,7 @@ function Document({ title, children }) {
   return (
     <html lang="en">
       <head>
-      {title && <title>{title}</title>}
+        {title && <title>{title}</title>}
         <Meta />
         <Links />
       </head>
@@ -37,17 +37,17 @@ function Document({ title, children }) {
             <Footer />
           </PersistGate>
           <ScrollRestoration />
-            <Scripts />
-            <LiveReload />
+          <Scripts />
+          <LiveReload />
         </Provider>
       </body>
     </html>
   );
 }
-export default function App(){
+export default function App() {
   return (
     <Document>
-      <Outlet/>
+      <Outlet />
     </Document>
   )
 }
@@ -57,7 +57,7 @@ export function ErrorBoundary({ error }) {
     <Document title="Ha ocurrido un error">
       <main className="min-h-screen">
         <div>
-        <p>{error.message || "Algo ha fallado. Intente de nuevo."}</p>
+          <p>{error.message || "Algo ha fallado. Intente de nuevo."}</p>
         </div>
 
       </main>

@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import {authSlice} from './auth/authSlice';
+import { authSlice } from './auth/authSlice';
 import { turnerSlice } from './turner/turnerSlice';
 import {
   persistStore,
@@ -13,17 +13,17 @@ import {
 } from 'redux-persist';
 import createWebStorage from 'redux-persist/lib/storage/createWebStorage';
 const createNoopStorage = () => {
-   return {
-      getItem(_key) {
-         return Promise.resolve(null);
-      },
-      setItem(_key, value) {
-         return Promise.resolve(value);
-      },
-      removeItem(_key) {
-         return Promise.resolve();
-      },
-   };
+  return {
+    getItem(_key) {
+      return Promise.resolve(null);
+    },
+    setItem(_key, value) {
+      return Promise.resolve(value);
+    },
+    removeItem(_key) {
+      return Promise.resolve();
+    },
+  };
 };
 const storage = typeof window !== 'undefined' ? createWebStorage('local') : createNoopStorage();
 
@@ -31,7 +31,7 @@ export const rootReducer = combineReducers({
   user: authSlice.reducer,
   turner: turnerSlice.reducer
 
-}); 
+});
 
 const persistConfig = {
   key: 'root',

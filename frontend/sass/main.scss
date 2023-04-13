@@ -20,8 +20,8 @@
 @forward "pages/administrator";
 @forward "pages/aboutMe";
 
-//routes 
-@forward 'routes/Barber/$barberId';
+//routes
+@forward "routes/Barber/$barberId";
 
 * {
   box-sizing: border-box;
