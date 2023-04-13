@@ -77,6 +77,7 @@ const findAppointments = async (barberId) => {
         "status",
         "appointmentDate",
         "appointmentHour",
+        "message",
       ],
     });
     return appointments;
@@ -90,7 +91,7 @@ const updateAppointment = async (appointmentId, newDate, newHour) => {
     const appointment = await findAppointment(appointmentId);
     const updateAppointment = await appointment.update({
       appointmentDate: newDate,
-      appointmentHour: newHour
+      appointmentHour: newHour,
     });
     return updateAppointment;
   } catch (error) {
