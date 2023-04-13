@@ -3,19 +3,21 @@ const apptServices = require("../services/appointments.services");
 
 const postAppointment = tryCatchWrapper(async (req, res, next) => {
   const { barberId } = req.params;
-  const { date, hour } = req.body;
+  const { date, hour, service, message } = req.body;
 
   const response = await apptServices.createAppointment(
     barberId,
     date,
     hour,
+    service,
+    message,
     req.user.id
   );
 
   endPointResponse({ res, code: 201, message: "Turno creado", body: response });
 });
 
-const getAppointments = tryCatchWrapper(async (req, res, next) => {
+const getAppointmentsById = tryCatchWrapper(async (req, res, next) => {
   const { barberId } = req.params;
   const response = await apptServices.findAppointments(barberId);
 
@@ -44,7 +46,7 @@ const deleteAppointment = tryCatchWrapper(async (req, res, next) => {
 
 module.exports = {
   postAppointment,
-  getAppointments,
+  getAppointmentsById,
   patchAppointment,
   deleteAppointment,
 };

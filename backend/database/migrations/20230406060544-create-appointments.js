@@ -5,9 +5,9 @@ module.exports = {
     await queryInterface.createTable('appointments', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
         type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
         allowNull: false
       },
       appointmentDate: {
@@ -18,17 +18,19 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      satus: {
+      status: {
         type: Sequelize.ENUM,
-        allowNull: false
+        values: ["allow", "notAllow"],
+        defaultValue: "allow",
+        allowNull: false,
       },
-      clientId: {
-        type: Sequelize.UUID,
-        allowNull: false
+      service: {
+        type: Sequelize.STRING,
+        allowNull: false,
       },
-      barberId: {
-        type: Sequelize.UUID,
-        allowNull: false
+      message: {
+        type: Sequelize.STRING,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
