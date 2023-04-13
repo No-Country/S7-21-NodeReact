@@ -82,10 +82,23 @@ const deleteUser = tryCatchWrapper(async (req, res, next) => {
   });
 });
 
+const changeRole = tryCatchWrapper(async (req, res, next) => {
+  const { id } = req.params;
+  const { role } = req.body;
+  const response = await userServices.updateUserRole(id, role);
+
+  endPointResponse({
+    res,
+    message: "Rol del usuario modificado",
+    body: response,
+  });
+});
+
 module.exports = {
   getAllUsers,
   showMe,
   getUserById,
   updateUserById,
   deleteUser,
+  changeRole,
 };
