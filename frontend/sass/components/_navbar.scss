@@ -103,7 +103,42 @@ $navbar-hidden: "navbar-hidden";
             margin: 5px 0;
             font-size: 1.2rem;
           }
-
+          .button-container {
+            display: inline-block;
+            margin-left: 10px;
+            @include navbarmobile {
+              margin: 5px 0;
+              @include flex-column()
+            }
+            .buton {
+              color: white;
+              background-color: black;
+              border-radius: 30px;
+              padding: 5px 10px;
+              font-size: 13px;
+              cursor: pointer;
+          
+              &:hover {
+                background-color: white;
+                color: black;
+              }
+            }
+          
+            .button {
+              color: white;
+              background-color: black;
+              border-radius: 30px;
+              padding: 5px 10px;
+              font-size: 13px;
+              cursor: pointer;
+              text-decoration: none;
+          
+              &:hover {
+                background-color: white;
+                color: black;
+              }
+            }
+          }
           a {
             display: inline-block;
             padding: 5px;
