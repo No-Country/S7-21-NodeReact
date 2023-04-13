@@ -17,6 +17,8 @@ const postAppointment = tryCatchWrapper(async (req, res, next) => {
   endPointResponse({ res, code: 201, message: "Turno creado", body: response });
 });
 
+
+
 const getAppointmentsById = tryCatchWrapper(async (req, res, next) => {
   const { barberId } = req.params;
   const response = await apptServices.findAppointments(barberId);
