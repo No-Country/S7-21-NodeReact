@@ -15,7 +15,7 @@ module.exports = {
         defaultValue: "client",
         allowNull: false,
       },
-      fistName: {
+      firstName: {
         type: Sequelize.STRING,
       },
       lastName: {
@@ -38,7 +38,7 @@ module.exports = {
       },
       verified: {
         type: Sequelize.BOOLEAN,
-        defaultValue: false,
+        defaultValue: true,
       },
       createdAt: {
         allowNull: false,

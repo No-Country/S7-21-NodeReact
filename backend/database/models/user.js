@@ -94,13 +94,13 @@ module.exports = (sequelize, DataTypes) => {
       description: {
         type: DataTypes.TEXT,
       },
-      // verificationToken: {
-      //   type: DataTypes.STRING,
-      // },
-      // verified: {
-      //   type: DataTypes.BOOLEAN,
-      //   defaultValue: false,
-      // },
+      verificationToken: {
+        type: DataTypes.STRING,
+      },
+      verified: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+      },
     },
     {
       sequelize,
