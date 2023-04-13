@@ -1,5 +1,4 @@
 const { CustomError, checkPermissions } = require("../helpers");
-const moment = require('moment')
 const { User, appointments } = require("../database/models");
 const { Op } = require("sequelize");
 
@@ -33,7 +32,14 @@ const findAppointment = async (appointmentId) => {
   }
 };
 
-const createAppointment = async (barberId, date, hour, clientId) => {
+const createAppointment = async (
+  barberId,
+  date,
+  hour,
+  service,
+  message,
+  clientId
+) => {
   try {
     const barber = await findBarber(barberId);
 
@@ -44,6 +50,8 @@ const createAppointment = async (barberId, date, hour, clientId) => {
       defaults: {
         appointmentDate: date,
         appointmentHour: hour,
+        service,
+        message,
         clientId,
         barberId: barber.id,
         status: "notAllow",
