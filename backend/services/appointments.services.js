@@ -88,6 +88,11 @@ const findAppointments = async (barberId) => {
 const updateAppointment = async (appointmentId, newDate, newHour) => {
   try {
     const appointment = await findAppointment(appointmentId);
+    const updateAppointment = await appointment.update({
+      appointmentDate: newDate,
+      appointmentHour: newHour
+    });
+    return updateAppointment;
   } catch (error) {
     throw new CustomError(error.message, error.statusCode, error.errors);
   }
