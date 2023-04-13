@@ -36,6 +36,7 @@ function Document({ title, children }) {
             {children}
             <Footer />
           </PersistGate>
+          
           <ScrollRestoration />
             <Scripts />
             <LiveReload />
