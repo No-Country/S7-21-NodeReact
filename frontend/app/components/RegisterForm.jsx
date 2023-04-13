@@ -6,6 +6,7 @@ import { registeruser } from "../store/auth/authSlice";
 import { useState } from "react";
 export default function LoginForm() {
   const [acceptTerms, setAcceptTerms] = useState(false);
+  console.log(acceptTerms);
   const [user, setUser] = useState({
     nombre: "",
     apellido: "",
@@ -24,13 +25,13 @@ export default function LoginForm() {
   };
 
   const checkboxChange = (e) => {
-    const { name, checked } = e.target;
-    if (name === "acceptTerms")
-      setAcceptTerms(checked);
+    const { checked } = e.target;
+    setAcceptTerms(checked);
   };
 
   const handleRegister = (e) => {
     e.preventDefault();
+    console.log(user, "datos");
     dispacth(registeruser(user))
   };
 
@@ -43,7 +44,7 @@ export default function LoginForm() {
         </div>
         <div className="login-right">
           <h2>Registro nuevo usuario</h2>
-          <form onClick={handleRegister}>
+          <form onSubmit={handleRegister}>
             <div className="login-image">
               <img src={hairstyle} alt="Login" />
             </div>
