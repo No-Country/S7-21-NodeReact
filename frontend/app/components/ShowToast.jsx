@@ -6,12 +6,14 @@ export default function ShowToast(status, message, closeModal) {
   if (status) {
     toast.success(message, {
       position: toast.POSITION.TOP_CENTER,
-      autoClose: 3000
+      autoClose: 3000,
+      onClose: closeModal,
     });
   } else {
     toast.error(message, {
       position: toast.POSITION.TOP_CENTER,
       autoClose: 3000,
+      onClose: closeModal,
     });
   }
 }

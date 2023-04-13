@@ -57,9 +57,7 @@ export default function Turno({ closeModal }) {
       const response = await dispatch(createturne(form, barber));
       if (!response) return;
       console.log(response, "trajo de response")
-      alert("Se creo el turno")
-      closeModal()
-      // ShowToast(true, "turno creado", closeModal)
+      ShowToast(true, "turno creado", closeModal)
     }
   };
   useEffect(() => {
