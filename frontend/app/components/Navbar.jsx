@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
+
   const isAuthenticated = useSelector(
     (state) => state.user.status === "authenticated"
   );
@@ -53,7 +54,6 @@ export default function Navbar() {
             <div />
             <div />
           </div>
-
           <ul className={`nav-links ${isOpen ? "show-nav" : "navbar-hidden"}`}>
             <li className="nav-item">
               <Link to="/">INICIO</Link>
@@ -91,6 +91,7 @@ export default function Navbar() {
                 </Link>
               </li>
             )}
+
           </ul>
         </nav>
       </header>
@@ -105,5 +106,6 @@ export default function Navbar() {
         </div>
       </Modal>
     </div>
+
   );
 }

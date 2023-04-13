@@ -16,11 +16,11 @@ export default function LoginForm() {
     e.preventDefault();
     setUser({ ...user, [e.target.name]: e.target.value });
   };
-  const handlelogin = async(e) => {
+  const handlelogin = async (e) => {
     e.preventDefault();
     try {
       let response = await dispacth(loginuser(user))
-      if(!response) return
+      if (!response) return
       navigate("/")
       console.log(user, "datos de user");
     } catch (error) {

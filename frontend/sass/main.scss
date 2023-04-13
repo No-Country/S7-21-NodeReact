@@ -23,8 +23,8 @@
 @forward "pages/administrator";
 @forward "pages/aboutMe";
 
-//routes 
-@forward 'routes/Barber/$barberId';
+//routes
+@forward "routes/Barber/$barberId";
 
 // Importa los estilos de React-toastify
 @import "../node_modules/react-toastify/scss/main.scss";
