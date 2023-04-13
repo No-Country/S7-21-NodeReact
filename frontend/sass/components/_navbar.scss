@@ -1,7 +1,7 @@
 $navbar-hidden: "navbar-hidden";
 @use "../base/variables" as *;
 @use "../base/mixins" as *;
-.content-nav-and-head{
+.content-nav-and-head {
   width: 100%;
   header {
     width: 100%;
@@ -43,46 +43,45 @@ $navbar-hidden: "navbar-hidden";
       padding-right: 2rem;
       padding-top: 1rem;
       padding-bottom: 1rem;
-      background-color: #bcb2b2;
-      color: #fff;
+      background-color: $color-navbar;
+      color: $color-white;
       padding: 1rem;
       width: 100%;
-  
+
       @include navbarmobile {
         @include flex-column(center, center);
         padding: 1.5rem;
-  
       }
-     @include desktop {
+      @include desktop {
         @include flex-row(space-between, center);
         padding-left: 2rem;
         padding-right: 2rem;
         padding-top: 1rem;
         padding-bottom: 1rem;
-      } 
+      }
       .logo {
         display: inline-block;
         font-size: 1.6rem;
-        color: black;
+        color: $color-white;
         @include navbarmobile {
           display: flex; /* Utilizar flexbox */
           justify-content: center; /* Centrar horizontalmente */
           align-items: center; /* Centrar verticalmente */
-          color: black;
+          color: $color-white;
         }
       }
       .hamburger {
         display: none;
         cursor: pointer;
-  
+
         @include navbarmobile {
           display: block;
         }
-  
+
         div {
           width: 30px;
           height: 3px;
-          background-color: black;
+          background-color: $color-white;
           margin: 5px 0;
         }
       }
@@ -103,38 +102,42 @@ $navbar-hidden: "navbar-hidden";
           @include navbarmobile {
             margin: 5px 0;
             font-size: 1.2rem;
-  
           }
           .button-container {
             display: inline-block;
             margin-left: 10px;
             @include navbarmobile {
               margin: 5px 0;
-              @include flex-column()
+              @include flex-column();
             }
             .buton {
-              color: white;
-              background-color: black;
+              color: $color-navbar;
+              background-color: $color-yellow;
               border-radius: 30px;
               padding: 5px 10px;
               font-size: 13px;
               cursor: pointer;
-          
+
               &:hover {
                 background-color: white;
                 color: black;
               }
             }
-          
+
             .button {
-              color: white;
-              background-color: black;
+              color: $color-navbar;
+              background-color: $color-yellow;
               border-radius: 30px;
               padding: 5px 10px;
               font-size: 13px;
               cursor: pointer;
               text-decoration: none;
-          
+              font-style: normal;
+              font-weight: 700;
+              font-size: 14px;
+              line-height: 17px;
+              text-align: center;
+
               &:hover {
                 background-color: white;
                 color: black;
@@ -144,17 +147,22 @@ $navbar-hidden: "navbar-hidden";
           a {
             display: inline-block;
             padding: 5px;
-            color: black;
+            color: $color-white;
             text-decoration: none;
             font-size: 1.4rem;
             &:hover {
               text-decoration: underline;
             }
             &.button {
-              color: white;
-              background-color: black;
+              color: $color-navbar;
+              background-color: $color-yellow;
               border-radius: 30px;
               padding: 5px 10px;
+              font-style: normal;
+              font-weight: 700;
+              font-size: 14px;
+              line-height: 17px;
+              text-align: center;
               &:hover {
                 background-color: darken(white, 10%);
                 color: black;
@@ -188,21 +196,21 @@ $navbar-hidden: "navbar-hidden";
       height: 100%;
       z-index: 99;
     }
-    
+
     .modal-content {
-      display: flex; 
-      overflow: auto; 
-      position: relative; 
+      display: flex;
+      overflow: auto;
+      position: relative;
       padding-top: 1rem;
-      padding-bottom: 20px; 
+      padding-bottom: 20px;
       padding-left: 1.5rem;
-      padding-right: 1.5rem; 
-      background-color: #ffffff; 
-      max-width: 32rem; 
-      max-height: 80vh; 
-      border-radius: 0.5rem; 
-      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); 
+      padding-right: 1.5rem;
+      background-color: #ffffff;
+      max-width: 32rem;
+      max-height: 80vh;
+      border-radius: 0.5rem;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+        0 4px 6px -2px rgba(0, 0, 0, 0.05);
     }
   }
 }
-

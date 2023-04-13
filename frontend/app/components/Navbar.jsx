@@ -80,8 +80,8 @@ export default function Navbar() {
                     LOGOUT
                   </Link>
                 </div>
-                <div className="button-container" onClick={toggle}>
-                <div className="buton">TURNO</div>
+                <div className="button-container" >
+                <div className="button" onClick={togglemodal}>TURNO</div>
                 </div>
               </li>
             ) : (
