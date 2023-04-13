@@ -2,6 +2,7 @@ const router = require("express").Router();
 const authCtrls = require("../controllers/auth.controllers");
 const userSchemaValidator = require("../schemas/userSchema.validator");
 const validateFields = require("../schemas/validateFields");
+const { authenticateUser } = require("../middlewares/auth.middleware");
 
 /**
  * @openapi
@@ -198,7 +199,7 @@ router.post("/login", authCtrls.loginUser);
  *                   example: Error. Verificar Email y Contraseña
  */
 
-router.post("/resetPass", authCtrls.changePassword);
+router.post("/resetPass", authenticateUser, authCtrls.changePassword);
 
 // Ruta para verificar usuario por email
 router.post("/verifyEmail", authCtrls.verifyEmail);
