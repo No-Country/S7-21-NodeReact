@@ -43,8 +43,8 @@ $navbar-hidden: "navbar-hidden";
       padding-right: 2rem;
       padding-top: 1rem;
       padding-bottom: 1rem;
-      background-color: #bcb2b2;
-      color: #fff;
+      background-color: $color-navbar;
+      color: $color-white;
       padding: 1rem;
       width: 100%;
 
@@ -62,12 +62,12 @@ $navbar-hidden: "navbar-hidden";
       .logo {
         display: inline-block;
         font-size: 1.6rem;
-        color: black;
+        color: $color-white;
         @include navbarmobile {
           display: flex; /* Utilizar flexbox */
           justify-content: center; /* Centrar horizontalmente */
           align-items: center; /* Centrar verticalmente */
-          color: black;
+          color: $color-white;
         }
       }
       .hamburger {
@@ -81,7 +81,7 @@ $navbar-hidden: "navbar-hidden";
         div {
           width: 30px;
           height: 3px;
-          background-color: black;
+          background-color: $color-white;
           margin: 5px 0;
         }
       }
@@ -108,31 +108,36 @@ $navbar-hidden: "navbar-hidden";
             margin-left: 10px;
             @include navbarmobile {
               margin: 5px 0;
-              @include flex-column()
+              @include flex-column();
             }
             .buton {
-              color: white;
-              background-color: black;
+              color: $color-navbar;
+              background-color: $color-yellow;
               border-radius: 30px;
               padding: 5px 10px;
               font-size: 13px;
               cursor: pointer;
-          
+
               &:hover {
                 background-color: white;
                 color: black;
               }
             }
-          
+
             .button {
-              color: white;
-              background-color: black;
+              color: $color-navbar;
+              background-color: $color-yellow;
               border-radius: 30px;
               padding: 5px 10px;
               font-size: 13px;
               cursor: pointer;
               text-decoration: none;
-          
+              font-style: normal;
+              font-weight: 700;
+              font-size: 14px;
+              line-height: 17px;
+              text-align: center;
+
               &:hover {
                 background-color: white;
                 color: black;
@@ -142,17 +147,22 @@ $navbar-hidden: "navbar-hidden";
           a {
             display: inline-block;
             padding: 5px;
-            color: black;
+            color: $color-white;
             text-decoration: none;
             font-size: 1.4rem;
             &:hover {
               text-decoration: underline;
             }
             &.button {
-              color: white;
-              background-color: black;
+              color: $color-navbar;
+              background-color: $color-yellow;
               border-radius: 30px;
               padding: 5px 10px;
+              font-style: normal;
+              font-weight: 700;
+              font-size: 14px;
+              line-height: 17px;
+              text-align: center;
               &:hover {
                 background-color: darken(white, 10%);
                 color: black;
