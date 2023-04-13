@@ -26,6 +26,8 @@ module.exports = {
       },
       service: {
         type: Sequelize.STRING,
+        values: ["Corte Pelo", "Corte Barba", "Corte Pelo Y Barba", "Lavado Y Corte", "Lavado Y Perfilado"],
+        defaultValue: "Corte Pelo",
         allowNull: false,
       },
       message: {

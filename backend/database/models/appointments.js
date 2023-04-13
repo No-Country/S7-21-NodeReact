@@ -35,7 +35,9 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       service: {
-        type: DataTypes.STRING,
+        type: DataTypes.ENUM,
+        values: ["Corte Pelo", "Corte Barba", "Corte Pelo Y Barba", "Lavado Y Corte", "Lavado Y Perfilado"],
+        defaultValue: "Corte Pelo",
         allowNull: false,
       },
       message: {

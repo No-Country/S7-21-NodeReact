@@ -24,7 +24,13 @@ module.exports = {
           hour = `${9 + j}:00`;
           const appointment = {
             id: faker.datatype.uuid(),
-            service: faker.lorem.sentence(3),
+            service: faker.helpers.arrayElement([
+              "Corte Pelo",
+              "Corte Barba",
+              "Corte Pelo Y Barba",
+              "Lavado Y Corte",
+              "Lavado Y Perfilado",
+            ]),
             message: faker.lorem.sentence(5),
             appointmentDate: date,
             appointmentHour: hour,
