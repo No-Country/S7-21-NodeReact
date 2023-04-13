@@ -48,6 +48,7 @@
       font-family: $font-primary;
       margin-top: 6rem;
       position: relative;
+      min-width: 350px;
       .login-image {
         @include flex(center, center);
         @include box-shadow(0 0 1rem rgba(0, 0, 0, 0.2));
@@ -116,6 +117,18 @@
           #remember,
           label {
             margin: 0;
+          }
+        }
+      }
+      .terms {
+        @include flex(flex-start);
+        margin-bottom: 2rem;
+        a {
+          color: $color-tertiary;
+          cursor: pointer;
+          transition: color 0.2s ease-in-out;
+          &:hover {
+            color: darken($color-white, 10%);
           }
         }
       }

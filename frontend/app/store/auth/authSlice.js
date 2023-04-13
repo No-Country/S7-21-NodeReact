@@ -39,8 +39,23 @@ export const loginuser = (payload) => {
     console.log(payload, "datos")
     try {
       dispatch({ type: onChecking });
-      const {data}= await axios.post("http://localhost:8080/api/v1/auth/login", payload);
+      const { data } = await axios.post("http://localhost:8080/api/v1/auth/login", payload);
       console.log(data, "json")
+      if (data) {
+        dispatch({ type: onLogin, payload: data.body.user });
+        return data;
+      }
+    } catch (error) {
+      dispatch({ type: onLoginError, error: error.response.data.error });
+    }
+  };
+};
+
+export const registeruser = (payload) => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: onChecking });
+      const { data } = await axios.post("http://localhost:8080/api/v1/auth/register", payload);
       if (data) {
         dispatch({ type: onLogin, payload: data.body.user });
         return data;
