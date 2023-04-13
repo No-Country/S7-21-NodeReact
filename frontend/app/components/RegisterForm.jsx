@@ -2,9 +2,10 @@ import { Link, useNavigate } from "@remix-run/react";
 import { FaGoogle, FaFacebook } from "react-icons/fa";
 import hairstyle from "~/assets/images/hairstyle.png";
 import { useDispatch } from "react-redux";
-import { loginuser } from "../store/auth/authSlice";
+import { registeruser } from "../store/auth/authSlice";
 import { useState } from "react";
 export default function LoginForm() {
+  const [acceptTerms, setAcceptTerms] = useState(false);
   const [user, setUser] = useState({
     nombre: "",
     apellido: "",
@@ -16,19 +17,23 @@ export default function LoginForm() {
   const handlechange = (e) => {
     e.preventDefault();
     const { name, value } = e.target;
-    setUser({ ...user, [name]: value });
-  };
-  const handlelogin = (e) => {
-    e.preventDefault();
-    try {
-      let response = dispacth(loginuser(user))
-      if (!response) return
-      navigate("/")
-      console.log(user, "datos de user");
-    } catch (error) {
-      console.log(error)
+    if (name !== "check-password") {
+      setUser({ ...user, [name]: value });
     }
+
   };
+
+  const checkboxChange = (e) => {
+    const { name, checked } = e.target;
+    if (name === "acceptTerms")
+      setAcceptTerms(checked);
+  };
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    dispacth(registeruser(user))
+  };
+
   return (
     <>
       <div className="login-container">
@@ -38,7 +43,7 @@ export default function LoginForm() {
         </div>
         <div className="login-right">
           <h2>Registro nuevo usuario</h2>
-          <form onClick={(e) => handlelogin(e)}>
+          <form onClick={handleRegister}>
             <div className="login-image">
               <img src={hairstyle} alt="Login" />
             </div>
@@ -81,12 +86,22 @@ export default function LoginForm() {
               required
             />
 
-            <div className="login-forgot-password">
-              <input type="checkbox" id="remember" name="remember" />
-              <label htmlFor="remember">&nbsp;Acepto los&nbsp;</label> <a href="#">terminos y condiciones</a>
+            <label htmlFor="check-password">Repetir contraseña</label>
+            <input
+              type="password"
+              id="check-password"
+              name="check-password"
+              onChange={handlechange}
+              value={user.clave}
+              required
+            />
+
+            <div className="terms">
+              <input type="checkbox" id="acceptTerms" name="acceptTerms" checked={acceptTerms} onChange={checkboxChange} />
+              <label htmlFor="acceptTerms">&nbsp;Acepto los&nbsp;</label> <Link to="#" >terminos y condiciones</Link>
             </div>
 
-            <button type="submit">Registrar</button>
+            <input type="submit" value={'Registrar'} />
           </form>
           <p>
             ¿Ya tienes cuenta? <Link to="/login">Inicia Sesión</Link>

@@ -1,3 +1,23 @@
 {
-  "conventionalCommits.scopes": ["frontend"]
+  "conventionalCommits.scopes": ["frontend"],
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#97e1bf",
+    "activityBar.background": "#97e1bf",
+    "activityBar.foreground": "#15202b",
+    "activityBar.inactiveForeground": "#15202b99",
+    "activityBarBadge.background": "#a46bd4",
+    "activityBarBadge.foreground": "#15202b",
+    "commandCenter.border": "#15202b99",
+    "sash.hoverBorder": "#97e1bf",
+    "statusBar.background": "#6fd6a7",
+    "statusBar.foreground": "#15202b",
+    "statusBarItem.hoverBackground": "#47cb8f",
+    "statusBarItem.remoteBackground": "#6fd6a7",
+    "statusBarItem.remoteForeground": "#15202b",
+    "titleBar.activeBackground": "#6fd6a7",
+    "titleBar.activeForeground": "#15202b",
+    "titleBar.inactiveBackground": "#6fd6a799",
+    "titleBar.inactiveForeground": "#15202b99"
+  },
+  "peacock.color": "#6fd6a7"
 }
