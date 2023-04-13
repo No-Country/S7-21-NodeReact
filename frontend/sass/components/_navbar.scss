@@ -1,0 +1,59 @@
+@use "../base/variables" as *;
+@use "../base/mixins" as *;
+.navbar {
+  @include flex(
+    space-between,
+    center
+  ); // Aplicar el mixin 'flex' para centrar los elementos horizontalmente
+  width: 100%;
+  background-color: #bcb2b2;
+  color: #fff;
+  padding: 10px;
+  @include mobile {
+    // En pantallas móviles, cambiar la dirección de flexión a 'columna' y centrar los elementos verticalmente
+    @include flex-column($align: center);
+  }
+  .logo {
+    display: inline-block;
+    font-size: 1.6rem;
+    color: black;
+  }
+  ul {
+    list-style: none;
+    display: flex;
+    @include mobile {
+      // En pantallas móviles, cambiar la dirección de flexión a 'columna' y centrar los elementos verticalmente
+      @include flex-column();
+    }
+    .righ {
+      display: flex;
+      justify-content: flex-end;
+    }
+    li {
+      margin: 0 10px;
+      @include mobile {
+        margin: 10px 0;
+      }
+      a {
+        display: inline-block;
+        padding: 10px 15px;
+        color: black;
+        text-decoration: none;
+        font-size: 1.6rem;
+        &:hover {
+          text-decoration: underline;
+        }
+        &.button {
+          // Agregar la clase .button al selector
+          color: white;
+          background-color: black;
+          border-radius: 30px;
+          &:hover {
+            background-color: darken(white, 10%);
+            color: black;
+          }
+        }
+      }
+    }
+  }
+}
