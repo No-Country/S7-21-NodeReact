@@ -10,9 +10,7 @@ const jwt = require("jsonwebtoken");
  * @returns eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
  */
 const createJwt = ({ payload }) => {
-  const accessToken = jwt.sign(payload, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_DURATION,
-  });
+  const accessToken = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: process.env.JWT_DURATION });
   return accessToken;
 };
 
