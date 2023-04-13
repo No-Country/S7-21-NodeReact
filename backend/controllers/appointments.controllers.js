@@ -30,6 +30,7 @@ const patchAppointment = tryCatchWrapper(async (req, res, next) => {
     newDate,
     newHour
   );
+  endPointResponse({ res, message: response })
 });
 
 const deleteAppointment = tryCatchWrapper(async (req, res, next) => {
