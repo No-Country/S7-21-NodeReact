@@ -24,7 +24,8 @@ const updateUser = async (id, newInfo, reqUser) => {
 
     checkPermissions(reqUser, user.id);
 
-    const { firstName, lastName, email, phone, profileImage } = newInfo;
+    const { firstName, lastName, email, phone, profileImage, description } =
+      newInfo;
     let emailInUse, phoneInUse;
 
     if (email) {
@@ -51,6 +52,7 @@ const updateUser = async (id, newInfo, reqUser) => {
       phone,
       profileImage,
       attributes: { exclude: ["password"] },
+      description: reqUser?.role === "barber" ? description : "",
     });
     await user.save();
     const payload = { id: user.id, role: user.role };
@@ -62,4 +64,23 @@ const updateUser = async (id, newInfo, reqUser) => {
   }
 };
 
-module.exports = { findAllUsers, updateUser };
+const updateUserRole = async (id, role) => {
+  try {
+    const user = await User.findOne({ where: { id } });
+
+    if (!user) {
+      throw new CustomError("Usuario no encontrado", 404);
+    }
+
+    await user.update({ role });
+    await user.save();
+    const payload = { id: user.id, role: user.role };
+    const newToken = createJwt({ payload });
+
+    return newToken;
+  } catch (error) {
+    throw new CustomError(error.message, error.statusCode, error.errors);
+  }
+};
+
+module.exports = { findAllUsers, updateUser, updateUserRole };

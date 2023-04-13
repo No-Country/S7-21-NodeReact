@@ -1,12 +1,13 @@
 const express = require("express");
 const { checkSchema } = require("express-validator");
-const { authenticateUser } = require("../middlewares/auth.middleware");
+const { authenticateUser, authorizeByRole } = require("../middlewares/auth.middleware");
 const {
   getAllUsers,
   showMe,
   getUserById,
   updateUserById,
   deleteUser,
+  changeRole,
 } = require("../controllers/users.controllers");
 const router = express.Router();
 
@@ -443,5 +444,7 @@ router.patch("/:id", authenticateUser, updateUserById);
  *                   description: Mensaje de error descriptivo
  */
 router.delete("/:id", authenticateUser, deleteUser);
+
+router.patch("/changeRole/:id", [authenticateUser, authorizeByRole("admin")], changeRole )
 
 module.exports = router;
