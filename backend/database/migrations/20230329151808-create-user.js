@@ -15,7 +15,7 @@ module.exports = {
         defaultValue: "client",
         allowNull: false,
       },
-      fistName: {
+      firstName: {
         type: Sequelize.STRING,
       },
       lastName: {
@@ -30,12 +30,15 @@ module.exports = {
       profileImage: {
         type: Sequelize.STRING,
       },
-      verificationToken:{
-        type: Sequelize.STRING
+      description: {
+        type: Sequelize.TEXT,
       },
-      verified:{
+      verificationToken: {
+        type: Sequelize.STRING,
+      },
+      verified: {
         type: Sequelize.BOOLEAN,
-        defaultValue:false
+        defaultValue: true,
       },
       createdAt: {
         allowNull: false,

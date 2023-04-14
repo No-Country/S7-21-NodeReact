@@ -7,9 +7,10 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({ User }) {
+    static associate({ User, ServicesBarber }) {
       this.belongsTo(User, { foreignKey: "clientId" });
       this.belongsTo(User, { foreignKey: "barberId" });
+      this.belongsTo(ServicesBarber, {foreignKey: "servicesId"})
     }
   }
   appointments.init(
@@ -32,10 +33,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.ENUM,
         values: ["allow", "notAllow"],
         defaultValue: "allow",
-        allowNull: false,
-      },
-      service: {
-        type: DataTypes.STRING,
         allowNull: false,
       },
       message: {

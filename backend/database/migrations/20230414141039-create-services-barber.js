@@ -2,29 +2,19 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('appointments', {
+    await queryInterface.createTable('ServicesBarber', {
       id: {
-        allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
-      },
-      appointmentDate: {
-        type: Sequelize.DATE,
-        allowNull: false
-      },
-      appointmentHour: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      status: {
-        type: Sequelize.ENUM,
-        values: ["allow", "notAllow"],
-        defaultValue: "allow",
         allowNull: false,
       },
-      message: {
+      name: {
         type: Sequelize.STRING,
+        allowNull: false,
+      },
+      values: {
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
       createdAt: {
@@ -38,6 +28,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('appointments');
+    await queryInterface.dropTable('ServicesBarber');
   }
 };
