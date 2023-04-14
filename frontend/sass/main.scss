@@ -22,6 +22,7 @@
 @forward "pages/stylists";
 @forward "pages/administrator";
 @forward "pages/aboutMe";
+@forward "pages/profile";
 
 //routes
 @forward "routes/Barber/$barberId";
@@ -38,9 +39,10 @@ html {
 }
 
 body {
-  @include flex-column(start);
+  //  @include flex-row(start);
   font-family: $font-primary;
   height: 100vh;
+  width: 100%;
   margin: 0;
   font-size: 1.6rem;
   line-height: 1.6;

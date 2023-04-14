@@ -27,21 +27,21 @@ export const turnerSlice = createSlice({
       state.turner = {};
       state.errorMessage = error;
     },
-    onLoadingTurner:(state, {payload}) => {
+    onLoadingTurner: (state, { payload }) => {
       state.loadingTurner = true;
-      state.turners = []
-      state.errorMessage = undefined
+      state.turners = [];
+      state.errorMessage = undefined;
     },
     onTurnerHistory: (state, { payload }) => {
       state.loadingTurner = false;
-      state.turners = payload
-      state.errorMessage = undefined
+      state.turners = payload;
+      state.errorMessage = undefined;
     },
     onMessageTurnersError: (state, { error }) => {
       state.loadingTurner = false;
-      state.turners = []
-      state.errorMessage = error
-    }
+      state.turners = [];
+      state.errorMessage = error;
+    },
   },
 });
 export const getHeadersWithAuth = (token) => {
@@ -52,13 +52,14 @@ export const getHeadersWithAuth = (token) => {
 export const createturne = (payload, barber) => {
   return async (dispatch) => {
     const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFlNGFhNTVkLTFiYjctNDMyMS1hMmVjLTQ4MDkzMDE1YzIzYiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MTQyMTMwMiwiZXhwIjoxNjgyNjU0ODUwfQ.4D1rJKlx6guDSUyGRLTpZ6gLTERpbsIGgGPd65k0VjA"; // aquí deberías obtener el token de autenticación desde el estado de Redux
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFlNGFhNTVkLTFiYjctNDMyMS1hMmVjLTQ4MDkzMDE1YzIzYiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MTQ5NjYzMywiZXhwIjoxNjgyNzMwMTgxfQ.nSI8j_K9Qn8w3tK4NQCVEyOT9-Qg8c8jCY35d3hPx0g"; // aquí deberías obtener el token de autenticación desde el estado de Redux
     const headers = getHeadersWithAuth(token);
     try {
       dispatch({ type: onLoading });
-      const {data } = await axios.post(
+      const { data } = await axios.post(
         `http://localhost:8080/api/v1/appointments/${barber}`,
-        payload, {headers}
+        payload,
+        { headers }
       );
       console.log(data);
       if (data) {
@@ -70,24 +71,34 @@ export const createturne = (payload, barber) => {
     }
   };
 };
-export const historyTurner = (payload) =>{
+export const historyTurner = () => {
   const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFlNGFhNTVkLTFiYjctNDMyMS1hMmVjLTQ4MDkzMDE1YzIzYiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MTQyMTMwMiwiZXhwIjoxNjgyNjU0ODUwfQ.4D1rJKlx6guDSUyGRLTpZ6gLTERpbsIGgGPd65k0VjA"; // aquí deberías obtener el token de autenticación desde el estado de Redux
-const headers = getHeadersWithAuth(token);
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFlNGFhNTVkLTFiYjctNDMyMS1hMmVjLTQ4MDkzMDE1YzIzYiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MTQ5NjYzMywiZXhwIjoxNjgyNzMwMTgxfQ.nSI8j_K9Qn8w3tK4NQCVEyOT9-Qg8c8jCY35d3hPx0g"; // aquí deberías obtener el token de autenticación desde el estado de Redux
+  const headers = getHeadersWithAuth(token);
   return async (dispatch) => {
     try {
-      dispatch({ type: onLoadingTurner})
-      const { data } = await axios.get(`http://localhost:8080/api/v1/appointments/${payload}`, {headers})
-      console.log(data)
-      if(data){
-        dispatch({type: onTurnerHistory, payload: data})
+      dispatch({ type: onLoadingTurner });
+      const  data  = await axios.get(
+        "http://localhost:8080/api/v1/appointments/myAppointments",
+        { headers }
+      );
+      console.log(data);
+      if (data) {
+        dispatch({ type: onTurnerHistory, payload: data });
       }
     } catch (error) {
-      console.log(error, "error")
-      dispatch({type: onMessageTurnersError, error: error})
+      console.log(error, "error");
+      dispatch({ type: onMessageTurnersError, error: error });
     }
-  }
-}
+  };
+};
 
-export const { onLoading, onTurner, onTurnerError, onLoadingTurner, onMessageTurnersError, onTurnerHistory } = turnerSlice.actions;
+export const {
+  onLoading,
+  onTurner,
+  onTurnerError,
+  onLoadingTurner,
+  onMessageTurnersError,
+  onTurnerHistory,
+} = turnerSlice.actions;
 export default turnerSlice.reducer;

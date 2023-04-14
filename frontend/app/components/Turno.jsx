@@ -38,7 +38,6 @@ export default function Turno({ closeModal }) {
   });
   console.log(form.date)
   const handleChangeForm = (e) => {
-    e.preventDefault();
     setForm({ ...form, [e.target.name]: e.target.value });
   };
   const handlesubmit = async (e) => {
