@@ -45,9 +45,17 @@ const deleteAppointment = tryCatchWrapper(async (req, res, next) => {
   endPointResponse({ res, message: response });
 });
 
+const getMyAppointments = tryCatchWrapper(async (req, res, next) => {
+  const clientId = req.user.id;
+  const response = await apptServices.findMyAppointments(clientId);
+
+  endPointResponse({ res, message: "turnos asignados", body: response })
+})
+
 module.exports = {
   postAppointment,
   getAppointmentsById,
+  getMyAppointments,
   patchAppointment,
   deleteAppointment,
 };

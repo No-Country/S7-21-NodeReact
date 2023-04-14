@@ -18,6 +18,22 @@ const findBarber = async (barberId) => {
   }
 };
 
+const findClient = async (clienId) => {
+  try {
+    const client = await User.findOne({
+      where: {
+        [Op.and]: [{ id: clienId}, { role: "client" }],
+      },
+    });
+    if(!client) {
+      throw new CustomError("No se encontró ningún cliente con ese Id", 404);
+    }
+    return client;
+  } catch (error) {
+    throw new CustomError(error.message, error.statusCode, error.errors);
+  }
+}
+
 const findAppointment = async (appointmentId) => {
   try {
     const appointment = await appointments.findOne({
@@ -86,6 +102,24 @@ const findAppointments = async (barberId) => {
   }
 };
 
+const findMyAppointments = async (clientId) => {
+  try {
+    const client = await findClient(clientId);
+    const appointments = await client.getAppointment({
+      attributes: [
+        "id",
+        "barberId",
+        "appointmentDate",
+        "appointmentHour",
+        "message",
+      ],
+    });
+    return appointments;
+  } catch (error) {
+    throw new CustomError(error.message, error.statusCode, error.errors)
+  }
+}
+
 const updateAppointment = async (appointmentId, newDate, newHour) => {
   try {
     const appointment = await findAppointment(appointmentId);
@@ -116,4 +150,5 @@ module.exports = {
   findAppointments,
   updateAppointment,
   deleteAppointmentById,
+  findMyAppointments
 };
