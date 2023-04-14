@@ -8,7 +8,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
-        allowNull: false
       },
       appointmentDate: {
         type: Sequelize.DATE,
@@ -22,12 +21,6 @@ module.exports = {
         type: Sequelize.ENUM,
         values: ["allow", "notAllow"],
         defaultValue: "allow",
-        allowNull: false,
-      },
-      service: {
-        type: Sequelize.STRING,
-        values: ["Corte Pelo", "Corte Barba", "Corte Pelo Y Barba", "Lavado Y Corte", "Lavado Y Perfilado"],
-        defaultValue: "Corte Pelo",
         allowNull: false,
       },
       message: {
