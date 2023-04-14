@@ -1,5 +1,5 @@
 const { CustomError, checkPermissions } = require("../helpers");
-const { User, appointments } = require("../database/models");
+const { User, appointments, ServicesBarber } = require("../database/models");
 const { Op } = require("sequelize");
 
 const findBarber = async (barberId) => {
@@ -52,7 +52,7 @@ const createAppointment = async (
   barberId,
   date,
   hour,
-  service,
+  servicesId,
   message,
   clientId
 ) => {
@@ -63,10 +63,11 @@ const createAppointment = async (
       where: {
         [Op.and]: [{ appointmentDate: date }, { appointmentHour: hour }],
       },
+      include: ["name", ServicesBarber],
       defaults: {
         appointmentDate: date,
         appointmentHour: hour,
-        service,
+        servicesId,
         message,
         clientId,
         barberId: barber.id,
@@ -95,6 +96,12 @@ const findAppointments = async (barberId) => {
         "appointmentHour",
         "message",
       ],
+      include: {
+        model: ServicesBarber,
+        attributes: {
+          exclude: ["id", "createdAt", "updatedAt"],
+        },
+      },
     });
     return appointments;
   } catch (error) {

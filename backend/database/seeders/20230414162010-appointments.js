@@ -1,7 +1,8 @@
 "use strict";
 
 const { faker } = require("@faker-js/faker");
-const { User } = require("../models");
+const { User, ServicesBarber } = require("../models");
+faker.setLocale("es");
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -14,6 +15,8 @@ module.exports = {
       attributes: ["id"],
     });
     const clientIds = clients.map((user) => user.id);
+    const services = await ServicesBarber.findAll({ attributes: ["id"] });
+    const servicesId = services.map((service) => service.id);
     const appointmentsList = [];
     let date, hour;
     for (let barber of barbers) {
@@ -24,13 +27,7 @@ module.exports = {
           hour = `${9 + j}:00`;
           const appointment = {
             id: faker.datatype.uuid(),
-            service: faker.helpers.arrayElement([
-              "Corte Pelo",
-              "Corte Barba",
-              "Corte Pelo Y Barba",
-              "Lavado Y Corte",
-              "Lavado Y Perfilado",
-            ]),
+            servicesId: faker.helpers.arrayElement(servicesId),
             message: faker.lorem.sentence(5),
             appointmentDate: date,
             appointmentHour: hour,
