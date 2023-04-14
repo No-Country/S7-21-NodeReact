@@ -123,10 +123,19 @@ const findMyAppointments = async (clientId) => {
 const updateAppointment = async (appointmentId, newDate, newHour) => {
   try {
     const appointment = await findAppointment(appointmentId);
+    const exits = await appointments.findOne({
+      where: {
+        [Op.and]: [{ appointmentDate: newDate}, { appointmentHour: newHour}]
+      },
+    });
+    if(exits) {
+      throw new CustomError("Este turno ya se encuentra asignado", 400);
+    }
     const updateAppointment = await appointment.update({
       appointmentDate: newDate,
       appointmentHour: newHour,
     });
+
     return updateAppointment;
   } catch (error) {
     throw new CustomError(error.message, error.statusCode, error.errors);
