@@ -13,6 +13,7 @@ import Navbar from "~/components/Navbar";
 import styles from "~/styles/main.css";
 import { PersistGate } from 'redux-persist/integration/react'
 import Footer from "./components/Footer";
+import { ToastContainer } from "react-toastify";
 
 
 export const meta = () => ({
@@ -47,7 +48,8 @@ function Document({ title, children }) {
 export default function App() {
   return (
     <Document>
-      <Outlet />
+      <ToastContainer/>
+      <Outlet/>
     </Document>
   )
 }

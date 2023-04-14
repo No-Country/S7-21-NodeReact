@@ -9,17 +9,20 @@ import { useSelector } from "react-redux";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const isAuthenticated = useSelector((state) => state.user.status === "authenticated");
-  const Authuser = useSelector((state) => state.user.user)
-  console.log("authuser", Authuser)
+
+  const isAuthenticated = useSelector(
+    (state) => state.user.status === "authenticated"
+  );
+  const Authuser = useSelector((state) => state.user.user);
+  console.log("authuser", Authuser);
   console.log("isAuthenticated", isAuthenticated);
   const toggle = () => {
     console.log("click en togle", isOpen);
     setIsOpen(!isOpen);
   };
   const togglemodal = () => {
-    setIsOpenModal(!isOpenModal)
-  }
+    setIsOpenModal(!isOpenModal);
+  };
 
   const closeModal = () => {
     setIsOpenModal(false);
@@ -51,7 +54,6 @@ export default function Navbar() {
             <div />
             <div />
           </div>
-
           <ul className={`nav-links ${isOpen ? "show-nav" : "navbar-hidden"}`}>
             <li className="nav-item">
               <Link to="/">INICIO</Link>
@@ -71,17 +73,25 @@ export default function Navbar() {
             <li className="nav-item">
               <Link to="/contact">CONTACTO</Link>
             </li>
-            <li className="nav-item">
-              {isAuthenticated ? (<Link className="button" to="/">
-                LOGOUT
-              </Link>) : (<Link className="button" to="/login">
-                INGRESAR
-              </Link>)}
+            {isAuthenticated ? (
+              <li className="nav-item">
+                <div className="button-container">
+                  <Link className="button" to="/">
+                    LOGOUT
+                  </Link>
+                </div>
+                <div className="button-container" >
+                <div className="button" onClick={togglemodal}>TURNO</div>
+                </div>
+              </li>
+            ) : (
+              <li className="nav-item">
+                <Link className="button" to="/login">
+                  INGRESAR
+                </Link>
+              </li>
+            )}
 
-            </li>
-            <li className="nav-item custom-style" onClick={togglemodal}>
-              <div className="buton">TURNO</div>
-            </li>
           </ul>
         </nav>
       </header>
@@ -90,12 +100,10 @@ export default function Navbar() {
         onRequestClose={closeModal}
         contentLabel="Turno"
         className="modal"
-
       >
         <div className="modal-content">
           <Turno closeModal={closeModal} />
         </div>
-
       </Modal>
     </div>
 
