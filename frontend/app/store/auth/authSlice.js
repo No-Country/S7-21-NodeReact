@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+
 export const authSlice = createSlice({
   name: "auth",
   initialState: {
@@ -41,13 +42,11 @@ export const authSlice = createSlice({
 });
 export const loginuser = (payload) => {
   return async (dispatch) => {
-    console.log(payload, "datos")
     try {
       dispatch({ type: "onChecking" });
       const { data } = await axios.post("http://localhost:8080/api/v1/auth/login", payload);
-      console.log(data, "json")
+
       if (data) {
-        console.log(data.body, "bodu de login")
         const { user, token } = data.body;
         dispatch({ type: "onLogin", payload: { user, token } });
         return data;
@@ -64,7 +63,7 @@ export const registeruser = (payload) => {
     try {
       dispatch({ type: "onChecking" });
       const { data } = await axios.post("http://localhost:8080/api/v1/auth/register", payload);
-      console.log(data.body, "body de register")
+
       if (data) {
         return data;
       }
