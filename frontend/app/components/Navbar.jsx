@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { Link } from "@remix-run/react";
 import { HiOutlineMail } from "react-icons/hi";
@@ -6,6 +7,7 @@ import { TbClockHour9 } from "react-icons/tb";
 import Modal from "react-modal";
 import Turno from "./Turno";
 import { useSelector } from "react-redux";
+
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -20,6 +22,7 @@ export default function Navbar() {
     console.log("click en togle", isOpen);
     setIsOpen(!isOpen);
   };
+
   const togglemodal = () => {
     setIsOpenModal(!isOpenModal);
   };

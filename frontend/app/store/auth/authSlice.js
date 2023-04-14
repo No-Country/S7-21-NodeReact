@@ -11,9 +11,6 @@ export const authSlice = createSlice({
   reducers: {
     onChecking: (state) => {
       state.status = "checking";
-      state.user = {};
-      state.token = null
-      state.errorMessage = undefined;
     },
     onLogin: (state, { payload }) => {
       state.status = "authenticated";
@@ -24,8 +21,6 @@ export const authSlice = createSlice({
     onLoginError: (state, { error }) => {
       console.log(error, "error")
       state.status = "not-authenticated";
-      state.user = {};
-      state.token = null
       state.errorMessage = error;
     },
     onLogout: (state, { payload }) => {
@@ -47,9 +42,24 @@ export const loginuser = (payload) => {
       const { data } = await axios.post("http://localhost:8080/api/v1/auth/login", payload);
       console.log(data, "json")
       if (data) {
-        console.log(data.body, "bodu de login")
-        const { user, token } = data.body;
-        dispatch({ type: onLogin, payload:{user, token} });
+
+        dispatch({ type: onLogin, payload: data.body.user });
+        return data;
+      }
+    } catch (error) {
+      dispatch({ type: onLoginError, error: error.response.data.error });
+    }
+  };
+};
+
+export const registeruser = (payload) => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: onChecking });
+      const { data } = await axios.post("http://localhost:8080/api/v1/auth/register", payload);
+      if (data) {
+        dispatch({ type: onLogin, payload: data.body.user });
+
         return data;
       }
     } catch (error) {

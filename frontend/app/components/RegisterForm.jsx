@@ -1,12 +1,15 @@
 import { Link, useNavigate } from "@remix-run/react";
 import { FaGoogle, FaFacebook } from "react-icons/fa";
-// import React, { useEffect } from 'react'
 import hairstyle from "~/assets/images/hairstyle.png";
 import { useDispatch } from "react-redux";
-import { loginuser } from "../store/auth/authSlice";
+import { registeruser } from "../store/auth/authSlice";
 import { useState } from "react";
 export default function LoginForm() {
+  const [acceptTerms, setAcceptTerms] = useState(false);
+  console.log(acceptTerms);
   const [user, setUser] = useState({
+    nombre: "",
+    apellido: "",
     email: "",
     password: "",
   });
@@ -14,19 +17,24 @@ export default function LoginForm() {
   const navigate = useNavigate();
   const handlechange = (e) => {
     e.preventDefault();
-    setUser({ ...user, [e.target.name]: e.target.value });
-  };
-  const handlelogin = async (e) => {
-    e.preventDefault();
-    try {
-      let response = await dispacth(loginuser(user))
-      if (!response) return
-      navigate("/")
-      console.log(user, "datos de user");
-    } catch (error) {
-      console.log(error)
+    const { name, value } = e.target;
+    if (name !== "check-password") {
+      setUser({ ...user, [name]: value });
     }
+
   };
+
+  const checkboxChange = (e) => {
+    const { checked } = e.target;
+    setAcceptTerms(checked);
+  };
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    console.log(user, "datos");
+    dispacth(registeruser(user))
+  };
+
   return (
     <>
       <div className="login-container">
@@ -35,11 +43,30 @@ export default function LoginForm() {
                 <p>Únete a la experiencia de un corte de cabello excepcional y siéntete como en casa en nuestro ambiente acogedor. Inicia sesión para reservar tu cita y descubrir lo que podemos hacer por ti.</p> */}
         </div>
         <div className="login-right">
-          <h2>Inicia sesión</h2>
-          <form onClick={(e) => handlelogin(e)}>
+          <h2>Registro nuevo usuario</h2>
+          <form onSubmit={handleRegister}>
             <div className="login-image">
               <img src={hairstyle} alt="Login" />
             </div>
+            <label htmlFor="nombre">Nombre</label>
+            <input
+              type="text"
+              id="nombre"
+              name="nombre"
+              onChange={handlechange}
+              value={user.nombre}
+              required
+            />
+            <label htmlFor="nombre">Apellido</label>
+            <input
+              type="text"
+              id="apellido"
+              name="apellido"
+              onChange={handlechange}
+              value={user.apellido}
+              required
+            />
+
             <label htmlFor="email">Correo electrónico</label>
             <input
               type="email"
@@ -60,20 +87,25 @@ export default function LoginForm() {
               required
             />
 
-            <div className="login-forgot-password">
-              <div className="login-remember">
-                <input type="checkbox" id="remember" name="remember" />
-                <label htmlFor="remember">Recuérdame</label>
-              </div>
+            <label htmlFor="check-password">Repetir contraseña</label>
+            <input
+              type="password"
+              id="check-password"
+              name="check-password"
+              onChange={handlechange}
+              value={user.clave}
+              required
+            />
 
-              <Link to="/forgot-password">¿Olvidaste tu contraseña?</Link>
-
+            <div className="terms">
+              <input type="checkbox" id="acceptTerms" name="acceptTerms" checked={acceptTerms} onChange={checkboxChange} />
+              <label htmlFor="acceptTerms">&nbsp;Acepto los&nbsp;</label> <Link to="#" >terminos y condiciones</Link>
             </div>
 
-            <button type="submit">Iniciar sesión</button>
+            <input type="submit" value={'Registrar'} />
           </form>
           <p>
-            ¿No tienes una cuenta? <Link to="/register">Regístrate</Link>
+            ¿Ya tienes cuenta? <Link to="/login">Inicia Sesión</Link>
           </p>
 
           <div className="login-social">
@@ -83,7 +115,6 @@ export default function LoginForm() {
                 <FaFacebook />
               </Link>
               <Link to="/login/google">
-
                 <FaGoogle />
               </Link>
             </div>

@@ -2,6 +2,7 @@ import { useNavigate } from "@remix-run/react";
 import React, { useEffect, useState } from "react";
 import { FaCircle } from "react-icons/fa";
 import { useSelector } from "react-redux";
+
 export const Administrator = () => {
   const [isLoading, setLoading] = useState(true);
   const navigate = useNavigate();

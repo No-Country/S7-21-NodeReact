@@ -27,6 +27,7 @@ function Document({ title, children }) {
     <html lang="en">
       <head>
         {title && <title>{title}</title>}
+
         <Meta />
         <Links />
       </head>
@@ -45,6 +46,7 @@ function Document({ title, children }) {
     </html>
   );
 }
+
 export default function App() {
   return (
     <Document>
