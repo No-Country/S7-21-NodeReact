@@ -5,7 +5,6 @@ module.exports = {
     await queryInterface.createTable('messages', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
         type: Sequelize.UUID,
         allowNull: false

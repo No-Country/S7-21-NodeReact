@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class appointments extends Model {
     /**
@@ -9,8 +7,9 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
-      // define association here
+    static associate({ User }) {
+      this.belongsTo(User, { foreignKey: "clientId" });
+      this.belongsTo(User, { foreignKey: "barberId" });
     }
   }
   appointments.init(
@@ -22,31 +21,32 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       appointmentDate: {
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         allowNull: false,
       },
       appointmentHour: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      satus: {
-          type: DataTypes.ENUM,
-          values: ['allow', 'notAllow'],
-          defaultValue: 'allow',
-          allowNull: false,
-      },
-      clientId: {
-        type: DataTypes.UUID,
+      status: {
+        type: DataTypes.ENUM,
+        values: ["allow", "notAllow"],
+        defaultValue: "allow",
         allowNull: false,
       },
-      barberId: {
-        type: DataTypes.UUID,
+      service: {
+        type: DataTypes.STRING,
         allowNull: false,
       },
-    }, 
+      message: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+    },
     {
       sequelize,
-      modelName: 'appointments',
-  });
+      modelName: "appointments",
+    }
+  );
   return appointments;
 };

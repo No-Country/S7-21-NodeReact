@@ -1,3 +1,4 @@
+
 // Globals
 @use "base/variables" as *;
 @use "base/mixins" as *;
@@ -6,6 +7,8 @@
 // Components
 @forward "components/login_form";
 @forward "components/navbar";
+@forward "components/turno";
+@forward "components/footer";
 
 // Layout
 
@@ -16,10 +19,13 @@
 @forward "pages/services";
 @forward "pages/stylists";
 @forward "pages/administrator";
+@forward "pages/aboutMe";
 
-//routes 
-@forward 'routes/Barber/$barberId';
+//routes
+@forward "routes/Barber/$barberId";
 
+// Importa los estilos de React-toastify
+@import "../node_modules/react-toastify/scss/main.scss";
 * {
   box-sizing: border-box;
 }

@@ -65,7 +65,9 @@ export default function LoginForm() {
                 <input type="checkbox" id="remember" name="remember" />
                 <label htmlFor="remember">Recuérdame</label>
               </div>
+
               <Link to="/forgot-password">¿Olvidaste tu contraseña?</Link>
+
             </div>
 
             <button type="submit">Iniciar sesión</button>
@@ -81,6 +83,7 @@ export default function LoginForm() {
                 <FaFacebook />
               </Link>
               <Link to="/login/google">
+
                 <FaGoogle />
               </Link>
             </div>

@@ -2,6 +2,8 @@
 @use '../base/variables' as *;
 
 .stylist-container {
+    @include flex-column();
+    height: calc( 100vh - 144px );    
     .title {
         text-align: center;
         font-size: 40px;
@@ -11,7 +13,6 @@
     div {
         @include flex-wrap();
         gap: 1rem;
-
     }
 
     .cardStylist {

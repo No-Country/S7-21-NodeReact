@@ -120,6 +120,7 @@
           }
         }
       }
+
       .terms {
         @include flex(flex-start);
         margin-bottom: 2rem;
@@ -132,6 +133,7 @@
           }
         }
       }
+
       button {
         padding: 1rem;
         border-radius: 0.25rem;

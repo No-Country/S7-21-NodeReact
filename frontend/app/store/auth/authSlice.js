@@ -5,28 +5,28 @@ export const authSlice = createSlice({
   initialState: {
     status: "checking", //'authenticated', 'not-authenticated'
     user: {},
+    token: null,
     errorMessage: undefined,
   },
   reducers: {
     onChecking: (state) => {
       state.status = "checking";
-      state.user = {};
-      state.errorMessage = undefined;
     },
     onLogin: (state, { payload }) => {
       state.status = "authenticated";
-      state.user = payload;
+      state.user = payload.user;
+      state.token = payload.token
       state.errorMessage = undefined;
     },
     onLoginError: (state, { error }) => {
       console.log(error, "error")
       state.status = "not-authenticated";
-      state.user = {};
       state.errorMessage = error;
     },
     onLogout: (state, { payload }) => {
       state.status = "not-authenticated";
       state.user = {};
+      state.token = null
       state.errorMessage = payload;
     },
     clearErrorMessage: (state) => {
@@ -42,6 +42,7 @@ export const loginuser = (payload) => {
       const { data } = await axios.post("http://localhost:8080/api/v1/auth/login", payload);
       console.log(data, "json")
       if (data) {
+
         dispatch({ type: onLogin, payload: data.body.user });
         return data;
       }
@@ -58,6 +59,7 @@ export const registeruser = (payload) => {
       const { data } = await axios.post("http://localhost:8080/api/v1/auth/register", payload);
       if (data) {
         dispatch({ type: onLogin, payload: data.body.user });
+
         return data;
       }
     } catch (error) {
