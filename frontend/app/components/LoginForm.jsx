@@ -1,10 +1,12 @@
 import { Link, useNavigate } from "@remix-run/react";
-import { FaGoogle, FaFacebook } from "react-icons/fa";
+// import { FaGoogle, FaFacebook } from "react-icons/fa";
 // import React, { useEffect } from 'react'
 import hairstyle from "~/assets/images/hairstyle.png";
 import { useDispatch } from "react-redux";
 import { loginuser } from "../store/auth/authSlice";
 import { useState } from "react";
+import ShowToast from "./ShowToast";
+
 export default function LoginForm() {
   const [user, setUser] = useState({
     email: "",
@@ -14,15 +16,18 @@ export default function LoginForm() {
   const navigate = useNavigate();
   const handlechange = (e) => {
     e.preventDefault();
-    setUser({ ...user, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setUser({ ...user, [name]: value });
   };
   const handlelogin = async (e) => {
     e.preventDefault();
     try {
       let response = await dispacth(loginuser(user))
+
+      let status = response?.code === 200 ? true : false
+      ShowToast(status, status ? response?.message : response?.message, () => { });
       if (!response) return
       navigate("/")
-      console.log(user, "datos de user");
     } catch (error) {
       console.log(error)
     }
@@ -36,7 +41,7 @@ export default function LoginForm() {
         </div>
         <div className="login-right">
           <h2>Inicia sesión</h2>
-          <form onClick={(e) => handlelogin(e)}>
+          <form onSubmit={handlelogin}>
             <div className="login-image">
               <img src={hairstyle} alt="Login" />
             </div>
@@ -56,7 +61,7 @@ export default function LoginForm() {
               id="password"
               name="password"
               onChange={handlechange}
-              value={user.clave}
+              value={user.password}
               required
             />
 
@@ -74,7 +79,7 @@ export default function LoginForm() {
             ¿No tienes una cuenta? <Link to="/register">Regístrate</Link>
           </p>
 
-          <div className="login-social">
+          {/* <div className="login-social">
             <p>O inicia sesión con</p>
             <div className="login-social-icons">
               <Link to="/login/facebook">
@@ -84,7 +89,7 @@ export default function LoginForm() {
                 <FaGoogle />
               </Link>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </>
