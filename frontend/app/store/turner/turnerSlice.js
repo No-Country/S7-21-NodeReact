@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import {store} from "../store"
 export const turnerSlice = createSlice({
   name: "turner",
   initialState: {
@@ -51,8 +51,7 @@ export const getHeadersWithAuth = (token) => {
 };
 export const createturne = (payload, barber) => {
   return async (dispatch) => {
-    const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFlNGFhNTVkLTFiYjctNDMyMS1hMmVjLTQ4MDkzMDE1YzIzYiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MTQ5NjYzMywiZXhwIjoxNjgyNzMwMTgxfQ.nSI8j_K9Qn8w3tK4NQCVEyOT9-Qg8c8jCY35d3hPx0g"; // aquí deberías obtener el token de autenticación desde el estado de Redux
+    const token = store.getState().user.token;
     const headers = getHeadersWithAuth(token);
     try {
       dispatch({ type: onLoading });
@@ -71,18 +70,18 @@ export const createturne = (payload, barber) => {
     }
   };
 };
+
 export const historyTurner = () => {
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFlNGFhNTVkLTFiYjctNDMyMS1hMmVjLTQ4MDkzMDE1YzIzYiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MTQ5NjYzMywiZXhwIjoxNjgyNzMwMTgxfQ.nSI8j_K9Qn8w3tK4NQCVEyOT9-Qg8c8jCY35d3hPx0g"; // aquí deberías obtener el token de autenticación desde el estado de Redux
+  const token = store.getState().user.token;
   const headers = getHeadersWithAuth(token);
   return async (dispatch) => {
     try {
       dispatch({ type: onLoadingTurner });
-      const  data  = await axios.get(
+      const  {data}  = await axios.get(
         "http://localhost:8080/api/v1/appointments/myAppointments",
         { headers }
       );
-      console.log(data);
+      console.log(data, "data");
       if (data) {
         dispatch({ type: onTurnerHistory, payload: data });
       }
