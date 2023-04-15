@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { store } from "../store"
 import axios from "axios";
 export const barberSlice = createSlice({
   name: "barber",
@@ -32,8 +33,7 @@ export const getHeadersWithAuth = (token) => {
 };
 export const getAllBarber = () => {
   return async (dispatch) => {
-    const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc0NDc5ZjBiLWFjZGUtNDQyNS05NGI2LWYwNzFhMWVhMDgxZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MTMxOTY5MSwiZXhwIjoxNjgyNTUzMjM5fQ.C1mFAra2uuYBZHw4DkduVxpl-wcrhfcYYuPPjfp-iwE"; // aquí deberías obtener el token de autenticación desde el estado de Redux
+    const token = store.getState().user.token;
     const headers = getHeadersWithAuth(token);
     try {
       dispatch({ type: onLoading });
