@@ -1,49 +1,50 @@
-
 // Globals
-@use "base/variables" as *;
-@use "base/mixins" as *;
-@forward "base/normalize";
+@use 'base/variables' as *;
+@use 'base/mixins' as *;
+@forward 'base/normalize';
 
 // Components
-@forward "components/login_form";
-@forward "components/navbar";
-@forward "components/turno";
-@forward "components/footer";
+@forward 'components/login_form';
+@forward 'components/navbar';
+@forward 'components/turno';
+@forward 'components/footer';
 
 // Layout
 
 // Pages
-@forward "pages/login";
-@forward "pages/home";
-@forward "pages/contact";
-@forward "pages/services";
-@forward "pages/stylists";
-@forward "pages/administrator";
-@forward "pages/aboutMe";
-@forward "pages/profile";
+@forward 'pages/login';
+@forward 'pages/home';
+@forward 'pages/contact';
+@forward 'pages/services';
+@forward 'pages/stylists';
+@forward 'pages/administrator';
+@forward 'pages/aboutMe';
+@forward 'pages/profile';
 
 //routes
-@forward "routes/Barber/$barberId";
+@forward 'routes/Barber/$barberId';
 
 // Importa los estilos de React-toastify
-@import "../node_modules/react-toastify/scss/main.scss";
+@import '../node_modules/react-toastify/scss/main.scss';
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 html {
-  font-size: 62.5%;
-  scroll-behavior: smooth;
+	font-size: 62.5%;
+	scroll-behavior: smooth;
 }
 
 body {
-  //  @include flex-row(start);
-  font-family: $font-primary;
-  height: 100vh;
-  width: 100%;
-  margin: 0;
-  font-size: 1.6rem;
-  line-height: 1.6;
-  color: $color-primary;
-  background-color: $color-white;
+	//  @include flex-row(start);
+	font-family: $font-primary;
+	height: 100vh;
+	width: 100%;
+	margin: 0;
+	font-size: 1.6rem;
+	line-height: 1.6;
+	color: $color-primary;
+	background-color: $color-white;
+  display: flex;
+  flex-direction: column;
 }
