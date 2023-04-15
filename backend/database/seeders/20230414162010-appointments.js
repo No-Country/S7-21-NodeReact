@@ -25,15 +25,20 @@ module.exports = {
         for (let j = 0; j < Math.floor(Math.random() * 6); j++) {
           const createdAt = faker.date.recent();
           hour = `${9 + j}:00`;
+          const taken = faker.helpers.arrayElement([true, false]);
+          const status = taken
+            ? faker.helpers.arrayElement(["pending", "done"])
+            : "cancel";
           const appointment = {
             id: faker.datatype.uuid(),
-            servicesId: faker.helpers.arrayElement(servicesId),
-            message: faker.lorem.sentence(5),
             appointmentDate: date,
             appointmentHour: hour,
+            taken,
+            status,
+            message: faker.lorem.sentence(5),
+            servicesId: faker.helpers.arrayElement(servicesId),
             barberId: barber.id,
             clientId: faker.helpers.arrayElement(clientIds),
-            status: "notAllow",
             createdAt,
             updatedAt: createdAt,
           };
