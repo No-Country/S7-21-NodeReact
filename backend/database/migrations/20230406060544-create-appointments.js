@@ -17,10 +17,14 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      taken: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
       status: {
-        type: Sequelize.ENUM,
-        values: ["allow", "notAllow"],
-        defaultValue: "allow",
+        type: DataTypes.ENUM,
+        values: ["pending", "cancel", "done"],
+        defaultValue: "pending",
         allowNull: false,
       },
       message: {
