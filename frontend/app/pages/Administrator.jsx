@@ -1,14 +1,18 @@
 import { useNavigate } from "@remix-run/react";
 import React, { useEffect, useState } from "react";
 import { FaCircle } from "react-icons/fa";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllBarber } from "../store/barber/barberSlice";
 
 export const Administrator = () => {
   const [isLoading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const isAuthenticated = useSelector(
     (state) => state.user.status === "authenticated"
   );
+  const barbers = useSelector((state) => state.barber.barbers);
+  console.log(barbers, "barber");
   console.log("isAuthenticated", isAuthenticated);
   useEffect(() => {
     if (!isAuthenticated) {
@@ -16,7 +20,9 @@ export const Administrator = () => {
     }
     setLoading(false);
   }, [isAuthenticated, navigate]);
-
+  useEffect(() => {
+    dispatch(getAllBarber());
+  }, [dispatch]);
   return (
     <div>
       {isLoading ? (
@@ -33,34 +39,33 @@ export const Administrator = () => {
                 <button>CLIENTES</button>
               </div>
               <div className="table table-responsive">
-                <table>
-                  <tr className="tile_table">
-                    <th>Nombre y apellido</th>
-                    <th>Contacto</th>
-                    <th>Cortes Realizados</th>
-                    <th>Reservas</th>
-                    <th>Cancelados</th>
-                  </tr>
-                  <tr>
-                    <td>
-                      <FaCircle className="img-table" />
-                      Jorge Xxxxxxv
-                    </td>
-                    <td>952 186 137 jorge@hotmail.com</td>
-                    <td>#70</td>
-                    <td>#2</td>
-                    <td>#15</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <FaCircle className="img-table" /> Jorge Xxxxxxv
-                    </td>
-                    <td>952 186 137 jorge@hotmail.com </td>
-                    <td>#70</td>
-                    <td>#2</td>
-                    <td>#15</td>
-                  </tr>
-                </table>
+                {barbers.length === 0 ? (
+                  <div>Cargando...</div>
+                ) : (
+                  <table>
+                    <tr className="tile_table">
+                      <th>Nombre y apellido</th>
+                      <th>Contacto</th>
+                      <th>Cortes Realizados</th>
+                      <th>Reservas</th>
+                      <th>Cancelados</th>
+                    </tr>
+                    {barbers.map((barber) => (
+                      <tr key={barber.id}>
+                        <td>
+                          <div className="barber_name">
+                            <FaCircle className="img-table" />
+                            {barber.firstName}
+                          </div>
+                        </td>
+                        <td>{barber.phone}</td>
+                        <td>{barber.cuts}</td>
+                        <td>{barber.reservations}</td>
+                        <td>{barber.cancellations}</td>
+                      </tr>
+                    ))}
+                  </table>
+                )}
               </div>
             </div>
           </div>

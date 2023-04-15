@@ -86,6 +86,11 @@ export default function Navbar() {
                 <div className="button-container" >
                 <div className="button" onClick={togglemodal}>TURNO</div>
                 </div>
+                <div className="button-container">
+                <Link className="button" to={"/profile"}>
+                    {Authuser?.firstName}
+                  </Link>
+                </div>
               </li>
             ) : (
               <li className="nav-item">
