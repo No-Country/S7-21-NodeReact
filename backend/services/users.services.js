@@ -148,7 +148,6 @@ const analyticsBarber = async (barberId, startDate, endDate) => {
       paymentBarber,
     };
   } catch (error) {
-    console.log(error);
     throw new CustomError(error.message, error.statusCode, error.errors);
   }
 };
