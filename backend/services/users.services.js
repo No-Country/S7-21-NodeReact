@@ -109,7 +109,6 @@ const analyticsBarber = async (barberId, startDate, endDate) => {
     });
 
     const allServices = infoBarber.map((item) => item.ServicesBarber);
-    const analytics = {};
 
     const servicesAnalytics = Object.values(
       allServices.reduce((result, service) => {
@@ -136,7 +135,18 @@ const analyticsBarber = async (barberId, startDate, endDate) => {
       0
     );
 
-    return {servicesAnalytics, paymentBarber};
+    return {
+      barberInfo: {
+        id: barber.id,
+        firstName: barber.firstName,
+        lastName: barber.lastName,
+        profileImage: barber.profileImage,
+        email: barber.email,
+        phone: barber.phone,
+      },
+      servicesAnalytics,
+      paymentBarber,
+    };
   } catch (error) {
     console.log(error);
     throw new CustomError(error.message, error.statusCode, error.errors);
