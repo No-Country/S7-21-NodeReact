@@ -94,6 +94,7 @@ const createAppointment = async (
 
 const findAppointments = async (barberId) => {
   try {
+    await findBarber(barberId);
     const response = await appointments.findAll({
       where: { barberId },
       include: {
@@ -161,18 +162,6 @@ const updateAppointment = async (appointmentId, newDate, newHour) => {
   }
 };
 
-// const deleteAppointmentById = async (appointmentId, reqUser) => {
-//   try {
-//     const appointment = await findAppointment(appointmentId);
-//     checkPermissions(reqUser, appointment.clientId);
-//     await appointment.destroy();
-
-//     return `Turno ${appointmentId} eliminado`;
-//   } catch (error) {
-//     throw new CustomError(error.message, error.statusCode, error.errors);
-//   }
-// };
-
 const findAndCancelAppointment = async (appointmentId) => {
   try {
     const appointment = await findAppointment(appointmentId);
@@ -189,7 +178,7 @@ module.exports = {
   createAppointment,
   findAppointments,
   updateAppointment,
-  // deleteAppointmentById,
   findMyAppointments,
   findAndCancelAppointment,
+  findBarber
 };
