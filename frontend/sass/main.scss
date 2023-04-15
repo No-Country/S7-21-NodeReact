@@ -4,8 +4,6 @@
 @use "base/mixins" as *;
 @forward "base/normalize";
 
-
-
 // Components
 @forward "components/login_form";
 @forward "components/navbar";

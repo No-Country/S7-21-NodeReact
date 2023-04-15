@@ -39,6 +39,7 @@ module.exports = {
         role: i < 10 ? "barber" : "client",
         verificationToken: "",
         verified: true,
+        description: i < 10 ? faker.lorem.sentences(8) : "",
         createdAt,
         updatedAt: createdAt,
       };

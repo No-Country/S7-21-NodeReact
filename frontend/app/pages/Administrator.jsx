@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { FaCircle } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllBarber } from "../store/barber/barberSlice";
+
 export const Administrator = () => {
   const [isLoading, setLoading] = useState(true);
   const navigate = useNavigate();
