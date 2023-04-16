@@ -8,45 +8,14 @@
   height: 100vh; /* para ocupar toda la altura de la pantalla */
   background-color: transparent;
   .content-form {
+    @include flex-wrap();
     background-color: $color-primary;
     border-radius: 20px;
     padding: 46px;
-    .content-input {
-      @include flex-wrap();
-      width: 100%;
-      .input-container {
-        position: relative;
-        display: flex;
-        align-items: center;
-        width: 45%;
-        margin: 15px;
-        .iconofinput {
-          position: absolute;
-          left: 2rem; /* ajuste según sea necesario */
-          top: 50%;
-          transform: translateY(-50%);
-          margin-right: 0.5rem; /* ajuste según sea necesario */
-          font-size: 30px;
-        }
-        input[type="text"] {
-          text-align: center;
-          width: 100%;
-          padding-left: 5rem; /* ajuste según sea necesario */
-          padding-right: 1rem; /* 8px */
-          padding-top: 1rem; /* 8px */
-          padding-bottom: 1rem; /* 8px */
-          font-style: normal;
-          font-weight: 400;
-          font-size: 20px;
-          line-height: 24px;
-          border-radius: 10px;
-          margin-left: 0.5rem; /* ajuste según sea necesario */
-          margin-right: 0.5rem; /* ajuste según sea necesario */
-        }
-      }
-    }
+
     .content-message {
       margin-top: 4rem;
+      width: 100%;
       @include flex();
       textarea {
         width: 92%;
