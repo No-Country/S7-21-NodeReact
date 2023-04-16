@@ -1,5 +1,7 @@
-const { User } = require("../database/models");
+const { Op } = require("sequelize");
+const { User, appointments, ServicesBarber } = require("../database/models");
 const { CustomError, checkPermissions, createJwt } = require("../helpers");
+const { findBarber } = require("./appointments.services");
 
 const findAllUsers = async (roleUser) => {
   try {
@@ -83,4 +85,71 @@ const updateUserRole = async (id, role) => {
   }
 };
 
-module.exports = { findAllUsers, updateUser, updateUserRole };
+const analyticsBarber = async (barberId, startDate, endDate) => {
+  try {
+    const barber = await findBarber(barberId);
+    const infoBarber = await appointments.findAll({
+      where: {
+        [Op.and]: [
+          { barberId },
+          { status: "done" },
+          { appointmentDate: { [Op.gte]: startDate } },
+          { appointmentDate: { [Op.lte]: endDate } },
+        ],
+      },
+      include: {
+        model: ServicesBarber,
+        attributes: {
+          exclude: ["id", "createdAt", "updatedAt"],
+        },
+      },
+      attributes: {
+        exclude: ["createdAt", "updatedAt"],
+      },
+    });
+
+    const allServices = infoBarber.map((item) => item.ServicesBarber);
+
+    const servicesAnalytics = Object.values(
+      allServices.reduce((result, service) => {
+        if (!result[service.name]) {
+          result[service.name] = {
+            name: service.name,
+            singleCost: service.cost,
+            totalCost: service.cost,
+            quantity: 1,
+            singleTotalBarber: service.cost / 2,
+            totalBarber: service.cost / 2,
+          };
+        } else {
+          result[service.name].quantity++;
+          result[service.name].totalCost += service.cost;
+          result[service.name].totalBarber += service.cost / 2;
+        }
+        return result;
+      }, {})
+    );
+
+    const paymentBarber = servicesAnalytics.reduce(
+      (acc, curr) => acc + curr.totalBarber,
+      0
+    );
+
+    return {
+      barberInfo: {
+        id: barber.id,
+        firstName: barber.firstName,
+        lastName: barber.lastName,
+        profileImage: barber.profileImage,
+        email: barber.email,
+        phone: barber.phone,
+      },
+      servicesAnalytics,
+      paymentBarber,
+    };
+  } catch (error) {
+    throw new CustomError(error.message, error.statusCode, error.errors);
+  }
+};
+
+module.exports = { findAllUsers, updateUser, updateUserRole, analyticsBarber };

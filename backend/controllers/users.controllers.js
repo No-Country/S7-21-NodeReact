@@ -94,6 +94,18 @@ const changeRole = tryCatchWrapper(async (req, res, next) => {
   });
 });
 
+const getAnalyticsBarber = tryCatchWrapper(async (req, res, next) => {
+  const { barberId } = req.params;
+  const {startDate, endDate} = req.body
+  const analytics = await userServices.analyticsBarber(barberId, startDate, endDate);
+
+  endPointResponse({
+    res,
+    message: "Resumen actividades barbero",
+    body: analytics,
+  });
+});
+
 module.exports = {
   getAllUsers,
   showMe,
@@ -101,4 +113,5 @@ module.exports = {
   updateUserById,
   deleteUser,
   changeRole,
+  getAnalyticsBarber,
 };

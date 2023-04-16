@@ -1,28 +1,24 @@
+const productCtrls = require("../controllers/products.controllers");
 const { authenticateUser, authorizeByRole } = require("../middlewares");
-const sBarberCtrls = require("../controllers/servicesBarber.controllers");
 
 const router = require("express").Router();
 
 router.post(
   "/",
   [authenticateUser, authorizeByRole("admin")],
-  sBarberCtrls.postServiceBarber
+  productCtrls.postProduct
 );
-
-router.get("/", sBarberCtrls.getServicesBarber);
-
-router.get("/:serviceId", sBarberCtrls.getSingleServiceBarber);
-
+router.get("/", productCtrls.getProducts);
+router.get("/:productId", productCtrls.getSingleProduct);
 router.patch(
-  "/:serviceId",
+  "/:productId",
   [authenticateUser, authorizeByRole("admin")],
-  sBarberCtrls.patchServiceBarber
+  productCtrls.patchProduct
 );
-
 router.delete(
-  "/:serviceId",
+  "/:productId",
   [authenticateUser, authorizeByRole("admin")],
-  sBarberCtrls.deleteServiceBarber
+  productCtrls.deleteProduct
 );
 
 module.exports = router;
