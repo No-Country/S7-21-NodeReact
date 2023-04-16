@@ -33,10 +33,6 @@ export default function Turno({ closeModal }) {
   console.log(freeturner, "turnos libres");
   const [barber, setBarber] = useState();
   const [form, setForm] = useState({
-    name: "",
-    lastname: "",
-    email: "",
-    phone: "",
     message: "",
     servicesId: "",
     hour: "",
@@ -75,7 +71,6 @@ export default function Turno({ closeModal }) {
       closeModal();
     }
   };
-
   return (
     <div className="content-turno" onClick={handleClickOutside}>
       <form onSubmit={handlesubmit}>
@@ -107,7 +102,7 @@ export default function Turno({ closeModal }) {
             <div className="select-cont">
               <ImScissors className="select-icon select-icon-left" />
               {loading ? (
-                <div style={{ Color: "red", fontSize: "4rem" }}>Loading...</div>
+                <></>
               ) : (
                 <select
                   className="style_select"
@@ -141,16 +136,11 @@ export default function Turno({ closeModal }) {
                 value={form.hour}
                 onChange={handleChangeForm}
               >
-                <option value="9:00">9:00</option>
-                <option value="9:30">9:00</option>
-                <option value="10:00">10:00</option>
-                <option value="10:30">10:00</option>
-                <option value="11:00">11:00</option>
-                <option value="11:30">11:30</option>
-                <option value="12:00">12:00</option>
-                <option value="12:30">12:30</option>
-                <option value="13:00">13:00</option>
-                <option value="13:30">13:30</option>
+                {freeturner?.map((hour) => (
+    <option key={hour} value={`${Math.floor(hour)}:${((hour % 1) * 60).toFixed(0).padStart(2, '0')}`}>
+      {`${Math.floor(hour)}:${((hour % 1) * 60).toFixed(0).padStart(2, '0')}`}
+    </option>
+  ))}
               </select>
             </div>
           </div>
