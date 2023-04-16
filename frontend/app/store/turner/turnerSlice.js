@@ -55,12 +55,12 @@ export const createturne = (payload, barber) => {
     const headers = getHeadersWithAuth(token);
     try {
       dispatch({ type: onLoading });
-      const { data } = await axios.post(
+      const  data  = await axios.post(
         `http://localhost:8080/api/v1/appointments/${barber}`,
         payload,
         { headers }
       );
-      console.log(data);
+      console.log(data, "resultado de data" );
       if (data) {
         dispatch({ type: onTurner, payload: data.body });
         return data;
