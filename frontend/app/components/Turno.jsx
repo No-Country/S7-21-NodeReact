@@ -9,9 +9,10 @@ import {
 } from "react-icons/fa";
 import { ImScissors } from "react-icons/im";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllBarber } from "../store/barber/barberSlice";
+import { TurnersBarber, getAllBarber } from "../store/barber/barberSlice";
 import { createturne } from "../store/turner/turnerSlice";
 import ShowToast from "./ShowToast";
+import { getAllServices } from "../store/service/serviceSlice";
 const CustomDatePickerInput = ({ value, onClick }) => (
   <div className="custom-input" onClick={onClick}>
     <div className="icon-container">
@@ -24,7 +25,12 @@ export default function Turno({ closeModal }) {
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.barber.loading);
   const barbers = useSelector((state) => state.barber.barbers);
+  const { loadingService, services, errorMessage } = useSelector(
+    (state) => state.service
+  );
+  const freeturner = useSelector((state) => state.barber.freeTurner);
   console.log(barbers, "barbder");
+  console.log(freeturner, "turnos libres");
   const [barber, setBarber] = useState();
   const [form, setForm] = useState({
     name: "",
@@ -32,36 +38,38 @@ export default function Turno({ closeModal }) {
     email: "",
     phone: "",
     message: "",
-    service: "",
+    servicesId: "",
     hour: "",
     date: new Date(),
   });
-  console.log(form.date)
+  console.log(form.date);
   const handleChangeForm = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
   const handlesubmit = async (e) => {
     e.preventDefault();
     if (
-      form.name !== "" &&
-      form.lastname !== "" &&
-      form.email !== "" &&
-      form.phone !== "" &&
       form.message !== "" &&
-      form.service !== "" &&
+      form.servicesId !== "" &&
       form.hour !== "" &&
       form.date !== ""
     ) {
       console.log("tiene datos");
       const response = await dispatch(createturne(form, barber));
       if (!response) return;
-      console.log(response, "trajo de response")
-      ShowToast(true, "turno creado", closeModal)
+      console.log(response, "trajo de response");
+      ShowToast(true, "turno creado", closeModal);
     }
   };
   useEffect(() => {
     dispatch(getAllBarber());
+    dispatch(getAllServices());
   }, [dispatch]);
+  useEffect(() => {
+    if (barber) {
+      dispatch(TurnersBarber(barber));
+    }
+  }, [dispatch, barber]);
   const handleClickOutside = (event) => {
     if (event.target.classList.contains("content-turno")) {
       closeModal();
@@ -72,70 +80,34 @@ export default function Turno({ closeModal }) {
     <div className="content-turno" onClick={handleClickOutside}>
       <form onSubmit={handlesubmit}>
         <div className="content-form">
-          <div class="content-input">
-            <div class="input-container">
-              <FaUserAlt className="iconofinput" />
-              <input
-                type="text"
-                placeholder="Nombre"
-                name="name"
-                value={form.name}
-                onChange={handleChangeForm}
-              />
-            </div>
-            <div class="input-container">
-              <FaUserAlt className="iconofinput" />
-              <input
-                type="text"
-                placeholder="Apellido"
-                name="lastname"
-                value={form.lastname}
-                onChange={handleChangeForm}
-              />
-            </div>
-            <div class="input-container">
-              <FaEnvelope className="iconofinput" />
-              <input
-                type="text"
-                placeholder="Email"
-                name="email"
-                value={form.email}
-                onChange={handleChangeForm}
-              />
-            </div>
-            <div class="input-container">
-              <FaPhoneAlt className="iconofinput" />
-              <input
-                type="text"
-                placeholder="Telefono"
-                name="phone"
-                value={form.phone}
-                onChange={handleChangeForm}
-              />
-            </div>
-          </div>
           <div className="content-select">
             <div className="select-cont">
-              <ImScissors className="select-icon select-icon-left" />
-              <select
-                className="style_select"
-                id="service"
-                name="service"
-                value={form.service}
-                onChange={handleChangeForm}
-              >
-                <option value="Corte_pelo">CORTE PELO</option>
-                <option value="Corte_barba">CORTE BARBA</option>
-                <option value="Corte_pelo_barba">CORTE PELO Y BARBA</option>
-                <option value="Lavado_Corte">LAVADO Y CORTE</option>
-                <option value="Lavado_Perfilado">LAVADO Y PERFILADO</option>
-              </select>
+              {loadingService ? (
+                <div style={{ color: "red", fontSize: "4rem" }}>Loading</div>
+              ) : (
+                <div>
+                  <ImScissors className="select-icon select-icon-left" />
+                  <select
+                    className="style_select"
+                    id="servicesId"
+                    name="servicesId"
+                    value={form.servicesId}
+                    onChange={handleChangeForm}
+                  >
+                    {services.map((service)=> (
+                      <option key={service.id} value={service.id}>
+                      {service.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
             </div>
 
             <div className="select-cont">
               <ImScissors className="select-icon select-icon-left" />
               {loading ? (
-                <div style={{ Color: "red", fontSize: "2rem" }}>Loading...</div>
+                <div style={{ Color: "red", fontSize: "4rem" }}>Loading...</div>
               ) : (
                 <select
                   className="style_select"
