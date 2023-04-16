@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { Link } from '@remix-run/react'
 
 export const Home = () => {
+
     const status = useSelector(state => state.user.status)
     const isAuthenticated = status === 'authenticated'
     return (
