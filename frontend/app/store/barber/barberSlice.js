@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { store } from "../store"
 import axios from "axios";
 import { store } from "../store";
 export const barberSlice = createSlice({

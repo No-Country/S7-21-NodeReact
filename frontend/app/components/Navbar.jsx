@@ -6,18 +6,23 @@ import { FaWhatsapp } from "react-icons/fa";
 import { TbClockHour9 } from "react-icons/tb";
 import Modal from "react-modal";
 import Turno from "./Turno";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { persistor } from "../store/store";
+import { onLogout } from '../store/auth/authSlice'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const dispatch = useDispatch();
 
   const isAuthenticated = useSelector(
     (state) => state.user.status === "authenticated"
   );
+
   const Authuser = useSelector((state) => state.user.user);
   console.log("authuser", Authuser);
   console.log("isAuthenticated", isAuthenticated);
+
   const toggle = () => {
     console.log("click en togle", isOpen);
     setIsOpen(!isOpen);
@@ -30,6 +35,13 @@ export default function Navbar() {
   const closeModal = () => {
     setIsOpenModal(false);
   };
+
+
+  const handleLogout = () => {
+    dispatch(onLogout());
+    persistor.purge(['persistor:root']);
+  }
+
   return (
     <div className="content-nav-and-head">
       <header>
@@ -79,15 +91,19 @@ export default function Navbar() {
             {isAuthenticated ? (
               <li className="nav-item">
                 <div className="button-container">
-                  <Link className="button" to="/">
+                  <Link
+                    className="button"
+                    to="/"
+                    onClick={handleLogout}
+                  >
                     LOGOUT
                   </Link>
                 </div>
                 <div className="button-container" >
-                <div className="button" onClick={togglemodal}>TURNO</div>
+                  <div className="button" onClick={togglemodal}>TURNO</div>
                 </div>
                 <div className="button-container">
-                <Link className="button" to={"/profile"}>
+                  <Link className="button" to={"/profile"}>
                     {Authuser?.firstName}
                   </Link>
                 </div>

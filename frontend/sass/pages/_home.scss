@@ -50,14 +50,19 @@
     font-size: 1.5rem;
     font-weight: 400;
     margin-bottom: 1rem;
-    button {
+    a {
       margin: 0 0.5rem;
       padding: 1rem;
-      border-radius: 1rem;
-      border: none;
-      color: #fff;
+      border-radius: 2rem;
+      text-decoration: none;
+      font-weight: 700;
+      color: $color-primary;
       cursor: pointer;
-      background-color: $color-primary;
+      background-color: $color-yellow;
+      transition: all 0.3s;
+      &:hover {
+        background-color: $color-white;
+      }
     }
   }
 }
