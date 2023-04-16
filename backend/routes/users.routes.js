@@ -12,6 +12,8 @@ const {
   deleteUser,
   changeRole,
   getAnalyticsBarber,
+  getAllBarbers,
+  getAllClients,
 } = require("../controllers/users.controllers");
 const router = express.Router();
 
@@ -195,7 +197,9 @@ router.get("/showMe", authenticateUser, showMe);
  *                   type: string
  *                   example: El token no es valido
  */
-router.get("/all/:roleUser", authenticateUser, getAllUsers);
+router.get("/all/barber",  getAllBarbers);
+
+router.get("/all/client", authenticateUser, getAllClients);
 
 /**
  * @openapi

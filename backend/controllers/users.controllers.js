@@ -6,13 +6,22 @@ const {
 const userServices = require("../services/users.services");
 const { User } = require("../database/models");
 
-const getAllUsers = tryCatchWrapper(async (req, res, next) => {
-  const { roleUser } = req.params;
-  const allUsers = await userServices.findAllUsers(roleUser);
+const getAllBarbers = tryCatchWrapper(async (req, res, next) => {
+  const allUsers = await userServices.findAllUsers("barber");
 
   endPointResponse({
     res,
-    message: `Usuarios con el rol "${roleUser}" listados de manera exitosa`,
+    message: `Barberos listados de manera exitosa`,
+    body: allUsers,
+  });
+});
+
+const getAllClients = tryCatchWrapper(async (req, res, next) => {
+  const allUsers = await userServices.findAllUsers("client");
+
+  endPointResponse({
+    res,
+    message: `Clientes listados de manera exitosa`,
     body: allUsers,
   });
 });
@@ -107,7 +116,8 @@ const getAnalyticsBarber = tryCatchWrapper(async (req, res, next) => {
 });
 
 module.exports = {
-  getAllUsers,
+  getAllBarbers,
+  getAllClients,
   showMe,
   getUserById,
   updateUserById,
