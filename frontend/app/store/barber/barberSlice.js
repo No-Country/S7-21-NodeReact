@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { store } from "../store"
 import axios from "axios";
-import { store } from "../store";
 export const barberSlice = createSlice({
   name: "barber",
   initialState: {
@@ -53,14 +52,16 @@ export const barberSlice = createSlice({
   },
 });
 const getFreeTurners = (appintHour) => {
-  console.log(appintHour)
   const openingTime = 9; // hora de apertura
   const closingTime = 18; // hora de cierre
-  const occupiedTurners = appintHour.map((appointment) => appointment.turner);
+  const occupiedTurners = appintHour && appintHour.length > 0 ? 
+    appintHour.map((appointment) => parseFloat(appointment.appointmentHour)) : [];
+    console.log(occupiedTurners, "ocupado")
   const freeTurners = [];
 
-  for (let i = openingTime; i < closingTime; i++) {
-    if (!occupiedTurners.includes(i + 0.5) && !occupiedTurners.includes(i)) {
+  for (let i = openingTime; i < closingTime; i += 0.5) {
+    if (!occupiedTurners.includes(i)) {
+      console.log(i, "librer")
       freeTurners.push(i);
     }
   }
