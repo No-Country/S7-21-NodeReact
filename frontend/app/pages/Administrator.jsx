@@ -14,15 +14,20 @@ export const Administrator = () => {
   const barbers = useSelector((state) => state.barber.barbers);
   console.log(barbers, "barber");
   console.log("isAuthenticated", isAuthenticated);
+
   useEffect(() => {
     if (!isAuthenticated) {
       navigate("/login");
     }
     setLoading(false);
   }, [isAuthenticated, navigate]);
+
+
   useEffect(() => {
     dispatch(getAllBarber());
   }, [dispatch]);
+
+
   return (
     <div>
       {isLoading ? (
