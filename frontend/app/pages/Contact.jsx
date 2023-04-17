@@ -14,42 +14,50 @@ export const Contact = () => {
             <div className="contact-wrapper animated bounceInUp">
                 <div className="contact-info">
                     <h4>Informacion de contacto</h4>
-                    <ul>
+                    <ul className='contact-info-list'>
                         <li>
-                            <i className="contact-info-icon">
+                            <div className="contact-info-icon">
                                 <MdOutlinePlace />
-                            </i>
-                            Direccion
-                            <p>Calle 32 No. 75-87.
-                                Celen Parque
-                            </p>
+                            </div>
+                            <div className="contact-info-text">
+                                <h5>Direccion</h5>
+                                <p>Calle 32 No. 75-87.
+                                    Celen Parque
+                                </p>
+                            </div>
                         </li>
                         <li>
-                            <i className="contact-info-icon">
+                            <div className="contact-info-icon">
                                 <HiOutlineMail />
-                            </i>
-                            Correo
-                            <p>
-                                thebossbarbershopco@gmail.com
-                            </p>
+                            </div>
+                            <div className="contact-info-text">
+                                <h5>Email</h5>
+                                <p>
+                                    thebossbarbershopco@gmail.com
+                                </p>
+                            </div>
                         </li>
                         <li>
-                            <i className="contact-info-icon">
+                            <div className="contact-info-icon">
                                 <AiOutlineWhatsApp />
-                            </i>
-                            Telefono
-                            <p>
-                                315 494 3242
-                            </p>
+                            </div>
+                            <div className="contact-info-text">
+                                <h5>Telefono</h5>
+                                <p>
+                                    315 494 3242
+                                </p>
+                            </div>
                         </li>
                         <li>
-                            <i className="contact-info-icon">
+                            <div className="contact-info-icon">
                                 <MdAccessTime />
-                            </i>
-                            Abierto
-                            <p>
-                                Lunes - Sábado, 09 am - 7.30 pm
-                            </p>
+                            </div>
+                            <div className="contact-info-text">
+                                <h5>Abierto</h5>
+                                <p>
+                                    Lunes - Sábado, 09 am - 7.30 pm
+                                </p>
+                            </div>
                         </li>
                     </ul>
 
@@ -63,8 +71,8 @@ export const Contact = () => {
                         <p className='tel'>
                             <input type="tel" name="tel" placeholder='+54 9' />
                         </p>
-                        <p>
-                            <input className='email' type="email" name="email" placeholder='ingresa@tuemail.com' />
+                        <p className='email'>
+                            <input type="email" name="email" placeholder='ingresa@tuemail.com' />
                         </p>
                         <p className="block">
                             <textarea name="message" rows="3" placeholder='Escriba tus comentarios aqui'></textarea>
