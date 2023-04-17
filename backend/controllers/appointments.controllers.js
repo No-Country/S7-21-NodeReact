@@ -25,9 +25,16 @@ const postAppointment = tryCatchWrapper(async (req, res, next) => {
   });
 });
 
-const getAppointmentsById = tryCatchWrapper(async (req, res, next) => {
+const getAppointmentsByBarber = tryCatchWrapper(async (req, res, next) => {
   const { barberId } = req.params;
-  const appointments = await apptServices.findAppointments(barberId);
+  const appointments = await apptServices.findBarberAppointments(barberId);
+
+  endPointResponse({ res, message: "turnos asignados", body: appointments });
+});
+
+const getAppointmentsByClient = tryCatchWrapper(async (req, res, next) => {
+  const { clientId } = req.params;
+  const appointments = await apptServices.findClientAppointments(clientId);
 
   endPointResponse({ res, message: "turnos asignados", body: appointments });
 });
@@ -42,16 +49,6 @@ const patchAppointment = tryCatchWrapper(async (req, res, next) => {
   );
   endPointResponse({ res, message: response });
 });
-
-// const deleteAppointment = tryCatchWrapper(async (req, res, next) => {
-//   const { appointmentId } = req.params;
-//   const response = await apptServices.deleteAppointmentById(
-//     appointmentId,
-//     req.user
-//   );
-
-//   endPointResponse({ res, message: response });
-// });
 
 const getMyAppointments = tryCatchWrapper(async (req, res, next) => {
   const clientId = req.user.id;
@@ -75,9 +72,9 @@ const cancelAppointment = tryCatchWrapper(async (req, res, next) => {
 
 module.exports = {
   postAppointment,
-  getAppointmentsById,
+  getAppointmentsByBarber,
+  getAppointmentsByClient,
   getMyAppointments,
   patchAppointment,
-  // deleteAppointment,
   cancelAppointment,
 };

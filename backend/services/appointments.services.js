@@ -92,11 +92,35 @@ const createAppointment = async (
   }
 };
 
-const findAppointments = async (barberId) => {
+const findBarberAppointments = async (barberId) => {
   try {
     await findBarber(barberId);
+
     const response = await appointments.findAll({
       where: { barberId },
+      include: {
+        model: ServicesBarber,
+        attributes: {
+          exclude: ["id", "createdAt", "updatedAt"],
+        },
+      },
+      attributes: {
+        exclude: ["createdAt", "updatedAt"],
+      },
+    });
+
+    return response;
+  } catch (error) {
+    throw new CustomError(error.message, error.statusCode, error.errors);
+  }
+};
+
+const findClientAppointments = async (clientId) => {
+  try {
+    await findClient(clientId);
+
+    const response = await appointments.findAll({
+      where: { clientId },
       include: {
         model: ServicesBarber,
         attributes: {
@@ -176,9 +200,10 @@ const findAndCancelAppointment = async (appointmentId) => {
 
 module.exports = {
   createAppointment,
-  findAppointments,
+  findBarberAppointments,
+  findClientAppointments,
   updateAppointment,
   findMyAppointments,
   findAndCancelAppointment,
-  findBarber
+  findBarber,
 };

@@ -6,16 +6,25 @@ router
   .route("/myAppointments")
   .get(authenticateUser, apptCtrls.getMyAppointments);
 
-router.patch("/cancel/:appointmentId", authenticateUser, apptCtrls.cancelAppointment);
+router.patch(
+  "/cancel/:appointmentId",
+  authenticateUser,
+  apptCtrls.cancelAppointment
+);
 
 router
-  .route("/:barberId")
+  .route("/barber/:barberId")
   .post(authenticateUser, apptCtrls.postAppointment)
-  .get(authenticateUser, apptCtrls.getAppointmentsById);
+  .get(authenticateUser, apptCtrls.getAppointmentsByBarber);
+
+router.get(
+  "/client/:clientId",
+  authenticateUser,
+  apptCtrls.getAppointmentsByClient
+);
 
 router
   .route("/:appointmentId")
   .patch(authenticateUser, apptCtrls.patchAppointment);
-// .delete(authenticateUser, apptCtrls.deleteAppointment)
 
 module.exports = router;
