@@ -16,17 +16,37 @@ $navbar-hidden: "navbar-hidden";
       flex-wrap: wrap;
       align-items: center;
       width: 100%;
+      a {
+        color: $color-white;
+        text-decoration: none;
+        &:hover {
+          color: $color-yellow;
+        }
+      }
     }
     .left {
       font-size: 1.6rem;
       color: $color-white;
       display: flex;
+      justify-content: center;
       align-items: center;
       gap: 0.5rem;
       flex-grow: 1;
+      width: 100%;
+      @include desktop {
+        width: 50%;
+        justify-content: flex-start;
+      }
+      span:hover {
+        color: $color-yellow;
+      }
+
     }
     .right {
       display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
       font-size: 1.6rem;
       gap: 2rem;
       color: $color-white;
@@ -35,6 +55,11 @@ $navbar-hidden: "navbar-hidden";
         align-items: center;
         gap: 0.5rem;
       }
+      @include desktop {
+        width: 50%;
+        justify-content: flex-end;
+      }
+      
     }
     .navbar {
       z-index: 999;
@@ -85,12 +110,13 @@ $navbar-hidden: "navbar-hidden";
           margin: 5px 0;
         }
       }
-      ul {
+      ul.nav-links {
         list-style: none;
         display: flex;
         flex-wrap: wrap;
         justify-content: flex-end;
         margin: 0;
+        padding: 0;
         @include navbarmobile {
           @include flex-column();
           &.navbar-hidden {
