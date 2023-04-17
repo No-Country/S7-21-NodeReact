@@ -9,6 +9,7 @@ import Turno from "./Turno";
 import { useDispatch, useSelector } from "react-redux";
 import { persistor } from "../store/store";
 import { onLogout } from '../store/auth/authSlice'
+import logo from "../assets/images/logo.svg";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -48,21 +49,29 @@ export default function Navbar() {
         <div className="header">
           <div className="left">
             <TbClockHour9 />
-            Abierto: Lunes - Sabado, 09 am - 7:30 pm
+            <span>Abierto: Lunes - Sabado, 09 am - 7:30 pm</span>
           </div>
           <div className="right">
-            <div>
-              <FaWhatsapp />
-              Whatsapp
-            </div>
-            <div>
-              <HiOutlineMail />
-              thebossbarbershopco@gmail.com
-            </div>
+            <a href="https://wa.me/573154943242" target="_blank" rel="noreferrer">
+              <div>
+                <FaWhatsapp />
+                Whatsapp
+              </div>
+            </a>
+            <a href="mailto:thebossbarbershopco@gmail.com">
+              <div>
+                <HiOutlineMail />
+                thebossbarbershopco@gmail.com
+              </div>
+            </a>
           </div>
         </div>
         <nav className="navbar">
-          <div className="logo">LOGO</div>
+          <div className="logo">
+            <Link to="/">
+              <img src={logo} alt="logo" />
+            </Link>
+          </div>
 
           <div className="hamburger" onClick={toggle}>
             <div />
