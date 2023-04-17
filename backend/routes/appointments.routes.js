@@ -15,7 +15,7 @@ router.patch(
 router
   .route("/barber/:barberId")
   .post(authenticateUser, apptCtrls.postAppointment)
-  .get(authenticateUser, apptCtrls.getAppointmentsByBarber);
+  .get(apptCtrls.getAppointmentsByBarber);
 
 router.get(
   "/client/:clientId",
