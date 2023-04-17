@@ -14,7 +14,7 @@
   margin-top: 12rem;
   margin-bottom: 9rem;
 }
-.barber-name{
+.barber-name {
   display: flex;
   align-items: center;
   text-align: left;
@@ -24,7 +24,7 @@
   width: 100%;
   .container_administration {
     width: 100%;
-margin-right: 20px;
+    margin-right: 20px;
     @include flex-row();
     @include navbarmobile {
       @include flex-column();
@@ -62,8 +62,8 @@ margin-right: 20px;
         }
       }
     }
-    .container_barber{
-    width: 100%;
+    .container_barber {
+      width: 100%;
       table th {
         padding-top: 12px;
         padding-bottom: 12px;
@@ -71,7 +71,7 @@ margin-right: 20px;
         background-color: #331763;
         color: white;
       }
-      
+
       th:first-child {
         border-radius: 10px 0 0 10px;
       }
@@ -97,7 +97,6 @@ margin-right: 20px;
             font-size: 16px;
             font-weight: 500;
             line-height: 19px;
-           
           }
           tr td .img-table {
             width: 60px;
@@ -124,26 +123,14 @@ margin-right: 20px;
     }
     .container_turners {
       width: 100%;
-      @include flex-row();
-      .calendar{
-        @include flex-column();
-        width: 20%;
-      }
-      .list_turner {
-        @include flex(space-between);;
-        width: 78%;
-        .title_list {
-          @include flex();
-          width: 80%;
-          div {
-            @include flex(space-between);
-            align-items: center;
-          }
-        }
-        .filter{
+      @include flex-column();
+      .container_title_and_filter {
+        @include flex-wrap();
+        width: 100%;
+        .filter {
           width: 20%;
           text-align: right;
-          .select_barber{
+          .select_barber {
             flex-basis: 45%;
             display: flex;
             align-items: center;
@@ -177,12 +164,79 @@ margin-right: 20px;
             }
           }
         }
+        .title_list {
+          @include flex();
+          width: 80%;
+          div {
+            @include flex(space-between);
+            align-items: center;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 24px;
+            line-height: 29px;
+          }
+        }
+      }
+      .container {
+        @include flex(flex-start);
+
+        width: 100%;
+        .calendar {
+          @include flex();
+          width: 15%;
+        }
+        .turners {
+          @include flex-row();
+          margin-left: 30px;
+          width: 90%;
+          ul {
+            width: 100%;
+            .turno {
+              width: 100%;
+              @include flex(flex-start);
+              .hora {
+                font-style: normal;
+                font-weight: 500;
+                font-size: 20px;
+                line-height: 24px;
+              }
+              .nombre {
+                height: 33.66px;
+                width: 50%;
+                padding: 5px;
+                padding-left: 10px;
+                margin-left: 10px;
+                background: #f5f5f5;
+                border: 1px solid #000000;
+                border-radius: 20px;
+                transform: matrix(1, 0, 0, 1, 0, 0);
+                margin-bottom: 15px;
+              }
+              .container_button {
+                @include flex-wrap();
+                margin-left: 5px;
+                width: 20%;
+                padding: 5px;
+                .option_button {
+                  width: 106px;
+                  height: 24px;
+                  border-radius: 20px;
+                  font-style: normal;
+                  font-weight: 500;
+                  font-size: 16px;
+                  line-height: 19px;
+                  background-color: $color-yellow;
+                  margin-right: 1rem;
+                  border: none;
+                }
+              }
+            }
+          }
+        }
       }
     }
     .hidden_turners {
       display: none;
     }
-
-
   }
 }

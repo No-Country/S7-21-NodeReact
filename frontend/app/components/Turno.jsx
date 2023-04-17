@@ -63,9 +63,9 @@ export default function Turno({ closeModal }) {
   }, [dispatch]);
   useEffect(() => {
     if (barber) {
-      dispatch(TurnersBarber(barber));
+      dispatch(TurnersBarber(barber, form.date));
     }
-  }, [dispatch, barber]);
+  }, [dispatch, barber, form.date]);
   const handleClickOutside = (event) => {
     if (event.target.classList.contains("content-turno")) {
       closeModal();
@@ -89,9 +89,9 @@ export default function Turno({ closeModal }) {
                     value={form.servicesId}
                     onChange={handleChangeForm}
                   >
-                    {services.map((service)=> (
+                    {services.map((service) => (
                       <option key={service.id} value={service.id}>
-                      {service.name}
+                        {service.name}
                       </option>
                     ))}
                   </select>
@@ -123,7 +123,7 @@ export default function Turno({ closeModal }) {
           <div className="content-date">
             <DatePicker
               selected={form.date}
-              onChange={handleChangeForm}
+              onChange={(date) => setForm({ ...form, date })}
               name="date"
               customInput={<CustomDatePickerInput />}
             />
@@ -137,10 +137,17 @@ export default function Turno({ closeModal }) {
                 onChange={handleChangeForm}
               >
                 {freeturner?.map((hour) => (
-    <option key={hour} value={`${Math.floor(hour)}:${((hour % 1) * 60).toFixed(0).padStart(2, '0')}`}>
-      {`${Math.floor(hour)}:${((hour % 1) * 60).toFixed(0).padStart(2, '0')}`}
-    </option>
-  ))}
+                  <option
+                    key={hour}
+                    value={`${Math.floor(hour)}:${((hour % 1) * 60)
+                      .toFixed(0)
+                      .padStart(2, "0")}`}
+                  >
+                    {`${Math.floor(hour)}:${((hour % 1) * 60)
+                      .toFixed(0)
+                      .padStart(2, "0")}`}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
