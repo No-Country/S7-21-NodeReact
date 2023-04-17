@@ -171,7 +171,7 @@ export const Administrator = () => {
                         <div className="turno" key={turno.appointmentHour}>
                           <div className="hora">{turno.hora}</div>
                           {turno.libre ? (
-                            <div className="nombre"></div>
+                            <div className="nombre">Libre</div>
                           ) : (
                             <div className="nombre">{turno.nombre}</div>
                           )}
