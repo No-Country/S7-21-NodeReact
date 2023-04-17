@@ -105,7 +105,7 @@ const changeRole = tryCatchWrapper(async (req, res, next) => {
 
 const getAnalyticsBarber = tryCatchWrapper(async (req, res, next) => {
   const { barberId } = req.params;
-  const {startDate, endDate} = req.body
+  const {startDate, endDate} = req.query
   const analytics = await userServices.analyticsBarber(barberId, startDate, endDate);
 
   endPointResponse({
