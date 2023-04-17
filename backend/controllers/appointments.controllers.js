@@ -29,14 +29,14 @@ const getAppointmentsByBarber = tryCatchWrapper(async (req, res, next) => {
   const { barberId } = req.params;
   const appointments = await apptServices.findBarberAppointments(barberId);
 
-  endPointResponse({ res, message: "turnos asignados", body: appointments });
+  endPointResponse({ res, message: "turnos asignados por barbero", body: appointments });
 });
 
 const getAppointmentsByClient = tryCatchWrapper(async (req, res, next) => {
   const { clientId } = req.params;
   const appointments = await apptServices.findClientAppointments(clientId);
 
-  endPointResponse({ res, message: "turnos asignados", body: appointments });
+  endPointResponse({ res, message: "turnos asignados por cliente", body: appointments });
 });
 
 const patchAppointment = tryCatchWrapper(async (req, res, next) => {
