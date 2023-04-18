@@ -1,33 +1,5 @@
 "use strict";
 
-/**
- * @openapi
- * components:
- *   schemas:
- *     Products:
- *       type: object
- *       properties:
- *         id:
- *           type: string
- *           format: uuid
- *           description: The unique identifier for a user.
- *         title:
- *           type: string
- *           description: Name of the product.
- *         description:
- *           type: string
- *           description: Description about the product.
- *         price:
- *           type: integer
- *           description: Price of the product.
- *         stock:
- *           type: integer
- *           description: Quantity of the product in stock.
- *         productImage:
- *           type: string
- *           format: uri
- *           description: The URL of the user's profile image.
- */
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class products extends Model {
