@@ -13,7 +13,7 @@ Existe un rol de aministrador que ingresa los barberos al sistema y visualiza la
 <hr/>
 
 <h3 align="center"  ><b>Acceda a la aplicación a través del siguiente link:</b></h3>
-<h3 align="center"><a href="https://www.google.com/" target="_blank" 
+<h3 align="center"><a href="https://www.google.com/" target="_blank" rel="noopener noreferrer"> Barbería </a></h3>
 
 <hr/>
 
