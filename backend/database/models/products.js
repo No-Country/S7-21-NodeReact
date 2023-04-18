@@ -1,11 +1,38 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     Products:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: string
+ *           format: uuid
+ *           description: The unique identifier for a user.
+ *         title:
+ *           type: string
+ *           description: Name of the product.
+ *         description:
+ *           type: string
+ *           description: Description about the product.
+ *         price:
+ *           type: integer
+ *           description: Price of the product.
+ *         stock:
+ *           type: integer
+ *           description: Quantity of the product in stock.
+ *         productImage:
+ *           type: string
+ *           format: uri
+ *           description: The URL of the user's profile image.
+ */
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class products extends Model {
-    static associate(models) {
-      // define association here
+    static associate({ Cart }) {
+      this.belongsTo(Cart, { foreignKey: "cartId" });
     }
   }
   products.init(
@@ -21,7 +48,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       description: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false,
       },
       price: {
@@ -39,7 +66,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: 'products',
-    });
+      modelName: "products",
+    }
+  );
   return products;
 };

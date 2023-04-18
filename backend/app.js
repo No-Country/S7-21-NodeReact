@@ -45,6 +45,6 @@ const startApi = async () => {
   }
 };
 
-console.log(expressListEndpoints(app));
+// console.log(expressListEndpoints(app));
 
 startApi();
