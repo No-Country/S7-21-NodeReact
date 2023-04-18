@@ -10,7 +10,7 @@ const swaggerOptions = {
       version: "1.0.0",
     },
   },
-  apis: ["./database/models/*.js", "./documentation/*.yaml"],
+  apis: ["./documentation/*.yaml", "./documentation/paths/*.yaml", "./documentation/schemas/*.yaml"]
 };
 
 const swaggerSpec = swaggerJSDoc(swaggerOptions);
