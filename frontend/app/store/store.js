@@ -2,6 +2,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { authSlice } from './auth/authSlice';
 import { turnerSlice } from './turner/turnerSlice';
 import { barberSlice } from './barber/barberSlice';
+import { serviceSlice } from './service/serviceSlice';
 import {
   persistStore,
   persistReducer,
@@ -31,7 +32,8 @@ const storage = typeof window !== 'undefined' ? createWebStorage('local') : crea
 export const rootReducer = combineReducers({
   user: authSlice.reducer,
   turner: turnerSlice.reducer,
-  barber: barberSlice.reducer
+  barber: barberSlice.reducer,
+  service: serviceSlice.reducer,
 
 });
 

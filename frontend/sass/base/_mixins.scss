@@ -90,3 +90,24 @@
   -moz-box-shadow: $shadow;
   box-shadow: $shadow;
 }
+
+// --------------------------------------------------
+// Button s
+// --------------------------------------------------
+@mixin button($color, $bg-color, $border-color) {
+  color: $color;
+  background-color: $bg-color;
+  border: 1px solid $border-color;
+  text-transform: uppercase;
+  font-weight: 700;
+  border-radius: 1.5rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+
+
+  &:hover {
+    background-color: $color-white;
+    text-decoration: underline;
+  }
+}

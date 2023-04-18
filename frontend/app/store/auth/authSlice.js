@@ -36,36 +36,38 @@ export const authSlice = createSlice({
   },
 });
 export const loginuser = (payload) => {
+  const local_url = window.ENV.REMIX_APP_API_UR
   return async (dispatch) => {
     try {
-      dispatch({ type: "onChecking" });
-      const { data } = await axios.post("http://localhost:8080/api/v1/auth/login", payload);
+      dispatch({ type: onChecking });
+      const { data } = await axios.post(`${local_url}/auth/login`, payload);
 
       if (data) {
 
         const { user, token } = data.body;
-        dispatch({ type: "onLogin", payload: { user, token } });
+        dispatch({ type: onLogin, payload: { user, token } });
 
         return data;
       }
     } catch (error) {
-      dispatch({ type: "onLoginError", error: error.response.data.error });
+      dispatch({ type: onLoginError, error: error.response.data.error });
     }
   };
 };
 
 export const registeruser = (payload) => {
+  const local_url = window.ENV.REMIX_APP_API_UR
   return async (dispatch) => {
     console.log(payload, "datos")
     try {
-      dispatch({ type: "onChecking" });
-      const { data } = await axios.post("http://localhost:8080/api/v1/auth/register", payload);
+      dispatch({ type: onChecking });
+      const { data } = await axios.post(`${local_url}/auth/register`, payload);
 
       if (data) {
         return data;
       }
     } catch (error) {
-      dispatch({ type: "onLoginError", error: error.response.data.error });
+      dispatch({ type: onLoginError, error: error.response.data.error });
     }
   };
 };

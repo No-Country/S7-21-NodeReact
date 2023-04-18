@@ -5,12 +5,17 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from "@remix-run/react";
+
 import { Provider } from "react-redux";
 import { persistor, store } from "./store/store";
 import Navbar from "~/components/Navbar";
 
 import styles from "~/styles/main.css";
+
+
+import 'react-calendar/dist/Calendar.css';
 import { PersistGate } from 'redux-persist/integration/react'
 import Footer from "./components/Footer";
 import { ToastContainer } from "react-toastify";
@@ -18,11 +23,19 @@ import { ToastContainer } from "react-toastify";
 
 export const meta = () => ({
   charset: "utf-8",
-  title: "New Remix App",
+  title: "The Boss",
   viewport: "width=device-width,initial-scale=1",
 });
 
+export function loader() {
+  return {
+    ENV: {
+      REMIX_APP_API_UR: process.env.REMIX_APP_API_UR,
+    },
+  }
+}
 function Document({ title, children }) {
+  const data = useLoaderData();
   return (
     <html lang="en">
       <head>
@@ -31,6 +44,14 @@ function Document({ title, children }) {
         <Meta />
         <Links />
       </head>
+      <script
+          dangerouslySetInnerHTML={{
+            __html: `window.ENV = ${JSON.stringify(
+              data.ENV
+            )}`,
+          }}
+        />
+        <Scripts />
       <body>
         <Provider store={store}>
           <PersistGate persistor={persistor}>
@@ -50,8 +71,8 @@ function Document({ title, children }) {
 export default function App() {
   return (
     <Document>
-      <ToastContainer/>
-      <Outlet/>
+      <ToastContainer />
+      <Outlet />
     </Document>
   )
 }
@@ -72,8 +93,9 @@ export function links() {
   return [
     { rel: "stylesheet", href: styles },
     {
-      rel: "stylesheet",
-      href: "https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap",
+      rel: 'icon',
+      type: 'image/x-icon',
+      href: "/favicon.ico",
     },
   ];
 }

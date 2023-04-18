@@ -1,26 +1,26 @@
-@use '../base/mixins' as *;
-@use '../base/variables' as *;
+.aboutMe-container{
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+    margin-bottom: 2rem;
 
-.aboutMe-container {    
-    height: calc( 100vh - 144px );
-    flex-grow: 1;
-    @include flex-center;  
-    padding: 0 5rem;      
-    gap: .5in;
-    img {
-        height: 80%;
-    }
-    p {
-        text-align: justify;
-        line-height: 2;
+    @media screen and (max-width: 900px) {
+        grid-template-columns: repeat(1, 1fr);
     }
 
-    @include mobile {
-        img{
-            display: none;
-        }
-        p{
-            line-height: normal;
+    .img-aboutMe{
+        padding-left: 2rem;
+        width: 80%;
+        height: 80vh;
+    }
+
+    p{
+        font-size: 2rem;
+        padding: 2rem;
+
+        @media screen and (max-width: 900px) {
+            font-size: 1.3rem;
         }
     }
 }

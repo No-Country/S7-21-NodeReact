@@ -1,12 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { store } from "../store"
 export const turnerSlice = createSlice({
   name: "turner",
   initialState: {
     loading: true,
+    loadingTurner: true,
     turner: {},
+    turners: [],
     errorMessage: undefined,
+    errorMessageTurner: undefined,
   },
   reducers: {
     onLoading: (state) => {
@@ -24,6 +27,21 @@ export const turnerSlice = createSlice({
       state.turner = {};
       state.errorMessage = error;
     },
+    onLoadingTurner: (state, { payload }) => {
+      state.loadingTurner = true;
+      state.turners = [];
+      state.errorMessage = undefined;
+    },
+    onTurnerHistory: (state, { payload }) => {
+      state.loadingTurner = false;
+      state.turners = payload;
+      state.errorMessage = undefined;
+    },
+    onMessageTurnersError: (state, { error }) => {
+      state.loadingTurner = false;
+      state.turners = [];
+      state.errorMessage = error;
+    },
   },
 });
 export const getHeadersWithAuth = (token) => {
@@ -32,17 +50,18 @@ export const getHeadersWithAuth = (token) => {
   };
 };
 export const createturne = (payload, barber) => {
+  const local_url = window.ENV.REMIX_APP_API_UR
   return async (dispatch) => {
-    const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNmNWUyMWM2LThhODUtNDEwYy04OWVjLWQyNjllMjIwZDI4YSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MTM4ODM0NiwiZXhwIjoxNjgyNjIxODk0fQ.PDdXetHKNYTOyKP2Z7El86AKnMIVqZNQy4v2LYec0d4"; // aquí deberías obtener el token de autenticación desde el estado de Redux
+    const token = store.getState().user.token;
     const headers = getHeadersWithAuth(token);
     try {
       dispatch({ type: onLoading });
-      const {data } = await axios.post(
-        `http://localhost:8080/api/v1/appointments/${barber}`,
-        payload, {headers}
+      const data = await axios.post(
+        `${local_url}/appointments/${barber}`,
+        payload,
+        { headers }
       );
-      console.log(data);
+      console.log(data, "resultado de data");
       if (data) {
         dispatch({ type: onTurner, payload: data.body });
         return data;
@@ -53,5 +72,35 @@ export const createturne = (payload, barber) => {
   };
 };
 
-export const { onLoading, onTurner, onTurnerError } = turnerSlice.actions;
+export const historyTurner = () => {
+  const token = store.getState().user.token;
+  const headers = getHeadersWithAuth(token);
+  const local_url = window.ENV.REMIX_APP_API_UR
+  return async (dispatch) => {
+    try {
+      dispatch({ type: onLoadingTurner });
+      const { data } = await axios.get(
+        `${local_url}/appointments/myAppointments`,
+        { headers }
+      );
+      console.log(data, "data");
+      if (data) {
+        dispatch({ type: onTurnerHistory, payload: data });
+      }
+    } catch (error) {
+      console.log(error, "error");
+      dispatch({ type: onMessageTurnersError, error: error });
+    }
+  };
+};
+
+
+export const {
+  onLoading,
+  onTurner,
+  onTurnerError,
+  onLoadingTurner,
+  onMessageTurnersError,
+  onTurnerHistory,
+} = turnerSlice.actions;
 export default turnerSlice.reducer;
