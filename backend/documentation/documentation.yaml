@@ -89,14 +89,6 @@ paths:
                 type: object
                 example: 
                   message: "El apellido es obligatorio, Email incorrecto"
-        '401': 
-          description: Unauthorized
-          content:
-            application/json: 
-              schema: 
-                type: object
-                example: 
-                  message: "Credenciales inválidas"
                   
   /auth/login:
     post:
@@ -140,6 +132,14 @@ paths:
                 type: object
                 example: 
                   message: "El apellido es obligatorio, Email incorrecto"
+        '401': 
+          description: Unauthorized
+          content:
+            application/json: 
+              schema: 
+                type: object
+                example: 
+                  message: "Credenciales inválidas"
             
   /auth/verifyEmail:
     post:
@@ -494,11 +494,13 @@ paths:
                         singleTotalBarber: 12340
                         totalBarber: 12340
                     "paymentBarber": 40721
-  /appointments/dd341958-c591-41fc-bcf5-c30bd841be56:
+
+  /appointments/barber/{barberId}:
     post:
       tags:
         - Appointments
       summary: Crear turno
+      description: Permite crear un turno con un barbero a traves del barberId
       requestBody:
         content:
           application/json:
@@ -512,27 +514,113 @@ paths:
       security:
         - bearerAuth: []
       responses:
-        '200':
+        '201':
           description: Successful response
           content:
-            application/json: {}
-  /appointments/80282cca-6d14-4f3a-8550-172cc4bafa04:
+            application/json:
+              schema: 
+                type: object
+                example: 
+                  code: 201
+                  message: "Turno creado"
+                  body: 
+                    newAppointment: 
+                      id: "9faab50a-b152-428a-a320-25ad18fd520c"
+                      appointmentDate: "2023-06-25T05:00:00.000Z"
+                      appointmentHour: "10:00"
+                      servicesId": "8ab7e463-64a5-437a-98f6-ed44c9803140"
+                      message: "mensaje de prueba"
+                      status: "pending"
+                      taken: true
+                      clientId: "ac81fe85-8161-444d-96fe-ee41fcc2c248"
+                      barberId: "a2639154-9d9f-4290-882b-bef9090a5878"
+                      updatedAt: "2023-04-18T00:58:46.812Z"
+                      createdAt: "2023-04-18T00:58:46.812Z"
+                    serviceBarber:
+                        id: "8ab7e463-64a5-437a-98f6-ed44c9803140"
+                        name: "Corte Pelo"
+                        cost: 42681
+                        createdAt: "2023-04-16T11:11:38.584Z"
+                        updatedAt: "2023-04-16T11:11:38.584Z"
     get:
       tags:
         - Appointments
       summary: Listar turnos por id barbero
+      description: Muestra una lista de todos los turnos que tiene asignado el barbero.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  code": 200,
+                  message: "turnos asignados por barbero"
+                  body: 
+                    - id": "9faab50a-b152-428a-a320-25ad18fd520c"
+                      appointmentDate: "2023-06-25"
+                      appointmentHour: "5:40"
+                      taken: true
+                      status: "pending"
+                      message: "mensaje de prueba"
+                      clientId: "ac81fe85-8161-444d-96fe-ee41fcc2c248"
+                      barberId: "a2639154-9d9f-4290-882b-bef9090a5878"
+                      servicesId: "8ab7e463-64a5-437a-98f6-ed44c9803140"
+                      ServicesBarber:
+                        name: "Corte Pelo"
+                        cost: 42681
+                    - id": "8f0a6ff1-446b-43cc-aaab-500035597ad4"
+                      appointmentDate: "2023-04-19"
+                      appointmentHour: "9:00"
+                      taken: false
+                      status: "cancel"
+                      message: "Placeat iusto occaecati placeat quam."
+                      clientId: "d9b928c2-41c0-430e-a911-17c4467dd217"
+                      barberId: "a2639154-9d9f-4290-882b-bef9090a5878"
+                      servicesId: "864a7521-f8fc-46d7-8796-7d85476c362d"
+                      ServicesBarber": 
+                        name": Corte Barba"
+                        cost: 45416
+
+  /appointments/client/{clientId}:
+    get:
+      tags:
+        - Appointments
+      summary: Listar turnos por id barbero
+      description: Muestra una lista de todos los turnos que tiene asignado el barbero.
       security:
         - bearerAuth: []
       responses:
         '200':
           description: Successful response
           content:
-            application/json: {}
-  /appointments/06777217-13e5-4d3c-96db-ad37a5035c12:
+            application/json:
+              schema:
+                type: object
+                example:
+                  code: 200
+                  message: "turnos asignados por cliente"
+                  body: 
+                    - id: "9faab50a-b152-428a-a320-25ad18fd520c"
+                      appointmentDate: "2023-06-25"
+                      appointmentHour: "5:40"
+                      taken: true
+                      status: "pending"
+                      message: "mensaje de prueba"
+                      clientId: "ac81fe85-8161-444d-96fe-ee41fcc2c248"
+                      barberId: "a2639154-9d9f-4290-882b-bef9090a5878"
+                      servicesId: "8ab7e463-64a5-437a-98f6-ed44c9803140"
+                      ServicesBarber:
+                        name: "Corte de Pelo"
+                        cost: 42681
+
+  /appointments/{appointmentId}:
     patch:
       tags:
         - Appointments
       summary: Actualizar turno por id
+      description: Permite actualizar la hora y fecha de un turno
       requestBody:
         content:
           application/json:
@@ -547,34 +635,95 @@ paths:
         '200':
           description: Successful response
           content:
-            application/json: {}
+            application/json:
+              schema:
+                type: object
+                example:
+                  code: 200
+                  message: "Turno actualizado de manera exitosa"
+                  body": 
+                    id: "9faab50a-b152-428a-a320-25ad18fd520c"
+                    appointmentDate: "2023-06-25"
+                    appointmentHour: "10:00"
+                    taken: true
+                    status: "pending"
+                    message: "mensaje de prueba"
+                    createdAt: "2023-04-18T00:58:46.812Z"
+                    updatedAt: "2023-04-18T02:11:28.314Z"
+                    clientId: "ac81fe85-8161-444d-96fe-ee41fcc2c248"
+                    barberId: "a2639154-9d9f-4290-882b-bef9090a5878"
+                    servicesId: "8ab7e463-64a5-437a-98f6-ed44c9803140"
+                    ServicesBarber: 
+                      name: "Corte Pelo"
+                      cost: 42681
+
   /appointments/myAppointments:
     get:
       tags:
         - Appointments
       summary: Obtener mis turnos como usuario activo
+      description: Muestra todos los turnos que tiene el usuario que esta en la sesion activa.
       security:
         - bearerAuth: []
       responses:
         '200':
           description: Successful response
           content:
-            application/json: {}
-  /appointments/cancel/06777217-13e5-4d3c-96db-ad37a5035c12:
+            application/json:
+              schema: 
+                type: object
+                example: 
+                  code: 200
+                  message: "turnos asignados"
+                  body:
+                    - id: "9faab50a-b152-428a-a320-25ad18fd520c"
+                      appointmentDate: "2023-06-25"
+                      appointmentHour: "10:00"
+                      taken: true
+                      status: "pending"
+                      message: "mensaje de prueba"
+                      clientId: "ac81fe85-8161-444d-96fe-ee41fcc2c248"
+                      barberId: "a2639154-9d9f-4290-882b-bef9090a5878"
+                      servicesId: "8ab7e463-64a5-437a-98f6-ed44c9803140"
+                      ServicesBarber: 
+                        name: "Corte Pelo"
+                        cost: 42681
+
+  /appointments/cancel/{appointmentId}:
     patch:
       tags:
         - Appointments
-      summary: Cancelar turno por Id
-      requestBody:
-        content: {}
+      summary: Cancelar turno por Id  
+      description: Permite cancelar un turno.
       security:
         - bearerAuth: []
       responses:
         '200':
           description: Successful response
           content:
-            application/json: {}
-  /reviews/7374b126-c714-42bd-89bd-a24151293ea8:
+            application/json:
+              schema:
+                type: object
+                example:
+                  code: 200
+                  message: "Turno cancelado de manera exitosa"
+                  body:
+                    id: "9faab50a-b152-428a-a320-25ad18fd520c"
+                    appointmentDate: "2023-06-25"
+                    appointmentHour: "10:00"
+                    taken: false
+                    status: cancel
+                    message: "mensaje de prueba"
+                    createdAt: "2023-04-18T00:58:46.812Z"
+                    updatedAt: "2023-04-18T02:22:04.022Z"
+                    clientId: "ac81fe85-8161-444d-96fe-ee41fcc2c248"
+                    barberId: "a2639154-9d9f-4290-882b-bef9090a5878"
+                    servicesId: "8ab7e463-64a5-437a-98f6-ed44c9803140"
+                    ServicesBarber: 
+                      name: "Corte Pelo"
+                      cost: 42681
+
+  /reviews/{barberId}:
     post:
       tags:
         - Reviews
@@ -594,48 +743,101 @@ paths:
         '200':
           description: Successful response
           content:
-            application/json: {}
-  /reviews/70270547-7897-471f-b049-41a16012b734:
+            application/json: 
+              schema:
+                type: object
+                example: 
+                  code: 201
+                  message: "Reseña creada de manera exitosa"
+                  body: 
+                    id: "da443d1f-36bc-4659-b3b0-e1cdb48e67eb"
+                    title: "muy buen trabajo"
+                    rating: 4
+                    comment: "muy buen barbero"
+                    clientId: "ac81fe85-8161-444d-96fe-ee41fcc2c248"
+                    barberId: "a2639154-9d9f-4290-882b-bef9090a5878"
+                    updatedAt: "2023-04-18T02:48:09.441Z"
+                    createdAt: "2023-04-18T02:48:09.441Z"
     get:
       tags:
         - Reviews
-      summary: Obtener reseñas barbero
-      security:
-        - bearerAuth: []
+      summary: Obtener reseñas barber
+      description: Devuelve un listado con las reseñas y calificaciones de los barberos dejadas por los clientes.
       responses:
         '200':
           description: Successful response
           content:
-            application/json: {}
-  /reviews/review/ddf79d6a-21c1-48cb-aac1-e6d529c99c6d:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  code: 200
+                  message: "Reviews listadas de manera exitosa"
+                  body:
+                    reviews:
+                      - id: "9f58130a-e6de-4ea1-9390-456d7ef9eb53"
+                        title: "Vero ipsum officiis."
+                        rating: 5
+                        comment: "Optio doloremque dolore animi laudantium hic corporis. Sunt numquam natus voluptas harum mollitia modi adipisci."
+                        clientId: "53362548-9cae-4456-9ff6-6906c6ed7cf6"
+                        barberId: "a2639154-9d9f-4290-882b-bef9090a5878"
+                      - id: "7a459a88-5878-4863-8fe1-1f9219cab279"
+                        title: "Ea consectetur impedit."
+                        rating: 3
+                        comment: "Voluptatum id nulla dolorum. A consequuntur ducimus sed adipisci architecto reprehenderit."
+                        clientId: "4397bc7e-7e41-4409-85e6-611efb897225"
+                        barberId: "a2639154-9d9f-4290-882b-bef9090a5878"
+                    ratingAverage: 4
+
+  /reviews/review/{reviewId}:
     get:
       tags:
         - Reviews
       summary: Obtener reseña por Id
-      security:
-        - bearerAuth: []
+      description: Devuelve el contenido de una reseaña.
       responses:
         '200':
           description: Successful response
           content:
-            application/json: {}
-  /reviews/review/7091ae9f-b044-4a8a-baa7-00b2fbeee7e6:
+            application/json:
+              schema:
+                type: object
+                example:
+                  code: 200
+                  message: "Reseña listada de manera exitosa"
+                  body: 
+                    id: "da443d1f-36bc-4659-b3b0-e1cdb48e67eb"
+                    title: "muy buen trabajo"
+                    rating: 4
+                    comment: "muy buen barbero"
+                    clientId: "ac81fe85-8161-444d-96fe-ee41fcc2c248"
+                    createdAt: "2023-04-18T02:48:09.441Z"
+                    updatedAt: "2023-04-18T02:48:09.441Z"
+                    barberId: "a2639154-9d9f-4290-882b-bef9090a5878"
     delete:
       tags:
         - Reviews
       summary: Eliminar reseña por Id
+      description: Elimina una reseña, para esto es necesario un token y tener rol de admin.
       security:
         - bearerAuth: []
       responses:
         '200':
           description: Successful response
           content:
-            application/json: {}
+            application/json: 
+              schema: 
+                type: object
+                example:
+                  code: 200
+                  message: "Review da443d1f-36bc-4659-b3b0-e1cdb48e67eb eliminada de manera exitosa"
+
   /servicesbarber:
     post:
       tags:
         - Servicios barbero
       summary: Crear servicio barbero
+      description: Permite al administrador agregar un nuevo servicio a la aplicacion de la barberia.
       requestBody:
         content:
           application/json:
@@ -647,53 +849,96 @@ paths:
       security:
         - bearerAuth: []
       responses:
-        '200':
+        '201':
           description: Successful response
           content:
-            application/json: {}
+            application/json: 
+              schema: 
+                type: object
+                example: 
+                  code: 201
+                  message: "Nuevo servicio creado"
+                  body:
+                    id: "c1960567-9470-4db1-9424-a951d84794e3"
+                    name: "nuevo servicio"
+                    cost: 16000
+                    updatedAt: "2023-04-18T03:08:09.554Z"
+                    createdAt: "2023-04-18T03:08:09.554Z"
     get:
       tags:
         - Servicios barbero
       summary: Obtener servicios disponibles
-      security:
-        - noauthAuth: []
+      description: Devuelve una lista de todos los servicios que ofrece la barberia y sus respectivos precios.
       responses:
         '200':
           description: Successful response
           content:
-            application/json: {}
-  /servicesbarber/4088ad8d-2fc7-4db1-ad31-dd31d6d6c9af:
+            application/json:
+              schema:
+                type: object
+                example:
+                  code: 200
+                  message: "Servicios disponibles"
+                  body:
+                    - id: "8ab7e463-64a5-437a-98f6-ed44c9803140"
+                      name: "Corte Pelo"
+                      cost: 42681
+                    - id: "864a7521-f8fc-46d7-8796-7d85476c362d"
+                      name: "Corte Barba"
+                      cost: 45416
+  /servicesbarber/{serviceId}:
     get:
       tags:
         - Servicios barbero
       summary: Obtener un servicio disponible
-      security:
-        - noauthAuth: []
+      description: Devuelve la informacion completa de un servicio.
       responses:
         '200':
           description: Successful response
           content:
-            application/json: {}
-  /servicesbarber/70044f36-775b-4403-b616-fc961dfd8c93:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  code: 200
+                  message: "Servicio disponible"
+                  body:
+                    id: "4cb9de0d-fd32-4932-b27f-53025383f143"
+                    name: "Lavado Y Corte"
+                    cost: 47743
+                    createdAt: "2023-04-16T02:30:58.555Z"
+                    updatedAt: "2023-04-16T02:30:58.555Z"
     patch:
       tags:
         - Servicios barbero
       summary: Actualizar un servicio disponible
+      description: Permite actualizar un servicio disponible, es necesario tener rol de admin.
       requestBody:
         content:
           application/json:
             schema:
               type: object
               example:
-                name: eliminame
+                name: "servicio actualizado"
+                cost: 20000
       security:
         - bearerAuth: []
       responses:
         '200':
           description: Successful response
           content:
-            application/json: {}
-  /servicesbarber/58ee379d-3cab-45e3-9225-559df597ce66:
+            application/json: 
+              schema: 
+                type: object
+                example:
+                  code: 200
+                  message: "Servicio actualizado"
+                  body:
+                    id: "c1960567-9470-4db1-9424-a951d84794e3"
+                    name: "servicio actualizado"
+                    cost: 20000
+                    createdAt: "2023-04-18T03:08:09.554Z"
+                    updatedAt: "2023-04-18T03:19:45.025Z"
     delete:
       tags:
         - Servicios barbero
