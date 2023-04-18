@@ -1,4 +1,4 @@
-import { useNavigate } from "@remix-run/react";
+import { Link, useNavigate } from "@remix-run/react";
 import React, { useEffect, useState } from "react";
 import { FaCircle } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
@@ -71,7 +71,9 @@ export const Administrator = () => {
       nombre: turno.clientId,
     })),
   ];
-
+  const handleredirecttopago = (e) => {
+    navigate(`/pago/${e}`)
+  }
   allTurns.sort((a, b) => (a.hora > b.hora ? 1 : b.hora > a.hora ? -1 : 0));
   return (
     <div>
@@ -106,9 +108,9 @@ export const Administrator = () => {
                         <th>Cancelados</th>
                       </tr>
                       {barbers.map((barber) => (
-                        <tr key={barber.id}>
+                        <tr key={barber.id} >
                           <td>
-                            <div className="barber_name">
+                            <div className="barber-name" onClick={() => navigate(`/pago/${barber.id}`)}>
                               <FaCircle className="img-table" />
                               {barber.firstName}
                             </div>
@@ -188,6 +190,9 @@ export const Administrator = () => {
                     </ul>
                   </div>
                 </div>
+              </div>
+              <div className={`container_client ${myClients ? "show": "hidden-client"}`}>
+
               </div>
             </div>
           </div>
