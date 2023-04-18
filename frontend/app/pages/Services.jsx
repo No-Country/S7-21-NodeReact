@@ -1,13 +1,12 @@
 import axios from 'axios'
-import React, { useState } from 'react'
-import { useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 import corte from '~/assets/images/corte/corte.jpg'
 
 export const Services = () => {
     const [services, setServices] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:8080/api/v1/servicesbarber')
+        axios.get(`http://localhost:8080/api/v1/servicesbarber`)
             .then(response => {
                 setServices(response.data.body);
                 console.log(response.data.body)
@@ -27,7 +26,7 @@ export const Services = () => {
                             <img
                                 src={corte}
                                 className='imgServices'
-                                alt=''
+                                alt={data.name}
                             />
                             <h1>{data.name}</h1>
                             <h3>${data.cost}</h3>

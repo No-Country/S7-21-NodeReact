@@ -1,12 +1,17 @@
-import React, { useEffect } from "react";
+import React, {
+    useEffect
+    , useState
+} from "react";
 import { useNavigate } from "@remix-run/react";
 import { getAllBarber } from "../store/barber/barberSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 export const Stylists = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate()
     const barbers = useSelector((state) => state.barber.barbers);
     const loading = useSelector((state) => state.barber.loading);
+
     console.log(barbers)
     console.log(barbers, "barbder");
 
@@ -14,7 +19,6 @@ export const Stylists = () => {
         dispatch(getAllBarber());
     }, []);
 
-    const navigate = useNavigate()
 
     return (
         <div className="stylist-container">
@@ -38,15 +42,16 @@ export const Stylists = () => {
                                             src={barbers.profileImage}
                                             className="imgStylist"
                                             alt={barbers.firstName}
-                                            onClick={() => navigate(`/Barber/${barbers.id}`)}
                                         />
 
                                         <div className="textContainer">
                                             <span>Especialidad: {barbers.role}</span>
                                         </div>
 
-                                        <div className="btn">Turnos</div>
-
+                                        <div
+                                            className="btn"
+                                            onClick={() => navigate(`/Barber/${barbers.id}`)}
+                                        >Ver más</div>
                                     </div>
                                 ))
                             }
