@@ -10,9 +10,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { persistor } from "../store/store";
 import { onLogout } from '../store/auth/authSlice'
 import logo from "../assets/images/logo.svg";
+import { BurguerButton } from "./BurguerButton";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [burguer, setBurger] = useState(false)
   const [isOpenModal, setIsOpenModal] = useState(false);
   const dispatch = useDispatch();
 
@@ -26,16 +28,28 @@ export default function Navbar() {
 
   const toggle = () => {
     console.log("click en togle", isOpen);
-    setIsOpen(!isOpen);
+
+    if (window.innerWidth < 900) {
+      setIsOpen(!isOpen);
+    }
   };
 
   const togglemodal = () => {
     setIsOpenModal(!isOpenModal);
+    toggle()
   };
+
+  const toggleBurgee = () => {
+    setBurger(!burguer)
+  }
 
   const closeModal = () => {
     setIsOpenModal(false);
   };
+
+  const handleClick = () => {
+    setIsOpen(!isOpen)
+  }
 
 
   const handleLogout = () => {
@@ -74,28 +88,52 @@ export default function Navbar() {
           </div>
 
           <div className="hamburger" onClick={toggle}>
-            <div />
-            <div />
-            <div />
+            <BurguerButton isOpen={isOpen} handleClick={handleClick} />
           </div>
+          <div className={`initial ${isOpen ? "active" : ""}`}></div>
+
           <ul className={`nav-links ${isOpen ? "show-nav" : "navbar-hidden"}`}>
             <li className="nav-item">
-              <Link to="/">INICIO</Link>
+              <Link
+                to="/"
+                onClick={toggle}
+              >INICIO
+              </Link>
             </li>
             <li className="nav-item">
-              <Link to="/Barber/stylists">ESTILISTA/BARBERO</Link>
+              <Link
+                to="/Barber/stylists"
+                onClick={toggle}
+              >
+                ESTILISTA/BARBERO
+              </Link>
             </li>
             <li className="nav-item">
-              <Link to="/services">SERVICIOS</Link>
+              <Link
+                to="/services"
+                onClick={toggle}
+              >
+                SERVICIOS
+              </Link>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <Link to="/administrator">SHOP</Link>
-            </li>
+            </li> */}
             <li>
-              <Link to="/about">SOBRE NOSOTROS</Link>
+              <Link
+                to="/about"
+                onClick={toggle}
+              >
+                SOBRE NOSOTROS
+              </Link>
             </li>
             <li className="nav-item">
-              <Link to="/contact">CONTACTO</Link>
+              <Link
+                to="/contact"
+                onClick={toggle}
+              >
+                CONTACTO
+              </Link>
             </li>
             {isAuthenticated ? (
               <li className="nav-item">
@@ -119,7 +157,11 @@ export default function Navbar() {
               </li>
             ) : (
               <li className="nav-item">
-                <Link className="button" to="/login">
+                <Link
+                  className="button"
+                  to="/login"
+                  onClick={toggle}
+                >
                   INGRESAR
                 </Link>
               </li>

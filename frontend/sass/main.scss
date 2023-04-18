@@ -8,6 +8,8 @@
 @forward 'components/navbar';
 @forward 'components/turno';
 @forward 'components/footer';
+@forward 'components/_burguerbutton';
+
 
 // Layout
 
@@ -49,8 +51,8 @@ body {
   flex-direction: column;
 }
 
-main {
-  display: flex;
-  flex: 1;
-}
+// main {
+//   display: flex;
+//   flex: 1;
+// }
 

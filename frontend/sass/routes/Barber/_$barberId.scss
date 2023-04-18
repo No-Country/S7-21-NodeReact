@@ -18,7 +18,9 @@ h2{
         img{
             width: 80%;
         }
+    }
         button{
+            width: 40%;
             display: flex;
             padding: 10px;
             background: #000000;
@@ -27,8 +29,8 @@ h2{
             font-weight: bold;
             cursor: pointer;
             margin: 0px auto;
+            justify-content: center;
         }
-    }
 
     .content-barber-info{
         h3{
