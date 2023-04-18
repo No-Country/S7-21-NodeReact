@@ -39,9 +39,6 @@ export default function Navbar() {
     toggle()
   };
 
-  const toggleBurgee = () => {
-    setBurger(!burguer)
-  }
 
   const closeModal = () => {
     setIsOpenModal(false);

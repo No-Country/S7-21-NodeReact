@@ -21,7 +21,7 @@ import { ToastContainer } from "react-toastify";
 
 export const meta = () => ({
   charset: "utf-8",
-  title: "New Remix App",
+  title: "The Boss",
   viewport: "width=device-width,initial-scale=1",
 });
 
@@ -53,8 +53,8 @@ function Document({ title, children }) {
 export default function App() {
   return (
     <Document>
-      <ToastContainer/>
-      <Outlet/>
+      <ToastContainer />
+      <Outlet />
     </Document>
   )
 }
@@ -75,8 +75,9 @@ export function links() {
   return [
     { rel: "stylesheet", href: styles },
     {
-      rel: "stylesheet",
-      href: "https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap",
+      rel: 'icon',
+      type: 'image/x-icon',
+      href: "/favicon.ico",
     },
   ];
 }
