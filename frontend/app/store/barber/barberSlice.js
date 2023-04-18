@@ -131,7 +131,7 @@ export const TurnersBarber = (barber, date) => {
     try {
       dispatch({ type: onLoadingBarber });
       const { data } = await axios.get(
-        `http://localhost:8080/api/v1/appointments/${barber}`,
+        `http://localhost:8080/api/v1/appointments/barber/${barber}`,
         { headers }
       );
       console.log(data.body, "data");
