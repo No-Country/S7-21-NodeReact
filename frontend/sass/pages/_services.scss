@@ -7,11 +7,16 @@
     }  
     .cardServices{
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
         gap: 5rem;
         margin: 0px auto;
 
-        @media screen and (max-width: 450px) {
+        @media screen and (max-width: 1024px) {
+            grid-template-columns: repeat(2, 1fr);
+            text-align: center;
+        }
+
+        @media screen and (max-width: 650px) {
             grid-template-columns: repeat(1, 1fr);
         }
 
@@ -19,6 +24,10 @@
             height: 300px;
             width: 300px;  
             margin: 0px auto;   
+
+            @media screen and (max-width: 650px) {
+               text-align: center;
+            }
 
             h1{
                 font-weight: 500;
