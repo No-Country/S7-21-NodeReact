@@ -2,11 +2,12 @@ import React from 'react'
 import video from '../assets/images/mixkit-barber.mp4'
 import { useSelector } from 'react-redux'
 import { Link } from '@remix-run/react'
+
 export const Home = () => {
  
     const status = useSelector(state => state.user.status)
     const isAuthenticated = status === 'authenticated'
-
+    console.log( window.ENV.REMIX_APP_API_UR)
     return (
         <div className='home'>
             <video id="background-video" preload='true' autoPlay loop muted >

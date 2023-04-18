@@ -5,7 +5,9 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from "@remix-run/react";
+
 import { Provider } from "react-redux";
 import { persistor, store } from "./store/store";
 import Navbar from "~/components/Navbar";
@@ -25,7 +27,15 @@ export const meta = () => ({
   viewport: "width=device-width,initial-scale=1",
 });
 
+export function loader() {
+  return {
+    ENV: {
+      REMIX_APP_API_UR: process.env.REMIX_APP_API_UR,
+    },
+  }
+}
 function Document({ title, children }) {
+  const data = useLoaderData();
   return (
     <html lang="en">
       <head>
@@ -34,6 +44,14 @@ function Document({ title, children }) {
         <Meta />
         <Links />
       </head>
+      <script
+          dangerouslySetInnerHTML={{
+            __html: `window.ENV = ${JSON.stringify(
+              data.ENV
+            )}`,
+          }}
+        />
+        <Scripts />
       <body>
         <Provider store={store}>
           <PersistGate persistor={persistor}>

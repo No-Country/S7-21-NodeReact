@@ -36,10 +36,11 @@ export const authSlice = createSlice({
   },
 });
 export const loginuser = (payload) => {
+  const local_url = window.ENV.REMIX_APP_API_UR
   return async (dispatch) => {
     try {
       dispatch({ type: onChecking });
-      const { data } = await axios.post("http://localhost:8080/api/v1/auth/login", payload);
+      const { data } = await axios.post(`${local_url}/auth/login`, payload);
 
       if (data) {
 
@@ -55,11 +56,12 @@ export const loginuser = (payload) => {
 };
 
 export const registeruser = (payload) => {
+  const local_url = window.ENV.REMIX_APP_API_UR
   return async (dispatch) => {
     console.log(payload, "datos")
     try {
       dispatch({ type: onChecking });
-      const { data } = await axios.post("http://localhost:8080/api/v1/auth/register", payload);
+      const { data } = await axios.post(`${local_url}/auth/register`, payload);
 
       if (data) {
         return data;
