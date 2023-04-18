@@ -33,13 +33,14 @@ export const getHeadersWithAuth = (token) => {
 };
 
 export const getAllServices = () => {
+  const local_url = window.ENV.REMIX_APP_API_UR
   return async (dispatch) => {
     const token = store.getState().user.token;
     const headers = getHeadersWithAuth(token);
     try {
       dispatch({ type: onLoading });
       const { data } = await axios.get(
-        "http://localhost:8080/api/v1/servicesbarber",
+        `${local_url}/servicesbarber`,
         { headers }
       );
       console.log(data, "data de servicios disponibles");

@@ -50,13 +50,14 @@ export const getHeadersWithAuth = (token) => {
   };
 };
 export const createturne = (payload, barber) => {
+  const local_url = window.ENV.REMIX_APP_API_UR
   return async (dispatch) => {
     const token = store.getState().user.token;
     const headers = getHeadersWithAuth(token);
     try {
       dispatch({ type: onLoading });
       const data = await axios.post(
-        `http://localhost:8080/api/v1/appointments/${barber}`,
+        `${local_url}/appointments/${barber}`,
         payload,
         { headers }
       );
@@ -74,11 +75,12 @@ export const createturne = (payload, barber) => {
 export const historyTurner = () => {
   const token = store.getState().user.token;
   const headers = getHeadersWithAuth(token);
+  const local_url = window.ENV.REMIX_APP_API_UR
   return async (dispatch) => {
     try {
       dispatch({ type: onLoadingTurner });
       const { data } = await axios.get(
-        "http://localhost:8080/api/v1/appointments/myAppointments",
+        `${local_url}/appointments/myAppointments`,
         { headers }
       );
       console.log(data, "data");

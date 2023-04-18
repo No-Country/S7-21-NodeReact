@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { store } from "../store";
 import axios from "axios";
 import moment from "moment";
+
 export const barberSlice = createSlice({
   name: "barber",
   initialState: {
@@ -72,6 +73,7 @@ export const barberSlice = createSlice({
     },
   },
 });
+
 const getFreeTurners = (appintHour, date) => {
   const openingTime = 9; // hora de apertura
   const closingTime = 18; // hora de cierre
@@ -101,6 +103,8 @@ export const getHeadersWithAuth = (token) => {
   };
 };
 export const getAllBarber = () => {
+  const local_url = window.ENV.REMIX_APP_API_UR
+console.log(local_url)
   return async (dispatch) => {
     const token = store.getState().user.token;
     const headers = getHeadersWithAuth(token);
@@ -108,7 +112,7 @@ export const getAllBarber = () => {
     try {
       dispatch({ type: onLoading });
       const { data } = await axios.get(
-        `http://localhost:8080/api/v1/users/all/barber`,
+        `${local_url}/users/all/barber`,
         { headers }
       );
       console.log(data, "datos de getallbabrber");
@@ -125,13 +129,15 @@ export const getAllBarber = () => {
   };
 };
 export const TurnersBarber = (barber, date) => {
+  const local_url = window.ENV.REMIX_APP_API_UR
+console.log(local_url)
   return async (dispatch) => {
     const token = store.getState().user.token;
     const headers = getHeadersWithAuth(token);
     try {
       dispatch({ type: onLoadingBarber });
       const { data } = await axios.get(
-        `http://localhost:8080/api/v1/appointments/barber/${barber}`,
+        `${local_url}/appointments/barber/${barber}`,
         { headers }
       );
       console.log(data.body, "data");
@@ -147,13 +153,15 @@ export const TurnersBarber = (barber, date) => {
   };
 };
 export const getInfoPay = (payload, barber) => {
+  const local_url = window.ENV.REMIX_APP_API_UR
+console.log(local_url)
   return async (dispatch) => {
     const token = store.getState().user.token;
     const headers = getHeadersWithAuth(token);
     console.log(headers, "header")
     try {
       dispatch({ type: onLoadingPay });
-      const { data } = await axios.get(`http://localhost:8080/api/v1/users/analyticsbarber/${barber}`, { headers, params: payload })
+      const { data } = await axios.get(`${local_url}/users/analyticsbarber/${barber}`, { headers, params: payload })
       console.log(data, "datos de analitbarbers")
       if(data) {
         dispatch({type: onGetPay, payload: data.body})
