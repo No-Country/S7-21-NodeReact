@@ -110,11 +110,9 @@ export const Administrator = () => {
                       {barbers.map((barber) => (
                         <tr key={barber.id} >
                           <td>
-                            <div className="barber_name">
-                              <Link to={`/pago/${barber.id}`}>
+                            <div className="barber-name" onClick={() => navigate(`/pago/${barber.id}`)}>
                               <FaCircle className="img-table" />
                               {barber.firstName}
-                              </Link>
                             </div>
                           </td>
                           <td>{barber.phone}</td>
