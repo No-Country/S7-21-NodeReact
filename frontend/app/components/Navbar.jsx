@@ -11,6 +11,7 @@ import { persistor } from "../store/store";
 import { onLogout } from '../store/auth/authSlice'
 import logo from "../assets/images/logo.svg";
 import { BurguerButton } from "./BurguerButton";
+import jwt_decode from "jwt-decode";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,7 +34,13 @@ export default function Navbar() {
       setIsOpen(!isOpen);
     }
   };
+  const token = useSelector((state)=> state.user.token)
+  let decodedToken = null;
 
+if (isAuthenticated) {
+  decodedToken = jwt_decode(token);
+}
+  console.log(decodedToken?.role, "decode")
   const togglemodal = () => {
     setIsOpenModal(!isOpenModal);
     toggle()
@@ -151,6 +158,13 @@ export default function Navbar() {
                     {Authuser?.firstName}
                   </Link>
                 </div>
+                {decodedToken.role === "admin" ?(
+                <div className="button-container">
+                  <Link className="button" to={"/administrator"}>
+                  Dashboard
+                  </Link>
+                </div>
+                ): null}
               </li>
             ) : (
               <li className="nav-item">
