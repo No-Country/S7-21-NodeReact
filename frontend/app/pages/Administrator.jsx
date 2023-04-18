@@ -170,10 +170,11 @@ export const Administrator = () => {
                           {turno.libre ? null : turno.clientId ? (
                             <div className="info">Hola</div>
                           ) : (
-                            <div className="container_button">
+                            null
+                    /*         <div className="container_button">
                               <button className="option_button">Modificar</button>
                               <button className="option_button">Rechazar</button>
-                            </div>
+                            </div> */
                           )}
                         </div>
                       ))}
