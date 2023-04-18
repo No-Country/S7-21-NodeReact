@@ -13,9 +13,13 @@ export const Profile = () => {
     setMyAccount(true);
     setMyTurner(false);
   };
+
+
   useEffect(() => {
     dispatch(historyTurner())
   }, [dispatch])
+
+
   const showMyTurner = () => {
     setMyTurner(true);
     setMyAccount(false);
@@ -49,13 +53,16 @@ export const Profile = () => {
                 <th>Pago</th>
                 <th>Estado</th>
               </tr>
-              <tr>
-                <td>Corte</td>
-                <td>13/06</td>
-                <td>$170.000</td>
-                <td>Efectivo</td>
-                <td>Realizado</td>
-              </tr>
+              {
+                <tr>
+
+                  <td>Corte</td>
+                  <td>13/06</td>
+                  <td>$170.000</td>
+                  <td>Efectivo</td>
+                  <td>Realizado</td>
+                </tr>
+              }
               <tr>
                 <td>Corte</td>
                 <td>13/04</td>
