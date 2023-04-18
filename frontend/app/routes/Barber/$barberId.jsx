@@ -2,6 +2,8 @@ import { useNavigate, useParams } from "@remix-run/react"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
+import Modal from "react-modal";
+import Turno from "../../components/Turno";
 
 export default function SingleBarber() {
 
@@ -9,6 +11,8 @@ export default function SingleBarber() {
     const [barber, setBarber] = useState({})
     const [loading, setLoadig] = useState(true)
     const isAuthenticated = useSelector((state) => state.user.status === "authenticated");
+    const [isOpenModal, setIsOpenModal] = useState(false);
+
 
     const { barberId } = useParams()
 
@@ -24,6 +28,22 @@ export default function SingleBarber() {
             .catch((error) => console.log(error))
     }, [])
 
+    const togglemodal = () => {
+        setIsOpenModal(!isOpenModal);
+    };
+
+    const closeModal = () => {
+        setIsOpenModal(false);
+    };
+
+    const handleTurno = () => {
+        if (!isAuthenticated) {
+            navigate('/login')
+        }
+        else {
+            togglemodal()
+        }
+    }
 
     return (
         <>
@@ -47,7 +67,18 @@ export default function SingleBarber() {
                                     {barber.description}
                                 </p>
                             </div>
+                            <button onClick={handleTurno}>Turno</button>
                         </div>
+                        <Modal
+                            isOpen={isOpenModal}
+                            onRequestClose={closeModal}
+                            contentLabel="Turno"
+                            className="modal"
+                        >
+                            <div className="modal-content">
+                                <Turno closeModal={closeModal} />
+                            </div>
+                        </Modal>
                     </>
 
                 )
