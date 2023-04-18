@@ -14,26 +14,19 @@ export const Administrator = () => {
   const dispatch = useDispatch();
   const [myBarbers, setMyBarbers] = useState(true);
   const [myTurners, setMyTurners] = useState(false);
-  const [myClients, setMyClients] = useState(false);
   const loading = useSelector((state) => state.barber.loading);
   const getTurnerFree = useSelector((state) => state.barber.freeTurner);
   const getTurnerFill = useSelector((state) => state.barber.barber);
 
   const handleShowBarbers = () => {
     setMyBarbers(true);
-    setMyClients(false);
     setMyTurners(false);
   };
   const handleShowTurners = () => {
     setMyTurners(true);
     setMyBarbers(false);
-    setMyClients(false);
   };
-  const handleShowClients = () => {
-    setMyClients(true);
-    setMyTurners(false);
-    setMyBarbers(false);
-  };
+
   const isAuthenticated = useSelector(
     (state) => state.user.status === "authenticated"
   );
@@ -71,9 +64,7 @@ export const Administrator = () => {
       nombre: turno.clientId,
     })),
   ];
-  const handleredirecttopago = (e) => {
-    navigate(`/pago/${e}`)
-  }
+
   allTurns.sort((a, b) => (a.hora > b.hora ? 1 : b.hora > a.hora ? -1 : 0));
   return (
     <div>
@@ -85,10 +76,9 @@ export const Administrator = () => {
           <div className="container">
             <div className="container_administration">
               <div className="buton_administration">
-                <button onClick={handleShowBarbers}>PAGOS</button>
-                <button>CALENDARIOS</button>
+                <button onClick={handleShowBarbers}>Barberos</button>
                 <button onClick={handleShowTurners}>TURNOS</button>
-                <button onClick={handleShowClients}>CLIENTES</button>
+                {/* <button onClick={handleShowClients}>CLIENTES</button> */}
               </div>
               <div
                 className={`container_barber ${
@@ -159,7 +149,7 @@ export const Administrator = () => {
                     </div>
                   </div>
                 </div>
-                <div class="container">
+                <div class="container_calendar_and_client">
                   <div className="calendar">
                     <Calendar
                       selected={startDate}
@@ -190,9 +180,6 @@ export const Administrator = () => {
                     </ul>
                   </div>
                 </div>
-              </div>
-              <div className={`container_client ${myClients ? "show": "hidden-client"}`}>
-
               </div>
             </div>
           </div>

@@ -178,18 +178,17 @@
           }
         }
       }
-      .container {
-        @include flex(flex-start);
-
+      .container_calendar_and_client {
+        @include flex-wrap(flex-start);
         width: 100%;
         .calendar {
           @include flex();
-          width: 15%;
+          width: 20%;
         }
         .turners {
           @include flex-row();
           margin-left: 30px;
-          width: 90%;
+          width: 75%;
           ul {
             width: 100%;
             .turno {
