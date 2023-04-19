@@ -2,7 +2,7 @@
   "private": true,
   "sideEffects": false,
   "scripts": {
-    "build": "remix build",
+    "build": "remix build && yarn build:css",
     "dev": "remix dev",
     "start": "remix run",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.json,.md,.mdx",
