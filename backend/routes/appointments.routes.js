@@ -1,6 +1,10 @@
 const router = require("express").Router();
 const apptCtrls = require("../controllers/appointments.controllers");
 const { authenticateUser } = require("../middlewares/auth.middleware");
+const { enviarAlertas }= require("../middlewares/email.middleware");
+
+router.route('/test')
+  .post(enviarAlertas)
 
 router
   .route("/myAppointments")

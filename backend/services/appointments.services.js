@@ -198,6 +198,35 @@ const findAndCancelAppointment = async (appointmentId) => {
   }
 };
 
+const getReminderAppointments = async () => {
+  try {
+    const now = new Date();
+    const oneHourLater = new Date(now.getTime() + 60 * 60 * 1000);
+    const nowStr = now.toISOString().substring(11, 19);
+    const oneHourLaterStr = oneHourLater.toISOString().substring(11, 19);
+
+    const reminderAppointments = await appointments.findAll({
+      where: {
+        appointmentDate: {
+          [Op.eq]: now,
+        },
+        appointmentHour: {
+          [Op.and]: [
+            { [Op.gte]: nowStr },
+            { [Op.lte]: oneHourLaterStr },
+          ],
+        },
+      },
+    });
+
+    console.log("getreminder", reminderAppointments)
+    return reminderAppointments;
+
+  } catch (error) {
+    throw new CustomError(error.message, error.statusCode, error.errors);
+  }
+}
+
 module.exports = {
   createAppointment,
   findBarberAppointments,
@@ -206,4 +235,5 @@ module.exports = {
   findMyAppointments,
   findAndCancelAppointment,
   findBarber,
+  getReminderAppointments,
 };
