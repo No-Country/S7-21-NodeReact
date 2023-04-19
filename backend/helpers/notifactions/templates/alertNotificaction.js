@@ -2,10 +2,9 @@ function appointmentAcept(
     userName,
     appointmentDate,
     appointmentHour,
-    barber
+    serviceName
   ) 
-
-  const confirmationTemplate = (userName, appointmentDate, appointmentHour, barber) => {
+ {
     return `<!DOCTYPE html>
       <html lang="es">
         <head>
@@ -90,7 +89,7 @@ function appointmentAcept(
               <h1>¡Hola ${userName}!</h1>
               <p>
                 Te confirmamos que tienes una cita agendada en The Boss Barber Shop!<br />
-                La cita será el día ${appointmentDate} a las ${appointmentHour} con ${barber}.
+                La cita será el día ${appointmentDate} a las ${appointmentHour} para ${serviceName}.
               </p>
               <a href="#">Cancelar Cita</a>
             </div>
@@ -99,3 +98,5 @@ function appointmentAcept(
         </body>
       </html>`;
   };
+
+module.exports = appointmentAcept

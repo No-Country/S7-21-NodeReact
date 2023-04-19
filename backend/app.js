@@ -4,6 +4,8 @@ const cors = require("cors");
 require("dotenv").config();
 const db = require("./database/models");
 const routes = require("./routes");
+const { enviarAlertas } = require("./middlewares/email.middleware");
+
 
 //Documentacion con swagger
 const { swaggerDocs: V1SwaggerDocs } = require("./swagger.js");
@@ -44,6 +46,12 @@ const startApi = async () => {
     console.log("Unable to connect to the database \n", error);
   }
 };
+
+// // Programar el envío de alertas de correo electrónico una vez cada hora
+setInterval(enviarAlertas, 60 * 60 * 1000);
+
+// // Programar el envío de alertas de correo electrónico una vez cada 30 segundos
+//setInterval(enviarAlertas, 30 * 1000);
 
 // console.log(expressListEndpoints(app));
 

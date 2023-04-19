@@ -1,8 +1,10 @@
 const transporter = require("../helpers/notifactions/gmail/config.js");
 const gmailOptions = require("../helpers/notifactions/gmail/emailSender.js");
 const emailNewUser = require("../helpers/notifactions/templates/newUserEmail.js");
+const remAppointment = require("../helpers/notifactions/templates/reminderAppointment.js");
+const appointmentAcept = require("../helpers/notifactions/templates/alertNotificaction.js");
 const { getReminderAppointments } = require("../services/appointments.services.js");
-const endPointResponse = require("../helpers/endPointReponse.js");
+
 /**
  * Middleware para el envío de mails a usuarios nuevos.
  * @param {String} email email de usario nuevo
@@ -36,55 +38,53 @@ async function sendNewUser(
 }
 
 // Función para enviar alertas de correo electrónico
-async function enviarAlertas(req, res) {
+async function enviarAlertas() {
   try {
-    // Obtener todas las citas que se llevarán a cabo en una hora
+
     const citas = await getReminderAppointments();
-    console.log("Hola",citas)
-    
-    endPointResponse({
-      res,
-      code: 201,
-      message: "hola",
-      body: { }
-    });
-    // if(citas) {
 
-    // }
+    if( citas ) {
+      citas.forEach(async (cita) => {
+        const { appClient, appointmentDate, appointmentHour, turno } = cita;
+        const { email, firstName, lastName } = appClient;
 
-    // // Para cada cita, obtener la información del cliente y del barbero correspondiente y enviar una alerta por correo electrónico al cliente
-    // for (let cita of citas) {
-    //   const cliente = await User.findOne({
-    //     where: {
-    //       id: cita.clientId,
-    //       role: 'client'
-    //     }
-    //   });
-    //   const barbero = await User.findOne({
-    //     where: {
-    //       id: cita.barberId,
-    //       role: 'barber'
-    //     }
-    //   });
+        const emailSubject = `Recordatorio turno para ${turno.name}`;
 
-    //   // Configurar el correo electrónico
-    //   const correoElectronico = {
-    //     from: 'user@example.com',
-    //     to: cliente.email,
-    //     subject: 'Recordatorio de cita',
-    //     text: confirmationTemplate
-    //   };
+        const htmlTemplate = remAppointment(firstName, lastName, turno.name, appointmentDate, appointmentHour)
+        try {
+          const info = await transporter.sendMail(gmailOptions(email, emailSubject, htmlTemplate));
+          console.log(`Correo electrónico enviado a ${email}: ${info.messageId}`);
+        } catch (error) {
+          console.error(`Error al enviar el correo electrónico a ${email}: ${error}`);
+        }
+      });
+    }
 
-    //   // Enviar el correo electrónico
-    //   const info = await transporter.sendMail(correoElectronico);
-    //   console.log(`Correo electrónico enviado a ${cliente.email}: ${info.messageId}`);
-    // }
+    return;
   } catch (error) {
     console.error(error);
   }
 }
 
-// // Programar el envío de alertas de correo electrónico una vez cada hora
-// setInterval(enviarAlertas, 60 * 60 * 1000);
+async function sendValidatorAppointment(
+  email,
+  userName,
+  date,
+  hour,
+  serviceName
+) {
+  try {
+    const htmlTemplate = appointmentAcept(
+      userName,
+      date,
+      hour,
+      serviceName
+    );
+    const emailSubject = "Nuevo Servicio Registrado";
+    await transporter.sendMail(gmailOptions(email, emailSubject, htmlTemplate));
+  } catch (err) {
+    console.log("Error al leer el archivo HTML: ", err);
+  }
+}
 
-module.exports = { sendNewUser, enviarAlertas };
+module.exports = { sendNewUser, enviarAlertas, sendValidatorAppointment };
