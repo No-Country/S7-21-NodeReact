@@ -10,6 +10,7 @@ COPY package*.json ./
 # Instala las dependencias del proyecto
 RUN npm install -g sass
 RUN npm install --production
+RUN npm install -g remix
 
 # Copia todos los archivos del proyecto al contenedor
 COPY . .
