@@ -4,7 +4,7 @@
   "scripts": {
     "build": "remix build",
     "dev": "remix dev",
-    "start": "remix-serve build",
+    "start": "remix run",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.json,.md,.mdx",
     "build:css": "sass --no-source-map --style=compressed sass:app/styles",
     "dev:css": "yarn build:css && sass --watch --no-source-map --style=compressed sass:app/styles"
