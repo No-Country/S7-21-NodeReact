@@ -4,7 +4,7 @@
   "scripts": {
     "build": "remix build",
     "dev": "remix dev",
-    "start": "remix run",
+    "start": "remix-serve ./build",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.json,.md,.mdx",
     "build:css": "sass --no-source-map --style=compressed sass:app/styles",
     "dev:css": "yarn build:css && sass --watch --no-source-map --style=compressed sass:app/styles"
@@ -14,6 +14,7 @@
     "@remix-run/node": "^1.14.3",
     "@remix-run/react": "^1.14.3",
     "@remix-run/vercel": "^1.14.3",
+    "@remix-run/serve": "^1.14.3",
     "@vercel/node": "^2.6.2",
     "@wojtekmaj/react-daterange-picker": "^5.0.2",
     "axios": "^1.3.5",
@@ -37,7 +38,6 @@
   "devDependencies": {
     "@remix-run/dev": "^1.14.3",
     "@remix-run/eslint-config": "^1.14.3",
-    "@remix-run/serve": "^1.14.3",
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.8",
     "eslint": "^8.27.0",

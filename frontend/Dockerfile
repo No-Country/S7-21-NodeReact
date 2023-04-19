@@ -1,19 +1,18 @@
 # Usa una imagen de node.js
 FROM node:14
 
+COPY package*.json /app/
 # Establece el directorio de trabajo en /app
 WORKDIR /app
 
-# Copia el archivo package.json y package-lock.json al contenedor
-COPY package*.json ./
+# Copia todos los archivos del proyecto al contenedor
+COPY . .
 
 # Instala las dependencias del proyecto
 RUN npm install
 RUN npm install -g sass
 RUN npm install -g remix
 
-# Copia todos los archivos del proyecto al contenedor
-COPY . .
 
 # Compila el código Sass
 RUN npm run build:css
@@ -25,4 +24,4 @@ RUN npm run build
 EXPOSE 3000
 
 # Ejecuta el servidor de RemixJS
-CMD ["npm", "start"]
+CMD [ "npm", "run", "start" ]
