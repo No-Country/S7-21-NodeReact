@@ -1,22 +1,9 @@
-# Usa la imagen de Node.js versión 16 como base
-FROM node:16
-
-# Establece el directorio de trabajo dentro del contenedor
+FROM node:16-alpine
 WORKDIR /app
 
-# Copia el resto de los archivos del proyecto al contenedor
-COPY . .
-COPY package*.json ./
-
-# Instala las dependencias
+COPY ./package.json ./
 RUN npm install
-
-# Construye la aplicación y genera los archivos CSS
+COPY ./ .
 RUN npm run build
-RUN npm run build:css
-
-# Expone el puerto 3000 para que pueda ser accedido desde fuera del contenedor
-EXPOSE 3000
-
-# Define el comando para iniciar la aplicación
-CMD ["npm", "start"]
+ENV NODE_ENV=production
+CMD ["npm", “run” ,"start"] # 
