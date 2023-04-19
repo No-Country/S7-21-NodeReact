@@ -3,7 +3,7 @@
   "sideEffects": false,
   "scripts": {
     "build": "remix build",
-    "dev": "concurrently \"npm run dev:css\" \"remix dev\"",
+    "dev": "remix dev",
     "start": "remix run",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.json,.md,.mdx",
     "build:css": "sass --no-source-map --style=compressed sass:app/styles",
