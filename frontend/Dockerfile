@@ -1,27 +1,26 @@
-# Usa una imagen de node.js
+# Use the official Node.js 14 image as the base image
 FROM node:14
 
-COPY package*.json /app/
-# Establece el directorio de trabajo en /app
+# Install npm version 9.5.0
+RUN npm install -g npm@9.5.0
+
+# Set the working directory to /app
 WORKDIR /app
 
-# Copia todos los archivos del proyecto al contenedor
+# Copy the package.json and package-lock.json files to the container
+COPY package*.json ./
+
+# Install the dependencies
+RUN npm install
+
+# Copy the rest of the application code to the container
 COPY . .
 
-# Instala las dependencias del proyecto
-RUN npm install
-RUN npm install -g sass
-RUN npm install -g remix
-
-
-# Compila el código Sass
-RUN npm run build:css
-
-# Compila el proyecto de RemixJS
+# Build the application
 RUN npm run build
 
-# Expone el puerto 3000 para que el servidor web sea accesible
+# Expose port 3000
 EXPOSE 3000
 
-# Ejecuta el servidor de RemixJS
-CMD [ "npm", "run", "start" ]
+# Start the application
+CMD ["npm", "start"]
