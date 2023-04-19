@@ -8,5 +8,5 @@ module.exports = {
   serverBuildPath: "api/index.js",
   // appDirectory: "app",
   // assetsBuildDirectory: "public/build",
-  publicPath: "/build/",
+  //publicPath: "/build/",
 };
