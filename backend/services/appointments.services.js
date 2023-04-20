@@ -92,11 +92,35 @@ const createAppointment = async (
   }
 };
 
-const findAppointments = async (barberId) => {
+const findBarberAppointments = async (barberId) => {
   try {
     await findBarber(barberId);
+
     const response = await appointments.findAll({
       where: { barberId },
+      include: {
+        model: ServicesBarber,
+        attributes: {
+          exclude: ["id", "createdAt", "updatedAt"],
+        },
+      },
+      attributes: {
+        exclude: ["createdAt", "updatedAt"],
+      },
+    });
+
+    return response;
+  } catch (error) {
+    throw new CustomError(error.message, error.statusCode, error.errors);
+  }
+};
+
+const findClientAppointments = async (clientId) => {
+  try {
+    await findClient(clientId);
+
+    const response = await appointments.findAll({
+      where: { clientId },
       include: {
         model: ServicesBarber,
         attributes: {
@@ -174,11 +198,63 @@ const findAndCancelAppointment = async (appointmentId) => {
   }
 };
 
+const getReminderAppointments = async () => {
+  try {
+    const now = new Date();
+    const oneHourLater = new Date(now.getTime() + 60 * 60 * 1000);
+    const nowStr = now.toISOString().substring(11, 16);
+    const oneHourLaterStr = oneHourLater.toISOString().substring(11, 16);
+    // console.log("Hora ahora ", nowStr, " Hora + 1", oneHourLaterStr)
+    const reminderAppointments = await appointments.findAll({
+      where: {
+        [Op.and]: [
+          { appointmentDate: now },
+          { appointmentHour: { [Op.between]: [nowStr, oneHourLaterStr]}}
+        ]
+      },
+      include: [
+        {
+          model: ServicesBarber, as: "turno",
+          attributes: {
+            exclude: ["id", "createdAt", "updatedAt"],
+          },
+        },
+        {
+          model: User,
+          as: "appBarber",
+          attributes: {
+            exclude: ["id","profileImage", "password", "description", "verificationToken", "verified", "createdAt", "updatedAt"]
+          },
+        },
+        { 
+          model: User,
+          as: "appClient",
+          attributes: {
+            exclude: ["id","profileImage", "password", "description", "verificationToken", "verified", "createdAt", "updatedAt"]
+          },
+        },
+      ],
+      attributes: {
+        exclude: ["createdAt", "updatedAt"],
+      },
+    });
+
+    // console.log("getreminder", reminderAppointments)
+    
+    return reminderAppointments;
+
+  } catch (error) {
+    throw new CustomError(error.message, error.statusCode, error.errors);
+  }
+}
+
 module.exports = {
   createAppointment,
-  findAppointments,
+  findBarberAppointments,
+  findClientAppointments,
   updateAppointment,
   findMyAppointments,
   findAndCancelAppointment,
-  findBarber
+  findBarber,
+  getReminderAppointments,
 };

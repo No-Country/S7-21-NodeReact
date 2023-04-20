@@ -6,11 +6,11 @@ const swaggerOptions = {
     openapi: "3.0.0",
     info: {
       title: "The Boss Barbershop API",
-      description: "API para manejar todo lo referido al usuario.",
+      description: "API para la gestion de turnos de una barberia.",
       version: "1.0.0",
     },
   },
-  apis: ["./database/models/user.js", "./routes/*.js"],
+  apis: ["./documentation/*.yaml", "./documentation/paths/*.yaml", "./documentation/schemas/*.yaml"]
 };
 
 const swaggerSpec = swaggerJSDoc(swaggerOptions);

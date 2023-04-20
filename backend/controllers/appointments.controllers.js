@@ -1,6 +1,8 @@
 const { tryCatchWrapper, endPointResponse } = require("../helpers");
 const apptServices = require("../services/appointments.services");
 const sBarberServices = require("../services/servicesBarber.services");
+const { sendValidatorAppointment } = require("../middlewares/email.middleware.js");
+const { User } = require("../database/models");
 
 const postAppointment = tryCatchWrapper(async (req, res, next) => {
   const { barberId } = req.params;
@@ -16,6 +18,15 @@ const postAppointment = tryCatchWrapper(async (req, res, next) => {
     message,
     req.user.id
   );
+    
+  const userId = req.user.id;
+  const user = await User.findByPk(userId, {
+    attributes: { exclude: ["password"] },
+  });
+
+  const { email, firstName } = user
+  const { name } = serviceBarber
+  await sendValidatorAppointment( email, firstName, date, hour, name )
 
   endPointResponse({
     res,
@@ -25,11 +36,26 @@ const postAppointment = tryCatchWrapper(async (req, res, next) => {
   });
 });
 
-const getAppointmentsById = tryCatchWrapper(async (req, res, next) => {
+const getAppointmentsByBarber = tryCatchWrapper(async (req, res, next) => {
   const { barberId } = req.params;
-  const appointments = await apptServices.findAppointments(barberId);
+  const appointments = await apptServices.findBarberAppointments(barberId);
 
-  endPointResponse({ res, message: "turnos asignados", body: appointments });
+  endPointResponse({
+    res,
+    message: "turnos asignados por barbero",
+    body: appointments,
+  });
+});
+
+const getAppointmentsByClient = tryCatchWrapper(async (req, res, next) => {
+  const { clientId } = req.params;
+  const appointments = await apptServices.findClientAppointments(clientId);
+
+  endPointResponse({
+    res,
+    message: "turnos asignados por cliente",
+    body: appointments,
+  });
 });
 
 const patchAppointment = tryCatchWrapper(async (req, res, next) => {
@@ -40,18 +66,12 @@ const patchAppointment = tryCatchWrapper(async (req, res, next) => {
     newDate,
     newHour
   );
-  endPointResponse({ res, message: response });
+  endPointResponse({
+    res,
+    message: "Turno actualizado de manera exitosa",
+    body: response,
+  });
 });
-
-// const deleteAppointment = tryCatchWrapper(async (req, res, next) => {
-//   const { appointmentId } = req.params;
-//   const response = await apptServices.deleteAppointmentById(
-//     appointmentId,
-//     req.user
-//   );
-
-//   endPointResponse({ res, message: response });
-// });
 
 const getMyAppointments = tryCatchWrapper(async (req, res, next) => {
   const clientId = req.user.id;
@@ -75,9 +95,9 @@ const cancelAppointment = tryCatchWrapper(async (req, res, next) => {
 
 module.exports = {
   postAppointment,
-  getAppointmentsById,
+  getAppointmentsByBarber,
+  getAppointmentsByClient,
   getMyAppointments,
   patchAppointment,
-  // deleteAppointment,
   cancelAppointment,
 };

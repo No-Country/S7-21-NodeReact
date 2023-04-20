@@ -58,9 +58,10 @@ const updateUser = async (id, newInfo, reqUser) => {
     });
     await user.save();
     const payload = { id: user.id, role: user.role };
-    const newToken = createJwt({ payload });
+    const token = createJwt({ payload });
+    const { password, ...newUserInfo } = user.dataValues;
 
-    return newToken;
+    return { user: newUserInfo, token };
   } catch (error) {
     throw new CustomError(error.message, error.statusCode, error.errors);
   }
@@ -77,9 +78,10 @@ const updateUserRole = async (id, role) => {
     await user.update({ role });
     await user.save();
     const payload = { id: user.id, role: user.role };
-    const newToken = createJwt({ payload });
+    const token = createJwt({ payload });
+    const { password, ...newUserInfo } = user.dataValues;
 
-    return newToken;
+    return { user: newUserInfo, token };
   } catch (error) {
     throw new CustomError(error.message, error.statusCode, error.errors);
   }

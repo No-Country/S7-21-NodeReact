@@ -71,6 +71,7 @@ const login = async (email, password) => {
         id: user.id,
         firstName: user.firstName,
         lastName: user.lastName,
+        role: user.role,
         email: user.email,
         phone: user.phone,
         profileImage: user.profileImage,
