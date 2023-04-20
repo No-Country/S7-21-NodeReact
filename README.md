@@ -29,7 +29,7 @@ Existe un rol de aministrador que ingresa los barberos al sistema y visualiza la
 | <img src="https://media.licdn.com/dms/image/D4D35AQFY25arWLfGgA/profile-framedphoto-shrink_800_800/0/1674741905614?e=1682388000&v=beta&t=XtXmSLfHhX8zmNYmQw-8LmAUkTRdiO4wvE0tm19zylg" width=80>| <img src="https://media.licdn.com/dms/image/C4D03AQFjcuD1ijAvoQ/profile-displayphoto-shrink_800_800/0/1587132933569?e=1686787200&v=beta&t=JhLx6vuZSHcKYEGlnplclY3__sJCzo1n_4hew3lxkwI" width=80>| 
 |:-:|:-:|
 | **Veronica Mariela Stanislavsky** | **Ana Brest** |
-| <a href="https://www.linkedin.com/in/veronica-mariela-stanislavsky/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> | <a href="https://www.linkedin.com/in/ana-brest-3b882b116/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> |
+| <a href="https://www.behance.net/phstanis"><img src="https://img.shields.io/badge/-Behance-blue?style=for-the-badge&logo=behance&logoColor=white"/></a> <a href="https://www.linkedin.com/in/veronica-mariela-stanislavsky/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> | <a href="https://www.behance.net/anabrest1"><img src="https://img.shields.io/badge/-Behance-blue?style=for-the-badge&logo=behance&logoColor=white"/></a> <a href="https://www.linkedin.com/in/ana-brest-3b882b116/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> |
 
 <hr/>
 
