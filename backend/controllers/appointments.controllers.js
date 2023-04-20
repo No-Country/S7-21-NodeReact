@@ -1,6 +1,8 @@
 const { tryCatchWrapper, endPointResponse } = require("../helpers");
 const apptServices = require("../services/appointments.services");
 const sBarberServices = require("../services/servicesBarber.services");
+const { sendValidatorAppointment } = require("../middlewares/email.middleware.js");
+const { User } = require("../database/models");
 
 const postAppointment = tryCatchWrapper(async (req, res, next) => {
   const { barberId } = req.params;
@@ -16,6 +18,15 @@ const postAppointment = tryCatchWrapper(async (req, res, next) => {
     message,
     req.user.id
   );
+    
+  const userId = req.user.id;
+  const user = await User.findByPk(userId, {
+    attributes: { exclude: ["password"] },
+  });
+
+  const { email, firstName } = user
+  const { name } = serviceBarber
+  await sendValidatorAppointment( email, firstName, date, hour, name )
 
   endPointResponse({
     res,
